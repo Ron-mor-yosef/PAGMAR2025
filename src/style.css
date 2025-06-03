@@ -1,0 +1,20 @@
+.statistics {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.stat-block {
+  background: #f0f0f0;
+  padding: 12px;
+  border-radius: 6px;
+  max-width: 300px;
+  transition: transform 0.3s;
+}
+
+nav {
+  a{
+    padding: 5vw;
+  }
+}

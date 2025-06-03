@@ -1,0 +1,41 @@
+.category-nefesh {
+  --category-color: #F28B82;
+  --category-font: 'David', serif;
+  --category-font-weight: bold;
+  --category-font-style: normal;
+}
+
+.category-guf {
+  --category-color: #A7FFEB;
+  --category-font: 'Arial', sans-serif;
+  --category-font-weight: normal;
+  --category-font-style: italic;
+}
+
+.category-zugiyut {
+  --category-color: #CBF0F8;
+  --category-font: 'Courier New', monospace;
+  --category-font-weight: bold;
+  --category-font-style: italic;
+}
+
+.category-yeladim {
+  --category-color: #FFD6A5;
+  --category-font: 'Comic Sans MS', cursive;
+  --category-font-weight: normal;
+  --category-font-style: normal;
+}
+
+.category-taasukah {
+  --category-color: #D7AEFB;
+  --category-font: 'Tahoma', sans-serif;
+  --category-font-weight: bold;
+  --category-font-style: normal;
+}
+
+.category-other {
+  --category-color: #E6C9A8;
+  --category-font: 'Verdana', sans-serif;
+  --category-font-weight: normal;
+  --category-font-style: normal;
+}

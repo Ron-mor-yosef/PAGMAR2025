@@ -1,0 +1,28 @@
+.text-page {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.text-page h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.text-page h3 {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.text-page p {
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 3rem;
+}
