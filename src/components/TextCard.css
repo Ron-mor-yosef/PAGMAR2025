@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 600px;
 }
 
 .text-card:hover {
@@ -27,4 +28,25 @@
   font-size: 1.13rem;
   color: #1a237e;
   font-weight: bold;
+}
+
+.text-card-category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em;
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0 0 0;
+}
+
+.text-card-category li {
+  display: inline;
+  position: relative;
+  padding: 0 0.3em;
+}
+
+.text-card-category li:not(:last-child)::after {
+  content: " * ";
+  color: #888;
+  margin-left: 0.2em;
 }

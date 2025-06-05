@@ -80,7 +80,6 @@ const StatisticsPage = () => {
         p.textAlign(p.RIGHT, p.CENTER);
         p.textDirection(p.RIGHT_TO_LEFT);
         p.noStroke();
-        p.background(0);
         p.fill(255);
         p.textSize(24);
         p.text('📊 טוען נתונים...', p.width / 2, p.height / 2);
@@ -176,7 +175,7 @@ const StatisticsPage = () => {
       };
 
       p.draw = () => {
-        p.background('#222222');
+        p.background(34,34,34,180);
         let hoveredItem = null;
 
         for (const item of items) {
