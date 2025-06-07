@@ -1,11 +1,9 @@
 main {
-  max-width: 85vw;
+  max-width: 100%;
   max-height: 100%;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
+  margin: 2rem 8rem;
+  /* padding: 2rem; */
   border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 }
 
 label {
@@ -29,35 +27,6 @@ select:focus {
   outline: none;
 }
 
-.gallery-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  width: 2.2rem;
-  height: 2.2rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  opacity: 0.85;
-  transition: background 0.2s;
-}
-
-.gallery-arrow.left {
-  left: -2.5rem;
-}
-
-.gallery-arrow.right {
-  right: -2.5rem;
-}
-
-.gallery-arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
 .gallery-progress {
   display: flex;
   justify-content: center;
@@ -71,45 +40,45 @@ select:focus {
   color: #795548;
   font-weight: bold;
 }
+
 .text-gallery {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  padding: 0 1rem;
+  padding:1rem;
 }
+
 main>.text-gallery {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* -ms-overflow-style: none; */
+  /* scrollbar-width: none; */
   display: flex;
-  flex-direction: row;
-  max-height: 600px;
+  flex-direction: column;
+  max-height: 55vh;
   gap: 1.5rem;
   overflow-x: auto;
-  /* overflow-y: hidden; */
   padding-bottom: 1rem;
-  scroll-snap-type: x mandatory;
-  /* Optional: for snap scrolling */
-
+  margin: 1rem 8rem;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-main>.text-gallery::-webkit-scrollbar {
-  display: none;
-}
-
-.text-card {
-  flex: 0 0 320px;
-  /* or your preferred card width */
-  scroll-snap-align: start;
-  /* Optional: for snap scrolling */
-}
 
 .gallery-filters {
   display: flex;
   align-items: stretch;
   gap: 0;
   position: relative;
+}
+
+div.count-filter>label  {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  padding: auto 2rem;
+  margin: 2rem;
+  line-height: 100%;
+  width: 5rem;
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .single-filter {
@@ -127,29 +96,59 @@ main>.text-gallery::-webkit-scrollbar {
 .filter-options {
   display: flex;
   gap: 0.5rem;
+  border-bottom: 0.5px solid #222;
+  padding: 0 1rem;
 }
 
 .filter-options button {
-  background: #f7f7f7;
-  color: #222;
-  border: 1px solid #ccc;
-  border-radius: 16px;
-  padding: 0.3rem 1.1rem;
-  font-size: 1rem;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  font-weight: 550;
   cursor: pointer;
-  transition: background 0.18s, color 0.18s, border 0.18s;
+  transition: color 0.18s;
+}
+
+.filter-options button:not(:last-child)::after {
+  content: " /";
+  color: #888;
+  margin: 0 0.3em;
+  pointer-events: none;
 }
 
 .filter-options button.active {
-  background: #ffe082;
-  color: #795548;
-  border-color: #ffd54f;
-  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
 }
 
-.filter-options button:hover {
-  background: #e3f2fd;
-  color: #1976d2;
+.filter-options button.active::before {
+  content: "";
+  position: absolute;
+  right: -0.6em; /* adjust as needed */
+  /* top: 20%; */
+  transform: translateY(10%);
+  width:100%;   /* SVG size */
+  height: 100%;
+  background: no-repeat center/cover;
+
+}
+
+/* For emotions */
+.filter-options .active[data-svg-type="emotion"]::before {
+  background-image: var(--svg-url-emotion);
+}
+
+/* For categories */
+.filter-options .active[data-svg-type="category"]::before {
+  background-image: var(--svg-url-category);
+}
+
+.filter-options .active[data-svg-type="view"]::before {
+  background-image: var(--svg-url-view);
 }
 
 .single-filter:not(:last-child)::after {
@@ -157,8 +156,14 @@ main>.text-gallery::-webkit-scrollbar {
   position: absolute;
   top: 10%;
   right: 0;
-  width: 1px;
   height: 80%;
   background: #3f2424;
   z-index: 1;
+}
+
+.single-filter>label {
+  font-size: 1.2rem;
+  font-family: 'NarkissBlock-Thin', sans-serif;
+  font-weight: 800;
+  color: #222;
 }

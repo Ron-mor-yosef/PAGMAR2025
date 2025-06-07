@@ -10,6 +10,15 @@ const GalleryPage = () => {
   const [categories, setCategories] = useState([]);
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [emotionIcons, setEmotionIcons] = useState({});
+  const [categoryIcons, setCategoryIcons] = useState({});
+  const [allEmotionIcon, setAllEmotionIcon] = useState(Math.floor(Math.random() * 3) + 1);
+  const [allCategoryIcon, setAllCategoryIcon] = useState(Math.floor(Math.random() * 3) + 1);
+  const [viewIcons, setViewIcons] = useState({
+    snippet: Math.floor(Math.random() * 3) + 1,
+    citation: Math.floor(Math.random() * 3) + 1,
+    title: Math.floor(Math.random() * 3) + 1,
+  });
   const galleryRef = useRef(null);
   const [scrollIndex, setScrollIndex] = useState(0);
 
@@ -47,19 +56,37 @@ const GalleryPage = () => {
 
   // Multi-selection toggle logic
   const toggleEmotion = (emotion) => {
-    setSelectedEmotions((prev) =>
-      prev.includes(emotion)
-        ? prev.filter(e => e !== emotion)
-        : [...prev, emotion]
-    );
+    setSelectedEmotions((prev) => {
+      if (prev.includes(emotion)) {
+        // Remove emotion and its icon
+        const { [emotion]: _, ...rest } = emotionIcons;
+        setEmotionIcons(rest);
+        return prev.filter(e => e !== emotion);
+      } else {
+        // Add emotion and assign a random icon index (1-3)
+        setEmotionIcons({
+          ...emotionIcons,
+          [emotion]: Math.floor((Math.random() + 1) * 3)
+        });
+        return [...prev, emotion];
+      }
+    });
   };
 
   const toggleCategory = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
-    );
+    setSelectedCategories((prev) => {
+      if (prev.includes(category)) {
+        const { [category]: _, ...rest } = categoryIcons;
+        setCategoryIcons(rest);
+        return prev.filter(c => c !== category);
+      } else {
+        setCategoryIcons({
+          ...categoryIcons,
+          [category]: Math.floor(Math.random() * 3) + 1
+        });
+        return [...prev, category];
+      }
+    });
   };
 
   // Filtering logic for multi-selection
@@ -78,50 +105,29 @@ const GalleryPage = () => {
     return emotionMatch && categoryMatch;
   });
 
-  const cardWidth = 320 + 24; // card width + gap (adjust if needed)
   const visibleCards = 3; // How many cards fit in the viewport (adjust as needed)
   const totalCards = filtered.length;
 
-  const scrollToIndex = (idx) => {
-    if (!galleryRef.current) return;
-    const maxIndex = Math.max(0, totalCards - visibleCards);
-    const newIndex = Math.max(0, Math.min(idx, maxIndex));
-    galleryRef.current.scrollTo({
-      left: newIndex * cardWidth,
-      behavior: 'smooth'
-    });
-    setScrollIndex(newIndex);
-  };
-
-  const handlePrev = () => scrollToIndex(scrollIndex - 1);
-  const handleNext = () => scrollToIndex(scrollIndex + 1);
-
-  // Redirect vertical wheel to horizontal scroll
-  useEffect(() => {
-    const gallery = galleryRef.current;
-    if (!gallery) return;
-
-    const onWheel = (e) => {
-      if (e.deltaY !== 0) {
-        e.preventDefault();
-        gallery.scrollLeft += e.deltaY;
-      }
-    };
-
-    gallery.addEventListener('wheel', onWheel, { passive: false });
-    return () => gallery.removeEventListener('wheel', onWheel);
-  }, []);
 
   return (
     <main>
       <div className="gallery-filters">
+        <div className='count-filter'> <label>[ {filtered.length} ] </label></div>
         <div className="single-filter">
           <label>רגשות</label>
           <div className="filter-options">
             <button
               type="button"
               className={selectedEmotions.length === 0 ? 'active' : ''}
-              onClick={() => setSelectedEmotions([])}
+              style={
+                selectedEmotions.length === 0
+                  ? { '--svg-url-emotion': `url('/assets/images/red_circles/${allEmotionIcon}.svg')` }
+                  : {}
+              }
+              onClick={() => {
+                setSelectedEmotions([]);
+                setAllEmotionIcon(Math.floor(Math.random() * 3) + 1); // new random on click
+              }}
             >
               הכל
             </button>
@@ -130,6 +136,14 @@ const GalleryPage = () => {
                 key={e}
                 type="button"
                 className={selectedEmotions.includes(e) ? 'active' : ''}
+                data-svg-type="emotion"
+                style={
+                  selectedEmotions.includes(e)
+                    ? {
+                      '--svg-url-emotion': `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`
+                    }
+                    : {}
+                }
                 onClick={() => toggleEmotion(e)}
               >
                 {e}
@@ -139,12 +153,20 @@ const GalleryPage = () => {
         </div>
 
         <div className="single-filter">
-          <label>קטגוריות</label>
+          <label>נושאים</label>
           <div className="filter-options">
             <button
               type="button"
               className={selectedCategories.length === 0 ? 'active' : ''}
-              onClick={() => setSelectedCategories([])}
+              style={
+                selectedCategories.length === 0
+                  ? { '--svg-url-category': `url('/assets/images/red_circles/${allCategoryIcon}.svg')` }
+                  : {}
+              }
+              onClick={() => {
+                setSelectedCategories([]);
+                setAllCategoryIcon(Math.floor(Math.random() * 3) + 1); // new random on click
+              }}
             >
               הכל
             </button>
@@ -153,6 +175,14 @@ const GalleryPage = () => {
                 key={c}
                 type="button"
                 className={selectedCategories.includes(c) ? 'active' : ''}
+                data-svg-type="category"
+                style={
+                  selectedCategories.includes(c)
+                    ? {
+                      '--svg-url-category': `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`
+                    }
+                    : {}
+                }
                 onClick={() => toggleCategory(c)}
               >
                 {c}
@@ -164,43 +194,44 @@ const GalleryPage = () => {
         <div className="single-filter">
           <label>תצוגה</label>
           <div className="filter-options">
-            <button
-              type="button"
-              className={view === 'snippet' ? 'active' : ''}
-              onClick={() => setView('snippet')}
-            >
-              מקטע
-            </button>
-            <button
-              type="button"
-              className={view === 'citation' ? 'active' : ''}
-              onClick={() => setView('citation')}
-            >
-              ציטוט
-            </button>
-            <button
-              type="button"
-              className={view === 'title' ? 'active' : ''}
-              onClick={() => setView('title')}
-            >
-              כותרת
-            </button>
+            {['snippet', 'citation', 'title'].map((v) => (
+              <button
+                key={v}
+                type="button"
+                className={view === v ? 'active' : ''}
+                style={
+                  view === v
+                    ? { '--svg-url-view': `url('/assets/images/red_circles/${viewIcons[v]}.svg')` }
+                    : {}
+                }
+                onClick={() => {
+                  setView(v);
+                  setViewIcons((prev) => ({
+                    ...prev,
+                    [v]: Math.floor(Math.random() * 3) + 1 // new random on click
+                  }));
+                }}
+                data-svg-type="view"
+              >
+                {v === 'snippet' ? 'מקטע' : v === 'citation' ? 'ציטוט' : 'כותרת'}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-     
-        <div className="text-gallery" ref={galleryRef}>
-          {filtered.map((text, i) => (
-            <TextCard key={i} text={text} index={i} view={view} />
-          ))}
-        </div>
-       
-        <div className="gallery-progress">
-          {Array.from({ length: totalCards - visibleCards + 1 }, (_, i) => (
-            <span key={i} className={i === scrollIndex ? 'active' : ''}>*</span>
-          ))}
-        </div>
+
+      <div className="text-gallery" ref={galleryRef}>
+        {filtered.map((text, i) => (
+          <TextCard key={i} text={text} index={i} view={view} />
+        ))}
+      </div>
+
+      <div className="gallery-progress">
+        {Array.from({ length: totalCards - visibleCards + 1 }, (_, i) => (
+          <span key={i} className={i === scrollIndex ? 'active' : ''}>*</span>
+        ))}
+      </div>
     </main>
   );
 };

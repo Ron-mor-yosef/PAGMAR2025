@@ -1,7 +1,6 @@
 .text-card {
-  background: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border-top: #222 0.5px solid;
+  border-bottom: #222 0.5px solid;
   padding: 1.2rem 1.5rem;
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
@@ -9,26 +8,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  filter: blur(0.2px);
+  font-family: 'Masada';
   max-width: 600px;
+  font-size: 2rem;
 }
 
 .text-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
-  background: #f1f7ff;
   transform: translateY(-2px) scale(1.02);
 }
 
 .text-card p {
   margin: 0;
-  font-size: 1.08rem;
+  /* font-size: 1.08rem; */
   color: #222;
 }
 
-.text-card strong {
+/* .text-card strong {
   font-size: 1.13rem;
   color: #1a237e;
   font-weight: bold;
-}
+} */
 
 .text-card-category {
   display: flex;
@@ -46,7 +46,8 @@
 }
 
 .text-card-category li:not(:last-child)::after {
-  content: " * ";
+  content: " /";
   color: #888;
-  margin-left: 0.2em;
+  margin: 0 0.3em;
+  pointer-events: none;
 }

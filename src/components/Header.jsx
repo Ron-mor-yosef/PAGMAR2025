@@ -3,7 +3,7 @@ import './Header.css';
 
 const Header = () => (
   <header className="toolbar top-bar">
-    <img src="/assets/icons/hebrew-logo.svg" alt="Logo" className="logo" />
+    <img src="/assets/images/hebrew-logo.svg" alt="Logo" className="logo" />
     <nav>
       <Link to="/">אודות</Link>
       <Link to="/gallery">טקסטים</Link>

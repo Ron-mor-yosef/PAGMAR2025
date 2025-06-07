@@ -1,5 +1,5 @@
 .toolbar.top-bar {
-  font-family: 'NarkissBlock', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen';
+  font-family: 'NarkissBlock-Thin', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen';
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,7 +27,7 @@ nav {
 nav a {
   border: 0.5px solid #222;
   border-radius: 0.5rem 0.5rem 0 0;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 1.4rem;
   width: 113px;
   height: 54px;
