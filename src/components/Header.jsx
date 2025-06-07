@@ -3,11 +3,11 @@ import './Header.css';
 
 const Header = () => (
   <header className="toolbar top-bar">
-    <img src="/logo.pdf" alt="Logo" className="logo" />
+    <img src="/assets/icons/hebrew-logo.svg" alt="Logo" className="logo" />
     <nav>
-      <Link to="/">בית</Link>
-      <Link to="/gallery">גלריה</Link>
-      <Link to="/statistics">סטטיסטיקות</Link>
+      <Link to="/">אודות</Link>
+      <Link to="/gallery">טקסטים</Link>
+      <Link to="/statistics">נתונים</Link>
     </nav>
   </header>
 );

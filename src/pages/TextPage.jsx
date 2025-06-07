@@ -19,7 +19,7 @@ const TextPage = () => {
     <main>
       <h1>{text['כותרת']}</h1>
       <h3>{text['שם כותבת']}</h3>
-      <p>{text['הטקסט']?.split('\\n').map((line, i) => <div key={i}>{line}</div>)}</p>
+      <p>{text['הטקסט']?.split(/\n|\r/g).map((line, i) => <div key={i}>{line}</div>)}</p>
       <EmotionTag emotion={text['רגשות']} />
     </main>
   );
