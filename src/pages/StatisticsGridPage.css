@@ -1,0 +1,149 @@
+.statistics-grid-page {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: auto 8rem;
+  background: #FFFBF2;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.statistics-grid-center {
+  margin: 2vw 2vw 2vw 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statistics-grid-table {
+  display: grid;
+  grid-template-columns: repeat(35, 1vw);
+  grid-template-rows: repeat(35, 1vw);
+  gap: 0;
+  border: 0.5px solid #bbb;
+}
+
+.statistics-grid-cell {
+  width: 1vw;
+  height: 1vw;
+  border: 0.5px solid #bbb;
+  box-sizing: border-box;
+  background: #ffffff00;
+  transition: background 0.3s;
+}
+
+.statistics-grid-cell.filled {
+  background: #f8bfc7;
+}
+
+.statistics-grid-caption {
+  margin-top: 1.2vw;
+  font-size: 1.3vw;
+  color: #222;
+  display: flex;
+  align-items: baseline;
+  gap: 1vw;
+}
+
+.statistics-grid-percent {
+  font-size: 2vw;
+  font-weight: bold;
+  color: #795548;
+  margin-left: 0.5vw;
+}
+
+.statistics-grid-caption-text {
+  font-size: 1vw;
+  color: #222;
+  width: 20vw;
+}
+
+.statistics-grid-list {
+  margin: 2vw 0 2vw 2vw;
+  /* overflow-y: auto; */
+  /* direction: rtl; */
+  width: 30vw;
+  max-height: 90vh;
+  min-width: 340px;
+}
+
+.statistics-grid-group {
+  margin-bottom: 2em;
+}
+
+.statistics-grid-group-title {
+  font-size: 1.1rem;
+  color: #795548;
+  margin: 0.5em 0 0.2em 0;
+  font-weight: bold;
+}
+
+.statistics-grid-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.statistics-grid-li {
+  cursor: pointer;
+  margin: 0.5em 0;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+  background: transparent;
+  font-size: 1.05em;
+  border: none;
+}
+
+.statistics-grid-li.selected {
+  background: #ffe082;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #ffd54f44;
+}
+
+.statistics-grid-radio {
+  margin: 0.7em;
+  accent-color: #795548;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 2px; /* Makes it square */
+  appearance: none;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 2px solid #bbb;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.statistics-grid-radio:checked {
+  background: #795548;
+  border-color: #795548;
+}
+
+.statistics-grid-radio:checked::after {
+  content: "";
+  display: block;
+  width: 0.6em;
+  height: 0.6em;
+  background: #fff;
+  position: absolute;
+  top: 0.15em;
+  left: 0.15em;
+  border-radius: 1px;
+}
+
+.statistics-grid-li-percent {
+  color: #795548;
+  font-weight: 700;
+  margin-right: 0.7em;
+  min-width: 3em;
+  text-align: right;
+}
+
+.statistics-grid-li-text {
+  color: #222;
+  font-size: 1em;
+  max-width: 20vw;
+}

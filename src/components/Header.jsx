@@ -8,6 +8,7 @@ const Header = () => (
       <Link to="/">אודות</Link>
       <Link to="/gallery">טקסטים</Link>
       <Link to="/statistics">נתונים</Link>
+      <Link to="/statistics-grid">גריד</Link>
     </nav>
   </header>
 );

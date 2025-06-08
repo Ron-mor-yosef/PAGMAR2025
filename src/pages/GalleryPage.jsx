@@ -132,22 +132,25 @@ const GalleryPage = () => {
               הכל
             </button>
             {emotions.map((e) => (
-              <button
-                key={e}
-                type="button"
-                className={selectedEmotions.includes(e) ? 'active' : ''}
-                data-svg-type="emotion"
-                style={
-                  selectedEmotions.includes(e)
-                    ? {
-                      '--svg-url-emotion': `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`
-                    }
-                    : {}
-                }
-                onClick={() => toggleEmotion(e)}
-              >
-                {e}
-              </button>
+              <>
+                <button
+                  key={e}
+                  type="button"
+                  className={selectedEmotions.includes(e) ? 'active' : ''}
+                  data-svg-type="emotion"
+                  style={
+                    selectedEmotions.includes(e)
+                      ? {
+                        '--svg-url-emotion': `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`
+                      }
+                      : {}
+                  }
+                  onClick={() => toggleEmotion(e)}
+                >
+                  {e}
+                </button>
+                <label> / </label>
+              </>
             ))}
           </div>
         </div>
@@ -171,22 +174,25 @@ const GalleryPage = () => {
               הכל
             </button>
             {categories.map((c) => (
-              <button
-                key={c}
-                type="button"
-                className={selectedCategories.includes(c) ? 'active' : ''}
-                data-svg-type="category"
-                style={
-                  selectedCategories.includes(c)
-                    ? {
-                      '--svg-url-category': `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`
-                    }
-                    : {}
-                }
-                onClick={() => toggleCategory(c)}
-              >
-                {c}
-              </button>
+              <>
+              <div> / </div>
+                <button
+                  key={c}
+                  type="button"
+                  className={selectedCategories.includes(c) ? 'active' : ''}
+                  data-svg-type="category"
+                  style={
+                    selectedCategories.includes(c)
+                      ? {
+                        '--svg-url-category': `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`
+                      }
+                      : {}
+                  }
+                  onClick={() => toggleCategory(c)}
+                >
+                  {c}
+                </button>
+              </>
             ))}
           </div>
         </div>

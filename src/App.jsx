@@ -4,6 +4,8 @@ import GalleryPage from './pages/GalleryPage';
 import TextPage from './pages/TextPage';
 import StatisticsPage from './pages/StatisticsPage';
 import Header from './components/Header';
+import StatisticsGridPage from './pages/StatisticsGridPage';
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/text/:id" element={<TextPage />} />
         <Route path="/statistics" element={<StatisticsPage />} />
+        <Route path="/statistics-grid" element={<StatisticsGridPage />} />
       </Routes>
     </Router>
   );
