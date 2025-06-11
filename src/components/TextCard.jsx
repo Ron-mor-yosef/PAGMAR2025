@@ -1,18 +1,18 @@
-import { useNavigate } from 'react-router-dom';
-import './TextCard.css';
+import "./TextCard.css";
+import FloatingInfoBox from "./FloatingInfoBox";
 
-const TextCard = ({ text, index, view }) => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/text/${index}`);
-  };
+const TextCard = ({ text, view, onCardClick }) => {
 
   return (
-    <div onClick={handleClick} className="text-card">
+    <div
+      className="text-card"
+      style={{ position: "relative" }}
+      onClick={(e) => onCardClick(text, e)}
+    >
+      <div className="text-card-title">{text['כותרת'] || 'ללא כותרת'}</div>
       {view === 'snippet' && <p>{text['הטקסט']?.slice(0, 60)}...</p>}
       {view === 'citation' && <p>{text['ציטוט1'] || 'אין ציטוט'}</p>}
-      {view === 'title' && <strong>{text['כותרת']} / {text['שם כותבת']}</strong>}
+      {view === 'title' && <strong>{text['כותרת']|| 'ללא כותרת'} / {text['שם כותבת']|| 'ללא שם'}</strong>}
       <div className="text-card-emotions">
         {text['רגשות']?.split(/,|\r/g).map((emotion, i) => (
           <span key={i} className="emotion-tag">{emotion.trim()}</span>
@@ -22,7 +22,7 @@ const TextCard = ({ text, index, view }) => {
         {text['קטגוריות']?.split(/,|\r/g).map((category, i) => (
           <li key={i} className="category-tag">{category.trim()}</li>
         ))}
-      </ul>
+      </ul>      
     </div>
   );
 };

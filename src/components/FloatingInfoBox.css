@@ -1,0 +1,29 @@
+.floating-info-box {
+  z-index: 1000;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  min-width: 220px;
+  max-width: 320px;
+  padding: 16px;
+  cursor: grabbing;
+  position: fixed; /* You can adjust this if needed */
+}
+
+.floating-info-box-header {
+  font-weight: bold;
+  margin-bottom: 8px;
+  cursor: grab;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.floating-info-box-close {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}

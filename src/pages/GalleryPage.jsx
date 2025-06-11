@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { loadCSV } from '../utils/parseCSV';
-import TextCard from '../components/TextCard';
-import './GalleryPage.css';
+import React, { useEffect, useRef, useState } from "react";
+import { loadCSV } from "../utils/parseCSV";
+import TextCard from "../components/TextCard";
+import FloatingInfoBox from "../components/FloatingInfoBox";
+import "./GalleryPage.css";
 
 const GalleryPage = () => {
   const [texts, setTexts] = useState([]);
-  const [view, setView] = useState('snippet');
+  const [view, setView] = useState("snippet");
   const [emotions, setEmotions] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedEmotions, setSelectedEmotions] = useState([]);
@@ -21,18 +22,22 @@ const GalleryPage = () => {
   });
   const galleryRef = useRef(null);
   const [scrollIndex, setScrollIndex] = useState(0);
+  const [floatingInfo, setFloatingInfo] = useState(null);
+  const [selectedText, setSelectedText] = useState(null);
+  const [boxPos, setBoxPos] = useState(null);
+  const [openBoxes, setOpenBoxes] = useState([]);
 
   useEffect(() => {
-    loadCSV('/texts.csv').then(data => {
+    loadCSV("/texts.csv").then((data) => {
       setTexts(data);
 
       // Extract unique emotions
       const allEmotions = [
         ...new Set(
-          data.flatMap(t =>
-            (t['רגשות'] || '')
+          data.flatMap((t) =>
+            (t["רגשות"] || "")
               .split(/,|\n/)
-              .map(e => e.trim())
+              .map((e) => e.trim())
               .filter(Boolean)
           )
         ),
@@ -42,10 +47,10 @@ const GalleryPage = () => {
       // Extract unique categories
       const allCategories = [
         ...new Set(
-          data.flatMap(t =>
-            (t['קטגוריות'] || '')
+          data.flatMap((t) =>
+            (t["קטגוריות"] || "")
               .split(/,|\n/)
-              .map(e => e.trim())
+              .map((e) => e.trim())
               .filter(Boolean)
           )
         ),
@@ -61,12 +66,12 @@ const GalleryPage = () => {
         // Remove emotion and its icon
         const { [emotion]: _, ...rest } = emotionIcons;
         setEmotionIcons(rest);
-        return prev.filter(e => e !== emotion);
+        return prev.filter((e) => e !== emotion);
       } else {
         // Add emotion and assign a random icon index (1-3)
         setEmotionIcons({
           ...emotionIcons,
-          [emotion]: Math.floor((Math.random() + 1) * 3)
+          [emotion]: Math.floor((Math.random() + 1) * 3),
         });
         return [...prev, emotion];
       }
@@ -78,11 +83,11 @@ const GalleryPage = () => {
       if (prev.includes(category)) {
         const { [category]: _, ...rest } = categoryIcons;
         setCategoryIcons(rest);
-        return prev.filter(c => c !== category);
+        return prev.filter((c) => c !== category);
       } else {
         setCategoryIcons({
           ...categoryIcons,
-          [category]: Math.floor(Math.random() * 3) + 1
+          [category]: Math.floor(Math.random() * 3) + 1,
         });
         return [...prev, category];
       }
@@ -91,16 +96,16 @@ const GalleryPage = () => {
 
   // Filtering logic for multi-selection
   const filtered = texts.filter((t) => {
-    const textEmotions = (t['רגשות'] || '').split(/,|\n/g).map(e => e.trim()).filter(Boolean);
-    const textCategories = (t['קטגוריות'] || '').split(/,|\n/g).map(e => e.trim()).filter(Boolean);
+    const textEmotions = (t["רגשות"] || "").split(/,|\n/g).map((e) => e.trim()).filter(Boolean);
+    const textCategories = (t["קטגוריות"] || "").split(/,|\n/g).map((e) => e.trim()).filter(Boolean);
 
     const emotionMatch =
       selectedEmotions.length === 0 ||
-      selectedEmotions.some(e => textEmotions.includes(e));
+      selectedEmotions.some((e) => textEmotions.includes(e));
 
     const categoryMatch =
       selectedCategories.length === 0 ||
-      selectedCategories.some(c => textCategories.includes(c));
+      selectedCategories.some((c) => textCategories.includes(c));
 
     return emotionMatch && categoryMatch;
   });
@@ -108,20 +113,38 @@ const GalleryPage = () => {
   const visibleCards = 3; // How many cards fit in the viewport (adjust as needed)
   const totalCards = filtered.length;
 
+  const handleCardClick = (memory, event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setOpenBoxes((prev) => [
+      ...prev,
+      {
+        id: Date.now() + Math.random(), // unique id
+        text: memory,
+        position: { x: rect.right + 10, y: rect.top },
+      },
+    ]);
+  };
+
+  const handleCloseBox = (id) => {
+    setOpenBoxes((prev) => prev.filter((box) => box.id !== id));
+  };
 
   return (
     <main>
       <div className="gallery-filters">
-        <div className='count-filter'> <label>[ {filtered.length} ] </label></div>
+        <div className="count-filter">
+          {" "}
+          <label>[ {filtered.length} ] </label>
+        </div>
         <div className="single-filter">
           <label>רגשות</label>
           <div className="filter-options">
             <button
               type="button"
-              className={selectedEmotions.length === 0 ? 'active' : ''}
+              className={selectedEmotions.length === 0 ? "active" : ""}
               style={
                 selectedEmotions.length === 0
-                  ? { '--svg-url-emotion': `url('/assets/images/red_circles/${allEmotionIcon}.svg')` }
+                  ? { "--svg-url-emotion": `url('/assets/images/red_circles/${allEmotionIcon}.svg')` }
                   : {}
               }
               onClick={() => {
@@ -136,13 +159,13 @@ const GalleryPage = () => {
                 <button
                   key={e}
                   type="button"
-                  className={selectedEmotions.includes(e) ? 'active' : ''}
+                  className={selectedEmotions.includes(e) ? "active" : ""}
                   data-svg-type="emotion"
                   style={
                     selectedEmotions.includes(e)
                       ? {
-                        '--svg-url-emotion': `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`
-                      }
+                          "--svg-url-emotion": `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`,
+                        }
                       : {}
                   }
                   onClick={() => toggleEmotion(e)}
@@ -160,10 +183,10 @@ const GalleryPage = () => {
           <div className="filter-options">
             <button
               type="button"
-              className={selectedCategories.length === 0 ? 'active' : ''}
+              className={selectedCategories.length === 0 ? "active" : ""}
               style={
                 selectedCategories.length === 0
-                  ? { '--svg-url-category': `url('/assets/images/red_circles/${allCategoryIcon}.svg')` }
+                  ? { "--svg-url-category": `url('/assets/images/red_circles/${allCategoryIcon}.svg')` }
                   : {}
               }
               onClick={() => {
@@ -175,17 +198,17 @@ const GalleryPage = () => {
             </button>
             {categories.map((c) => (
               <>
-              <div> / </div>
+                <div> / </div>
                 <button
                   key={c}
                   type="button"
-                  className={selectedCategories.includes(c) ? 'active' : ''}
+                  className={selectedCategories.includes(c) ? "active" : ""}
                   data-svg-type="category"
                   style={
                     selectedCategories.includes(c)
                       ? {
-                        '--svg-url-category': `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`
-                      }
+                          "--svg-url-category": `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`,
+                        }
                       : {}
                   }
                   onClick={() => toggleCategory(c)}
@@ -200,44 +223,54 @@ const GalleryPage = () => {
         <div className="single-filter">
           <label>תצוגה</label>
           <div className="filter-options">
-            {['snippet', 'citation', 'title'].map((v) => (
+            {["snippet", "citation", "title"].map((v) => (
               <button
                 key={v}
                 type="button"
-                className={view === v ? 'active' : ''}
+                className={view === v ? "active" : ""}
                 style={
                   view === v
-                    ? { '--svg-url-view': `url('/assets/images/red_circles/${viewIcons[v]}.svg')` }
+                    ? { "--svg-url-view": `url('/assets/images/red_circles/${viewIcons[v]}.svg')` }
                     : {}
                 }
                 onClick={() => {
                   setView(v);
                   setViewIcons((prev) => ({
                     ...prev,
-                    [v]: Math.floor(Math.random() * 3) + 1 // new random on click
+                    [v]: Math.floor(Math.random() * 3) + 1, // new random on click
                   }));
                 }}
                 data-svg-type="view"
               >
-                {v === 'snippet' ? 'מקטע' : v === 'citation' ? 'ציטוט' : 'כותרת'}
+                {v === "snippet" ? "מקטע" : v === "citation" ? "ציטוט" : "כותרת"}
               </button>
             ))}
           </div>
         </div>
       </div>
 
-
       <div className="text-gallery" ref={galleryRef}>
         {filtered.map((text, i) => (
-          <TextCard key={i} text={text} index={i} view={view} />
+          <TextCard key={i} text={text} index={i} view={view} onCardClick={handleCardClick} />
         ))}
       </div>
 
       <div className="gallery-progress">
         {Array.from({ length: totalCards - visibleCards + 1 }, (_, i) => (
-          <span key={i} className={i === scrollIndex ? 'active' : ''}>*</span>
+          <span key={i} className={i === scrollIndex ? "active" : ""}>
+            *
+          </span>
         ))}
       </div>
+
+      {openBoxes.map((box) => (
+        <FloatingInfoBox
+          key={box.id}
+          text={box.text}
+          position={box.position}
+          onClose={() => handleCloseBox(box.id)}
+        />
+      ))}
     </main>
   );
 };

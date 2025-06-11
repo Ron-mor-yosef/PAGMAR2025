@@ -14,6 +14,7 @@ main .text-card p {
   font-family: 'Masada';
   max-width: 50vw;
   font-size: 3rem;
+  text-shadow: 0px 3px 7px rgba(60, 18, 158, 0.7);
 }
 
 .text-card:hover {
