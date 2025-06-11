@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./FloatingInfoBox.css";
 
-const FloatingInfoBox = ({ text, position, onClose }) => {
+const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus }) => {
     const boxRef = useRef(null);
     const [dragging, setDragging] = useState(false);
     const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -50,13 +50,20 @@ const FloatingInfoBox = ({ text, position, onClose }) => {
             style={{
                 top: boxPos?.y,
                 left: boxPos?.x,
+                zIndex: zIndex, // use the passed zIndex
+            }}
+            onMouseDown={(e) => {
+                onFocus && onFocus();
+                startDrag(e);
             }}
         >
-            <div
-                className="floating-info-box-header"
-                onMouseDown={startDrag}
-            >
-                {text['כותרת'] ? text['כותרת'] : "ללא כותרת"}
+            <div className="floating-info-box-header">
+                <span className="floating-info-box-title">
+                    {text['כותרת'] ? text['כותרת'] : "ללא כותרת"}
+                </span>
+                <span className="floating-info-box-author">
+                    {text['שם כותבת'] || "ללא שם"}
+                </span>
                 <button
                     className="floating-info-box-close"
                     onClick={onClose}
@@ -64,29 +71,24 @@ const FloatingInfoBox = ({ text, position, onClose }) => {
                     ×
                 </button>
             </div>
-            <div className="floating-info-box-author">
-                <strong>שם כותבת:</strong> {text['שם כותבת'] || "לא ידוע"}
-            </div>
+
             <div className="floating-info-box-content">
-                <strong>הטקסט:</strong>
-                <p>{text['הטקסט']}</p>
-            </div>
-            <div className="floating-info-box-citation">
-                <strong>ציטוט:</strong> {text['ציטוט1'] || "אין ציטוט"}
+                <p>{text['הטקסט']?.split(/,|\n/g).map((line, i) => <div key={i}>{line.trim()}</div>)}</p>
+
             </div>
             <div className="floating-info-box-filters">
                 <div>
                     <strong>רגשות:</strong>
                     <ul className="emotions">
-                        {text['רגשות']?.split(/,|\r|\n/g).map((emotion, i) => (
-                            <li key={i} className="emotion-tag">{emotion.trim()}</li>
+                        {text['רגשות']?.split(/,|\r/g).map((emotion, i) => (
+                            <span key={i} className="emotion-tag">{emotion.trim()}</span>
                         ))}
                     </ul>
                 </div>
                 <div>
                     <strong>קטגוריות:</strong>
                     <ul className="categories">
-                        {text['קטגוריות']?.split(/,|\r|\n/g).map((category, i) => (
+                        {text['קטגוריות']?.split(/,|\r/g).map((category, i) => (
                             <li key={i} className="category-tag">{category.trim()}</li>
                         ))}
                     </ul>

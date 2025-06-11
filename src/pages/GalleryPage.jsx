@@ -26,6 +26,7 @@ const GalleryPage = () => {
   const [selectedText, setSelectedText] = useState(null);
   const [boxPos, setBoxPos] = useState(null);
   const [openBoxes, setOpenBoxes] = useState([]);
+  const [nextZIndex, setNextZIndex] = useState(1001);
 
   useEffect(() => {
     loadCSV("/texts.csv").then((data) => {
@@ -118,15 +119,26 @@ const GalleryPage = () => {
     setOpenBoxes((prev) => [
       ...prev,
       {
-        id: Date.now() + Math.random(), // unique id
+        id: Date.now() + Math.random(),
         text: memory,
         position: { x: rect.right + 10, y: rect.top },
+        zIndex: nextZIndex,
       },
     ]);
+    setNextZIndex((z) => z + 1);
   };
 
   const handleCloseBox = (id) => {
     setOpenBoxes((prev) => prev.filter((box) => box.id !== id));
+  };
+
+  const handleFocusBox = (id) => {
+    setOpenBoxes((prev) =>
+      prev.map((box) =>
+        box.id === id ? { ...box, zIndex: nextZIndex } : box
+      )
+    );
+    setNextZIndex((z) => z + 1);
   };
 
   return (
@@ -181,7 +193,7 @@ const GalleryPage = () => {
         <div className="single-filter">
           <label>נושאים</label>
           <div className="filter-options">
-            <button
+            {/* <button
               type="button"
               className={selectedCategories.length === 0 ? "active" : ""}
               style={
@@ -195,7 +207,7 @@ const GalleryPage = () => {
               }}
             >
               הכל
-            </button>
+            </button> */}
             {categories.map((c) => (
               <>
                 <div> / </div>
@@ -268,7 +280,9 @@ const GalleryPage = () => {
           key={box.id}
           text={box.text}
           position={box.position}
+          zIndex={box.zIndex}
           onClose={() => handleCloseBox(box.id)}
+          onFocus={() => handleFocusBox(box.id)}
         />
       ))}
     </main>
