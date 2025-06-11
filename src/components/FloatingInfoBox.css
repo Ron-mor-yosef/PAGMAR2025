@@ -5,7 +5,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    width: 320px;
+    width: 400px;
     min-height: 400px;
     max-height: 600px;
     padding: 16px;
@@ -39,13 +39,21 @@
     font-size: 1rem;
 }
 
-
-.floating-info-box-content {
+.make-scrollbar-right {
     overflow: auto;
     flex-grow: 1;
+
+    direction: ltr; /* Ensures scrollbar is on the right */
+}
+
+.floating-info-box-content {
+    padding: 5px;
     margin-bottom: 8px;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
+    font-weight: 300;
+    direction: rtl;         /* Scrollbar on right */
+    text-align: right;      /* Text stays right-aligned */
 }
 
 

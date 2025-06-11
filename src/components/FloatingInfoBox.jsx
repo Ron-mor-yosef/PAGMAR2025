@@ -58,23 +58,22 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus }) => {
             }}
         >
             <div className="floating-info-box-header">
-                <span className="floating-info-box-title">
-                    {text['כותרת'] ? text['כותרת'] : "ללא כותרת"}
-                </span>
-                <span className="floating-info-box-author">
-                    {text['שם כותבת'] || "ללא שם"}
-                </span>
                 <button
                     className="floating-info-box-close"
                     onClick={onClose}
                 >
                     ×
                 </button>
+                <span className="floating-info-box-title">
+                    {text['כותרת'] ? text['כותרת'] : "ללא כותרת"}
+                </span>
+                <span className="floating-info-box-author">
+                    {text['שם כותבת'] || "ללא שם"}
+                </span>
             </div>
 
-            <div className="floating-info-box-content">
-                <p>{text['הטקסט']?.split(/,|\n/g).map((line, i) => <div key={i}>{line.trim()}</div>)}</p>
-
+            <div className="make-scrollbar-right">
+                <p className="floating-info-box-content">{text['הטקסט']?.split(/,|\n/g).map((line, i) => <div key={i}>{line.trim()}</div>)}</p>
             </div>
             <div className="floating-info-box-filters">
                 <div>
@@ -95,7 +94,6 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus }) => {
                 </div>
             </div>
             <div className="floating-info-box-extra">
-                <span><strong>תאריך:</strong> {text['תאריך']}</span>
             </div>
         </div>
     );
