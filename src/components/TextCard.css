@@ -1,28 +1,26 @@
 .text-card {
-  /* border-top: #222 0.5px solid;
-  border-bottom: #222 0.5px solid; */
+  /* /* border-top: #222 0.5px solid; */
+  border: #222 0.5px solid; 
   padding: 1.2rem 1.5rem;
   cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+  transition: background 0.2s, background-color 0.2s;
   display: flex;
   flex-direction: column;
   justify-content: wrap;
-}
-
-main .text-card p {
-  filter: blur(2px);
-  font-family: 'Masada';
-  max-width: 50vw;
-  font-size: 3rem;
-  text-shadow: 0px 3px 7px rgba(60, 18, 158, 0.7);
+  background:transparent; /* initial background */
 }
 
 .text-card:hover {
-  transform: translateY(-2px) scale(1.02);
+  background: #fcf6d7; /* slightly darker, adjust as needed */
+  /* Optional: add a subtle shadow or scale */
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
 .text-card p {
   margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
   color: #222;
 }
 

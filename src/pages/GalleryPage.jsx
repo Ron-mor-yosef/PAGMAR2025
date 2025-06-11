@@ -30,12 +30,14 @@ const GalleryPage = () => {
 
   useEffect(() => {
     loadCSV("/texts.csv").then((data) => {
-      setTexts(data);
+      // Add index property to each row
+      const dataWithIndex = data.map((row, idx) => ({ ...row, index: idx }));
+      setTexts(dataWithIndex);
 
       // Extract unique emotions
       const allEmotions = [
         ...new Set(
-          data.flatMap((t) =>
+          dataWithIndex.flatMap((t) =>
             (t["רגשות"] || "")
               .split(/,|\n/)
               .map((e) => e.trim())
@@ -48,7 +50,7 @@ const GalleryPage = () => {
       // Extract unique categories
       const allCategories = [
         ...new Set(
-          data.flatMap((t) =>
+          dataWithIndex.flatMap((t) =>
             (t["קטגוריות"] || "")
               .split(/,|\n/)
               .map((e) => e.trim())
@@ -115,16 +117,22 @@ const GalleryPage = () => {
   const totalCards = filtered.length;
 
   const handleCardClick = (memory, event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    setOpenBoxes((prev) => [
-      ...prev,
-      {
-        id: Date.now() + Math.random(),
-        text: memory,
-        position: { x: rect.right + 10, y: rect.top },
-        zIndex: nextZIndex,
-      },
-    ]);
+    setOpenBoxes((prev) => {
+      // Use the row index as the unique key
+      const uniqueKey = memory.index;
+      // Remove any existing box for this text
+      const filtered = prev.filter((box) => box.text.index !== uniqueKey);
+      // Add the new box at the clicked spot
+      return [
+        ...filtered,
+        {
+          id: Date.now() + Math.random(),
+          text: memory,
+          position: { x: event.clientX, y: event.clientY },
+          zIndex: nextZIndex,
+        },
+      ];
+    });
     setNextZIndex((z) => z + 1);
   };
 
@@ -232,7 +240,7 @@ const GalleryPage = () => {
           </div>
         </div>
 
-        <div className="single-filter">
+        {/* <div className="single-filter">
           <label>תצוגה</label>
           <div className="filter-options">
             {["snippet", "citation", "title"].map((v) => (
@@ -258,20 +266,19 @@ const GalleryPage = () => {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
 
-      <div className="text-gallery" ref={galleryRef}>
+      <div
+        className="text-gallery"
+        ref={galleryRef}
+        style={{
+          filter: openBoxes.length > 0 ? `blur(${(openBoxes.length * 1.00002)}px)` : "none",
+          transition: "filter 0.5s"
+        }}
+      >
         {filtered.map((text, i) => (
-          <TextCard key={i} text={text} index={i} view={view} onCardClick={handleCardClick} />
-        ))}
-      </div>
-
-      <div className="gallery-progress">
-        {Array.from({ length: totalCards - visibleCards + 1 }, (_, i) => (
-          <span key={i} className={i === scrollIndex ? "active" : ""}>
-            *
-          </span>
+          <TextCard key={i} text={text} index={i} onCardClick={handleCardClick} />
         ))}
       </div>
 

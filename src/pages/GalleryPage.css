@@ -26,35 +26,38 @@ select:focus {
   outline: none;
 }
 
-.gallery-progress {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.7rem;
-  font-size: 1.5rem;
-  letter-spacing: 0.5em;
-  color: #bbb;
-}
-
-.gallery-progress .active {
-  color: #795548;
-  font-weight: bold;
-}
-
 .text-gallery {
-  position: relative;
-  height: 100%;
-  padding:1rem;
+  /* position: relative; */
+  /* height: 100%; */
+  padding: 2rem 0;
+  overflow: auto;
+  filter: blur(var(--gallery-blur, 0px));
+  transition: filter 0.3s;
 }
 
-main>.text-gallery {
+main>.text-gallery,
+.text-gallery {
   display: flex;
   flex-direction: column;
-  max-height: 55vh;
-  gap: 1.5rem;
-  padding-bottom: 1rem;
-  margin: 1rem 8rem;
+  /* max-height: 55vh; */
+  /* gap: 1.5rem; */
+  /* padding-bottom: 1rem; */
+  /* margin: 1rem 8rem; */
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
+.text-card {
+  flex: 0 0 calc(33.333% - 16px);
+  /* 3 columns with gap */
+  box-sizing: border-box;
+  /* margin-bottom: 24px; */
+  /* Optional: add a min-width for responsiveness */
+  min-width: 250px;
+  max-width: 1fr;
+}
 
 .gallery-filters {
   display: flex;
@@ -63,7 +66,7 @@ main>.text-gallery {
   position: relative;
 }
 
-div.count-filter>label  {
+div.count-filter>label {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -106,13 +109,15 @@ div.count-filter>label  {
   cursor: pointer;
   transition: color 0.18s;
   background: no-repeat center/cover;
-  background-origin:padding-box
+  background-origin: padding-box
 }
+
 .filter-options button.active {
   content: "";
   position: absolute;
   height: 90%;
-  width:90%;   /* SVG size */
+  width: 90%;
+  /* SVG size */
 
 }
 

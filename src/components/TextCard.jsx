@@ -9,10 +9,11 @@ const TextCard = ({ text, view, onCardClick }) => {
       style={{ position: "relative" }}
       onClick={(e) => onCardClick(text, e)}
     >
-      <div className="text-card-title">{text['כותרת'] || 'ללא כותרת'}</div>
-      {view === 'snippet' && <p>{text['הטקסט']?.slice(0, 60)}...</p>}
-      {view === 'citation' && <p>{text['ציטוט1'] || 'אין ציטוט'}</p>}
-      {view === 'title' && <strong>{text['כותרת']|| 'ללא כותרת'} / {text['שם כותבת']|| 'ללא שם'}</strong>}
+      {<strong>{text['כותרת'] || 'ללא כותרת'} / {text['שם כותבת'] || 'ללא שם'}</strong>}
+
+      {text['הטקסט']?.slice(0, 60).split(/,|\r/g).map((paragraph, i) => (
+        i === 0 ? <p key={i} >{paragraph.trim()}</p> : i > 1 ? null : <p key={i} >{paragraph.trim().concat('...')}</p>
+      ))}
       <div className="text-card-emotions">
         {text['רגשות']?.split(/,|\r/g).map((emotion, i) => (
           <span key={i} className="emotion-tag">{emotion.trim()}</span>
@@ -22,7 +23,7 @@ const TextCard = ({ text, view, onCardClick }) => {
         {text['קטגוריות']?.split(/,|\r/g).map((category, i) => (
           <li key={i} className="category-tag">{category.trim()}</li>
         ))}
-      </ul>      
+      </ul>
     </div>
   );
 };

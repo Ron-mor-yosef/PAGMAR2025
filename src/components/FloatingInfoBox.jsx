@@ -66,8 +66,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus }) => {
                 </button>
                 <span className="floating-info-box-title">
                     {text['כותרת'] ? text['כותרת'] : "ללא כותרת"}
-                </span>
-                <span className="floating-info-box-author">
+                    {" "} / {" "}
                     {text['שם כותבת'] || "ללא שם"}
                 </span>
             </div>
@@ -76,24 +75,28 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus }) => {
                 <p className="floating-info-box-content">{text['הטקסט']?.split(/,|\n/g).map((line, i) => <div key={i}>{line.trim()}</div>)}</p>
             </div>
             <div className="floating-info-box-filters">
-                <div>
-                    <strong>רגשות:</strong>
-                    <ul className="emotions">
-                        {text['רגשות']?.split(/,|\r/g).map((emotion, i) => (
-                            <span key={i} className="emotion-tag">{emotion.trim()}</span>
-                        ))}
+                    <ul>
+
+                        נושאים |
+                        <li className="categories">
+                            {text['קטגוריות']?.split(/,|\r/g).map((category, i) => (
+                                <li key={i} className="category-tag">{category.trim()}</li>
+                            ))}
+                        </li>
                     </ul>
-                </div>
-                <div>
-                    <strong>קטגוריות:</strong>
-                    <ul className="categories">
-                        {text['קטגוריות']?.split(/,|\r/g).map((category, i) => (
-                            <li key={i} className="category-tag">{category.trim()}</li>
-                        ))}
+
+                    <ul>
+                        רגשות |
+                        <li className="emotions">
+                            {text['רגשות']?.split(/,|\r/g).map((emotion, i) => (
+                                <span key={i} className="emotion-tag">{emotion.trim()}</span>
+                            ))}
+                        </li>
                     </ul>
-                </div>
+
             </div>
             <div className="floating-info-box-extra">
+                + טקסטים נוספים
             </div>
         </div>
     );
