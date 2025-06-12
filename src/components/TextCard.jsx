@@ -1,11 +1,11 @@
 import "./TextCard.css";
 import FloatingInfoBox from "./FloatingInfoBox";
 
-const TextCard = ({ text, view, onCardClick }) => {
+const TextCard = ({ text, index, view, onCardClick ,twitch}) => {
 
   return (
     <div
-      className="text-card"
+      className={`text-card${twitch ? " twitch" : ""}`}
       style={{ position: "relative" }}
       onClick={(e) => onCardClick(text, e)}
     >

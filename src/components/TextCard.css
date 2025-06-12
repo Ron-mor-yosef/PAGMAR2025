@@ -19,6 +19,7 @@
 
 .text-card p {
   margin: 0;
+  padding-right: 0.5rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #222;
@@ -45,4 +46,17 @@
   color: #888;
   margin: 0 0.3em;
   pointer-events: none;
+}
+
+@keyframes twitch {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-1px) rotate(-1deg); }
+  /* 40% { transform: translateX(1px) rotate(1deg); }
+  60% { transform: translateX(-1px) rotate(-1deg); } */
+  80% { transform: translateX(1px) rotate(1deg); }
+  100% { transform: translateX(0); }
+}
+
+.text-card.twitch {
+  animation: twitch 0.5s;
 }

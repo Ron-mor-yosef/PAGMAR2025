@@ -27,6 +27,7 @@ const GalleryPage = () => {
   const [boxPos, setBoxPos] = useState(null);
   const [openBoxes, setOpenBoxes] = useState([]);
   const [nextZIndex, setNextZIndex] = useState(1001);
+  const [twitchIndexes, setTwitchIndexes] = useState([]);
 
   useEffect(() => {
     loadCSV("/texts.csv").then((data) => {
@@ -149,8 +150,26 @@ const GalleryPage = () => {
     setNextZIndex((z) => z + 1);
   };
 
+  // Twitch effect: randomly pick cards to twitch every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (filtered.length === 0) return;
+      // Pick 1-2 random indexes to twitch
+      const count = Math.floor(Math.random() * 2) + 1;
+      const indexes = [];
+      for (let i = 0; i < count; i++) {
+        indexes.push(Math.floor(Math.random() * filtered.length));
+      }
+      setTwitchIndexes(indexes);
+      // Remove twitch after animation duration
+      setTimeout(() => setTwitchIndexes([]), 350);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [filtered.length]);
+
   return (
     <main>
+      <div className="gallery-header">
       <div className="gallery-filters">
         <div className="count-filter">
           {" "}
@@ -268,17 +287,26 @@ const GalleryPage = () => {
           </div>
         </div> */}
       </div>
-
+</div>
       <div
         className="text-gallery"
         ref={galleryRef}
         style={{
-          filter: openBoxes.length > 0 ? `blur(${(openBoxes.length * 1.00002)}px)` : "none",
-          transition: "filter 0.5s"
+          filter: openBoxes.length > 0 ? `blur(${(openBoxes.length * 0.9)}px)` : "none",
+          opacity: openBoxes.length > 0
+            ? Math.max(1 - openBoxes.length * 0.02, 0.25)
+            : 1,
+          transition: "filter 0.5s, opacity 0.5s"
         }}
       >
         {filtered.map((text, i) => (
-          <TextCard key={i} text={text} index={i} onCardClick={handleCardClick} />
+          <TextCard
+            key={i}
+            text={text}
+            index={i}
+            onCardClick={handleCardClick}
+            twitch={twitchIndexes.includes(i)}
+          />
         ))}
       </div>
 
