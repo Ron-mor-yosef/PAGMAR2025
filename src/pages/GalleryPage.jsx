@@ -175,7 +175,7 @@ const GalleryPage = () => {
           {" "}
           <label>[ {filtered.length} ] </label>
         </div>
-        <div className="single-filter">
+        <div className="single-filter right">
           <label>רגשות</label>
           <div className="filter-options">
             <button
@@ -318,6 +318,11 @@ const GalleryPage = () => {
           zIndex={box.zIndex}
           onClose={() => handleCloseBox(box.id)}
           onFocus={() => handleFocusBox(box.id)}
+          extraQuotes={texts
+            .filter(t => t.index !== box.text.index)
+            .slice(0, 5)
+            .map(t => t['ציטוט'] || t['הטקסט']?.slice(0, 50) || "")
+          }
         />
       ))}
     </main>

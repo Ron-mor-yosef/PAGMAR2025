@@ -36,9 +36,10 @@ nav a {
   text-align: center;
   line-height: 54px;
   transition: background 0.2s, color 0.2s;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   border-bottom: none;
 }
+
 
 /* nav a:last-child {
   margin-right: -1px;

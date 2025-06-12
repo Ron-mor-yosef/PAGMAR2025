@@ -17,14 +17,16 @@
 
 .floating-info-box-header {
     font-weight: bold;
-    /* margin-bottom: 8px; */
     padding: 0 16px;
     user-select: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ccc;
-    /* border-top: 1px solid #ccc; */
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #fff;
 }
 
 .floating-info-box-close {
@@ -45,11 +47,12 @@
 }
 
 .make-scrollbar-right {
-    overflow: auto;
+    overflow-y: auto;
     flex-grow: 1;
     margin: 0 16px;
     padding: 0 0.8rem;
     direction: ltr;
+    max-height: 400px; /* Adjust as needed for your layout */
 }
 
 .floating-info-box-content {
@@ -61,6 +64,7 @@
     line-height: 1.5;
     font-weight: 300;
     direction: rtl;
+    height: fit-content;
     /* Scrollbar on right */
     text-align: right;
     /* Text stays right-aligned */
@@ -100,11 +104,25 @@
     flex-wrap: wrap;
 }
 
+.floating-info-box-main {
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  /* overflow-y: auto; */
+  opacity: 1;
+}
+.floating-info-box-main.collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .floating-info-box-extra {
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
-    margin: 8px;
-    font-weight: 400;
-    color: #272626;
+  cursor: pointer;
+  background: #f7f7f7;
+  border-top: 1px solid #eee;
+  padding: 12px;
+  text-align: center;
+  transition: background 0.2s;
+}
+.floating-info-box-extra.expanded {
+  background: #fffbe6;
 }
