@@ -1,18 +1,25 @@
+.header {
+    display: flex;
+margin: 0 8rem;
+  padding-top: 3rem;
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  background: #FFFBF2;
+
+  /* width: 100%; */
+  /* height: 100%; */
+}
 .toolbar.top-bar {
   font-family: 'NarkissBlock-Thin', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #FFFBF2;
   border-bottom-width: 0.5px;
   border-bottom-style: solid;
   border-bottom-color: #222;
   color: #222;
-  margin: 0 8rem;
-  padding-top: 3rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  width: calc(100% - 16rem);
 }
 
 .logo {
@@ -22,6 +29,11 @@
 
 nav {
   display: flex;
+  flex-direction: row;
+  width: max-content;
+  padding-right: 1px;
+  align-items: flex-end;
+  /* gap: -2px; */
 }
 
 nav a {
@@ -32,21 +44,25 @@ nav a {
   width: 113px;
   height: 54px;
   color: #222;
+  margin-right: -1px;
   text-decoration: none;
   text-align: center;
   line-height: 54px;
   transition: background 0.2s, color 0.2s;
   /* margin-right: 1rem; */
-  border-bottom: none;
+  /* border-bottom: none; */
 }
 
 
 /* nav a:last-child {
   margin-right: -1px;
 } */
-
-nav a:hover,
 nav a.active {
+  border-bottom: transparent;
+  box-shadow: 2px 2px 3 #222;
+}
+
+nav a:hover {
   color: #FFFBF2;
   background-color: #222;
 }

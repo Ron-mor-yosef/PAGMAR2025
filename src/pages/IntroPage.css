@@ -1,0 +1,11 @@
+main p {
+    font-family: 'masada';
+    font-size:1rem;
+    font-weight: 300;
+    line-height: 1.5rem;
+    max-width: 500px;
+}
+
+main.intro-page {
+    padding: 2rem 0 ;
+}

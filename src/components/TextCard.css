@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: wrap;
+  text-align: left;
   background:transparent; /* initial background */
 }
 
@@ -20,19 +21,36 @@
 .text-card p {
   margin: 0;
   padding-right: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 300;
   line-height: 1.5;
   color: #222;
+  text-align: right;
+  direction: rtl;
 }
 
-
+ .text-card-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0.5rem 0 0.5rem;
+  font-family: 'masada', sans-serif;
+  font-weight: 200;
+}
 .text-card-category {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 0.3em;
   list-style: none;
   padding: 0;
-  margin: 0.5em 0 0 0;
+  font-size: small;
+  font-family: 'NarkissBlock-Thin', sans-serif;
+  font-weight: 500;
+
+  /* margin: 0.5em 0 0 0; */
 }
 
 .text-card-category li {
@@ -42,7 +60,6 @@
 }
 
 .text-card-category li:not(:last-child)::after {
-  content: " /";
   color: #888;
   margin: 0 0.3em;
   pointer-events: none;
@@ -59,4 +76,17 @@
 
 .text-card.twitch {
   animation: twitch 0.5s;
+}
+.text-card-author {
+  width: fit-content;
+}
+.text-card-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;      /* Limit to 2 lines */
+  line-clamp: 2;              /* Standard property for compatibility */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3em;          /* Adjust as needed for your font-size/line-height */
+  line-height: 1.5em;         /* Adjust to match your design */
 }

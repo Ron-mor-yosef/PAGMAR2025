@@ -1,16 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import './Header.css';
 
-const Header = () => (
-  <header className="toolbar top-bar">
-    <img src="/assets/images/hebrew-logo.svg" alt="Logo" className="logo" />
-    <nav>
-      <Link to="/">אודות</Link>
-      <Link to="/gallery">טקסטים</Link>
-      <Link to="/statistics">נתונים</Link>
-      <Link to="/statistics-grid">גריד</Link>
-    </nav>
-  </header>
-);
+const Header = () => {
+  const location = useLocation();
+
+  return (
+    <div className="header">
+      <header className="toolbar top-bar">
+        <Link to="/"><img src="/assets/images/hebrew-logo.svg" alt="Logo" className="logo" /></Link>
+      </header>
+      <nav>
+        <Link to="/intro" className={location.pathname === "/intro" ? "active" : ""}>אודות</Link>
+        <Link to="/gallery" className={location.pathname === "/gallery" ? "active" : ""}>טקסטים</Link>
+        <Link to="/statistics" className={location.pathname === "/statistics" ? "active" : ""}>נתונים</Link>
+        <Link to="/statistics-grid" className={location.pathname === "/statistics-grid" ? "active" : ""}>גריד</Link>
+      </nav>
+    </div>
+  );
+};
 
 export default Header;

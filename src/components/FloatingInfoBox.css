@@ -1,128 +1,251 @@
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .floating-info-box {
-    position: fixed;
-    z-index: 1000;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
-    width: 450px;
-    min-height: 300px;
-    max-height: 600px;
-    padding: 4px 0;
-    cursor: grab;
-    direction: rtl;
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  z-index: 1000;
+  background: #F0F8FF;
+  border: 1px solid #222222;
+  border-radius: 4px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  width: 450px;
+  min-height: 300px;
+  max-height: 600px;
+  padding: 4px 0;
+  cursor: grab;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
 }
 
 .floating-info-box-header {
-    font-weight: bold;
-    padding: 0 16px;
-    user-select: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    background: #fff;
+  font-weight: bold;
+  padding: 0 16px;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #222222;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: inherit;
 }
 
 .floating-info-box-close {
-    border: none;
-    background: transparent;
-    font-size: 18px;
-    cursor: pointer;
-    margin-right: -5px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  margin-right: -5px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
 }
 
 .floating-info-box-author,
 .floating-info-box-title {
-    padding: 1rem;
-    font-size: 1.2rem;
-    width: 100%;
-    font-family: 'Masada';
-    font-weight: 200;
+  padding: 1rem;
+  font-size: 1.2rem;
+  width: 100%;
+  font-family: 'Masada';
+  font-weight: 200;
 }
 
 .make-scrollbar-right {
-    overflow-y: auto;
-    flex-grow: 1;
-    margin: 0 16px;
-    padding: 0 0.8rem;
-    direction: ltr;
-    max-height: 400px; /* Adjust as needed for your layout */
+  overflow-y: auto;
+  flex-grow: 1;
+  margin: 0 16px;
+  padding: 0 0.8rem;
+  direction: ltr;
+  max-height: 400px;
+  /* Adjust as needed for your layout */
+}
+
+.make-scrollbar-right::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+  /* Match your floating-info-box background */
+}
+
+.make-scrollbar-right::-webkit-scrollbar-thumb {
+  /* background: #506474; */
+  background: transparent;
+
+  /* Slightly darker for visibility */
+  border-radius: 8px;
+}
+
+.make-scrollbar-right::-webkit-scrollbar-track {
+  background: #506474;
+  border-radius: 8px;
+}
+
+/* For Firefox */
+.make-scrollbar-right {
+  scrollbar-color: #506474 transparent;
+  /* Thumb color and track color */
+  scrollbar-width: thin;
 }
 
 .floating-info-box-content {
-    padding: 5px;
-    margin-bottom: 8px;
-    letter-spacing: 0.001rem;
-    margin-top: 8px;
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 300;
-    direction: rtl;
-    height: fit-content;
-    /* Scrollbar on right */
-    text-align: right;
-    /* Text stays right-aligned */
+  padding: 5px;
+  margin-bottom: 8px;
+  letter-spacing: 0.001rem;
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  direction: rtl;
+  height: fit-content;
+  /* Scrollbar on right */
+  text-align: right;
+  /* Text stays right-aligned */
 }
 
 
 .floating-info-box-filters {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 1rem;
-    font-size: 0.8rem;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    letter-spacing: 0.02rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1rem;
+  font-size: 0.8rem;
+  border-top: 1px solid #222222;
+  border-bottom: 1px solid #222222;
+  letter-spacing: 0.02rem;
 
 }
 
 .floating-info-box-filters ul {
-    display: flex;
-    width: 50%;
-    gap: 8px;
-    font-size: medium;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  width: 50%;
+  gap: 8px;
+  font-size: medium;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
 }
 
 .floating-info-box-filters ul li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: small;
-    align-items: center;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: small;
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
+
+
 .floating-info-box-main {
-  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
-  /* overflow-y: auto; */
+  transition: max-height 0.5s, opacity 0.4s;
+  /* max-height: 1000px; */
   opacity: 1;
+  overflow: hidden;
 }
+
 .floating-info-box-main.collapsed {
   max-height: 0;
   opacity: 0;
   pointer-events: none;
 }
 
+.floating-info-box-filters,
+.floating-info-box-extra {
+  transition: transform 0.5s;
+}
+
+.floating-info-box-filters.collapsed,
+.floating-info-box-extra.expanded {
+  transform: translateY(-5px);
+  z-index: 2;
+  position: relative;
+}
+
 .floating-info-box-extra {
   cursor: pointer;
-  background: #f7f7f7;
-  border-top: 1px solid #eee;
+  background: inherit;
   padding: 12px;
   text-align: center;
   transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
 }
-.floating-info-box-extra.expanded {
-  background: #fffbe6;
+
+.extra-content {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+}
+
+.floating-info-box-extra.expanded .extra-content {
+  max-height: 400px;
+  /* Adjust as needed */
+  opacity: 1;
+}
+
+.extra-content-inner {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s, transform 0.5s;
+  pointer-events: none;
+}
+
+.floating-info-box-extra.expanded .extra-content-inner {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.extra-quotes-list {
+  /* padding: 1rem; */
+  border-top: 1px solid #222222;
+  max-height: 100%;
+  overflow-y: hidden;
+}
+
+.extra-quote-item {
+  cursor: pointer;
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid #222222;
+  font-family: 'masada', sans-serif;
+
+  .content {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    /* Limit to 1 line */
+    line-clamp: 1;
+    /* Standard property for compatibility */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    font-size: 0.9rem;
+    line-height: 2;
+    font-weight: 300;
+    direction: rtl;
+    text-align: right;
+    padding: 0.5rem 0;
+  }
+
+  .author {
+    font-weight: 200;
+
+    font-size: 0.8rem;
+    margin-top: 0.2em;
+    direction: rtl;
+    text-align: left;
+  }
+
+}
+
+.extra-quote-item:last-child {
+  border-bottom: none;
 }

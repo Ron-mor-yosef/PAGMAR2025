@@ -37,36 +37,24 @@ select:focus {
 
 main>.text-gallery,
 .text-gallery {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: space-between;
-  justify-content: space-between;
-  gap: 1rem;
-  /* max-height: 55vh; */
-  /* gap: 1.5rem; */
-  /* padding-bottom: 1rem; */
-  /* margin: 1rem 8rem; */
-
-  /* display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem; */
+  columns: 3 357px;
+  gap: 2rem;
 }
 
 .text-card {
-  flex: 0 0 calc(33.333% - 16px);
-  box-sizing: border-box;
-  min-width: 250px;
-  max-width: 1fr;
+  break-inside: avoid;
+  margin-bottom: 2rem; /* Space between cards must match the column gap */
 }
+
 .gallery-header {
   position: sticky;
-  top: 6.5rem;
+  top: calc(6.5rem + 5px);
   z-index: 10;
   background: #FFFBF2;
-  padding-bottom: 8px;
+  /* padding-bottom: 1rem; */
   padding-top: 2rem;
 }
+
 .gallery-filters {
   display: flex;
   align-items: stretch;
@@ -98,8 +86,10 @@ div.count-filter>label {
   padding: 1rem 1.5rem;
   margin: 0;
 }
-.single-filter.right{
-margin-left: -0.6px;}
+
+.single-filter.right {
+  margin-left: -0.6px;
+}
 
 .filter-options {
   display: flex;

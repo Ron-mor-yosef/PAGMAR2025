@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./FloatingInfoBox.css";
 
-const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes = [] }) => {
+const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes = [], onOpenNewBox }) => {
     const boxRef = useRef(null);
     const [dragging, setDragging] = useState(false);
     const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -58,19 +58,16 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
                 startDrag(e);
             }}
         >
-            {/* Header and content slide up when collapsed */}
+            {/* Always show close button */}
+            <button className="floating-info-box-close" onClick={onClose}>
+                ×
+            </button>
+
+            {/* Slide up/hide main content when collapsed */}
             <div className={`floating-info-box-main${collapsed ? " collapsed" : ""}`}>
                 <div className="floating-info-box-header">
-                    <button
-                        className="floating-info-box-close"
-                        onClick={onClose}
-                    >
-                        ×
-                    </button>
                     <span className="floating-info-box-title">
-                        {text['כותרת'] ? text['כותרת'] : "ללא כותרת"}
-                        {" "} / {" "}
-                        {text['שם כותבת'] || "ללא שם"}
+                        {text['כותרת'] ? text['כותרת'] : "ללא כותרת"} / {text['שם כותבת'] || "ללא שם"}
                     </span>
                 </div>
                 <div className="make-scrollbar-right">
@@ -79,8 +76,9 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
                     </p>
                 </div>
             </div>
-            {/* Filters always visible */}
-            <div className="floating-info-box-filters">
+
+            {/* Filters and extra button always visible, move up when collapsed */}
+            <div className={`floating-info-box-filters${collapsed ? " collapsed" : ""}`}>
                 <ul>
                     נושאים |
                     <li className="categories">
@@ -98,26 +96,44 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
                     </li>
                 </ul>
             </div>
-            {/* Extra quotes area */}
+
             <div
                 className={`floating-info-box-extra${collapsed ? " expanded" : ""}`}
                 onClick={() => setCollapsed((prev) => !prev)}
             >
-                {!collapsed ? "+ טקסטים נוספים" : (
-                    <div>
-                        <strong>ציטוטים נוספים:</strong>
-                        <ul>
-                            {extraQuotes.length > 0 ? (
-                                extraQuotes.map((q, i) => (
-                                    <li key={i}>{q}</li>
-                                ))
-                            ) : (
-                                <li>אין ציטוטים נוספים</li>
-                            )}
-                        </ul>
-                    </div>
-                )}
+                <span>
+                    {collapsed ? "- טקסטים נוספים" : "+ טקסטים נוספים"}
+                </span>
             </div>
+
+            {/* Show the list of texts only when collapsed/expanded */}
+            {collapsed && (
+                <div className="extra-quotes-list">
+                    <ul>
+                <div className="make-scrollbar-right ">
+
+                        {extraQuotes.length > 0 ? (
+                            extraQuotes.map((q, i) => (
+                                <li
+                                    key={q.index}
+                                    className="extra-quote-item"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onOpenNewBox(q, { clientX: e.clientX, clientY: e.clientY }); // Pass the quote object (should include row index/id)
+                                    }}
+                                >
+                                    <div className="content" dangerouslySetInnerHTML={{ __html: q.text.slice(0, 100)?.replace(/\r+\n+/g, "<br>") }}></div>
+                                    <div className="author">{q.author}</div>
+                                </li>
+                            ))
+                        ) : (
+                            <li>אין ציטוטים נוספים</li>
+                        )}
+                </div>
+
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };

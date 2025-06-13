@@ -321,8 +321,12 @@ const GalleryPage = () => {
           extraQuotes={texts
             .filter(t => t.index !== box.text.index)
             .slice(0, 5)
-            .map(t => t['ציטוט'] || t['הטקסט']?.slice(0, 50) || "")
-          }
+            .map(t => ({
+              index: t.index,
+              text: t['הטקסט'] || "",
+              author: t['שם כותבת'] || "ללא שם"
+            }))}
+          onOpenNewBox={(quote, location) => handleCardClick(texts[quote.index], location)}
         />
       ))}
     </main>
