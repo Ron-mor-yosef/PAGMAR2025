@@ -12,7 +12,7 @@
 }
 
 .text-card:hover {
-  background: #fcf6d7; /* slightly darker, adjust as needed */
+  /* background: #fcf6d7; slightly darker, adjust as needed */
   /* Optional: add a subtle shadow or scale */
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);

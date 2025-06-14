@@ -1,10 +1,10 @@
-main p {
+.home-page > p {
     font-family: 'masada';
     font-size:4rem;
     font-weight: 400;
     line-height: 6rem;
 }
-main p.highlight {
+.home-page > p.highlight {
         font-family: 'NarkissBlock-Thin', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen';
 
     font-weight: 200;

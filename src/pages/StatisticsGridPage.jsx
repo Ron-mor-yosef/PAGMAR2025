@@ -34,7 +34,7 @@ const StatisticsGridPage = () => {
   }, {});
 
   return (
-    <div className="statistics-grid-page">
+    <main className="statistics-grid-page">
       <div className="statistics-grid-center">
         <div className="statistics-grid-table">
           {Array.from({ length: TOTAL_SQUARES }).map((_, i) => (
@@ -76,7 +76,7 @@ const StatisticsGridPage = () => {
           </div>
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 

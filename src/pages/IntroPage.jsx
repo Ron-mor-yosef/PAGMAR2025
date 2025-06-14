@@ -18,7 +18,10 @@ const IntroPage = () => {
 
   return (
     <main className="intro-page">
+      <div className="intro-page-title">על הפרויקט</div>
+      <div className="intro-page-content">
       {introParagraphs}
+      </div>
     </main>
   );
 };

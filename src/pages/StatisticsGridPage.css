@@ -1,8 +1,8 @@
-.statistics-grid-page {
+main.statistics-grid-page {
   display: flex;
   flex-direction: row-reverse;
   margin: auto 8rem;
-  background: #FFFBF2;
+  background: inherit;
   align-items: center;
   justify-content: center;
   font-family: inherit;

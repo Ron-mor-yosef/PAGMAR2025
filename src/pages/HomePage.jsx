@@ -1,7 +1,7 @@
 import './HomePage.css';
 
 const HomePage = () => (
-  <main>
+  <main className='home-page'>
     <p>כיום בישראל יש כ־98,000 בנות זוג של משרתי מילואים.</p>
     <p>
       בקו הדק שבין הבית לחזית &mdash;

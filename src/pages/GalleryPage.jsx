@@ -151,76 +151,76 @@ const GalleryPage = () => {
   };
 
   // Twitch effect: randomly pick cards to twitch every 2 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (filtered.length === 0) return;
-      // Pick 1-2 random indexes to twitch
-      const count = Math.floor(Math.random() * 2) + 1;
-      const indexes = [];
-      for (let i = 0; i < count; i++) {
-        indexes.push(Math.floor(Math.random() * filtered.length));
-      }
-      setTwitchIndexes(indexes);
-      // Remove twitch after animation duration
-      setTimeout(() => setTwitchIndexes([]), 350);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [filtered.length]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (filtered.length === 0) return;
+  //     // Pick 1-2 random indexes to twitch
+  //     const count = Math.floor(Math.random() * 2) + 1;
+  //     const indexes = [];
+  //     for (let i = 0; i < count; i++) {
+  //       indexes.push(Math.floor(Math.random() * filtered.length));
+  //     }
+  //     setTwitchIndexes(indexes);
+  //     // Remove twitch after animation duration
+  //     setTimeout(() => setTwitchIndexes([]), 350);
+  //   }, 2000);
+  //   return () => clearInterval(interval);
+  // }, [filtered.length]);
 
   return (
-    <main>
+    <main className="gallery-page">
       <div className="gallery-header">
-      <div className="gallery-filters">
-        <div className="count-filter">
-          {" "}
-          <label>[ {filtered.length} ] </label>
-        </div>
-        <div className="single-filter right">
-          <label>רגשות</label>
-          <div className="filter-options">
-            <button
-              type="button"
-              className={selectedEmotions.length === 0 ? "active" : ""}
-              style={
-                selectedEmotions.length === 0
-                  ? { "--svg-url-emotion": `url('/assets/images/red_circles/${allEmotionIcon}.svg')` }
-                  : {}
-              }
-              onClick={() => {
-                setSelectedEmotions([]);
-                setAllEmotionIcon(Math.floor(Math.random() * 3) + 1); // new random on click
-              }}
-            >
-              הכל
-            </button>
-            {emotions.map((e) => (
-              <>
-                <button
-                  key={e}
-                  type="button"
-                  className={selectedEmotions.includes(e) ? "active" : ""}
-                  data-svg-type="emotion"
-                  style={
-                    selectedEmotions.includes(e)
-                      ? {
+        <div className="gallery-filters">
+          <div className="count-filter">
+            {" "}
+            <label>[ {filtered.length} ] </label>
+          </div>
+          <div className="single-filter right">
+            <label>רגשות</label>
+            <div className="filter-options">
+              <button
+                type="button"
+                className={selectedEmotions.length === 0 ? "active" : ""}
+                style={
+                  selectedEmotions.length === 0
+                    ? { "--svg-url-emotion": `url('/assets/images/red_circles/${allEmotionIcon}.svg')` }
+                    : {}
+                }
+                onClick={() => {
+                  setSelectedEmotions([]);
+                  setAllEmotionIcon(Math.floor(Math.random() * 3) + 1); // new random on click
+                }}
+              >
+                הכל
+              </button>
+              {emotions.map((e) => (
+                <>
+                  <button
+                    key={e}
+                    type="button"
+                    className={selectedEmotions.includes(e) ? "active" : ""}
+                    data-svg-type="emotion"
+                    style={
+                      selectedEmotions.includes(e)
+                        ? {
                           "--svg-url-emotion": `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`,
                         }
-                      : {}
-                  }
-                  onClick={() => toggleEmotion(e)}
-                >
-                  {e}
-                </button>
-                <label> / </label>
-              </>
-            ))}
+                        : {}
+                    }
+                    onClick={() => toggleEmotion(e)}
+                  >
+                    {e}
+                  </button>
+                  <label> / </label>
+                </>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="single-filter">
-          <label>נושאים</label>
-          <div className="filter-options">
-            {/* <button
+          <div className="single-filter">
+            <label>נושאים</label>
+            <div className="filter-options">
+              {/* <button
               type="button"
               className={selectedCategories.length === 0 ? "active" : ""}
               style={
@@ -235,31 +235,31 @@ const GalleryPage = () => {
             >
               הכל
             </button> */}
-            {categories.map((c) => (
-              <>
-                <div> / </div>
-                <button
-                  key={c}
-                  type="button"
-                  className={selectedCategories.includes(c) ? "active" : ""}
-                  data-svg-type="category"
-                  style={
-                    selectedCategories.includes(c)
-                      ? {
+              {categories.map((c) => (
+                <>
+                  <div> / </div>
+                  <button
+                    key={c}
+                    type="button"
+                    className={selectedCategories.includes(c) ? "active" : ""}
+                    data-svg-type="category"
+                    style={
+                      selectedCategories.includes(c)
+                        ? {
                           "--svg-url-category": `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`,
                         }
-                      : {}
-                  }
-                  onClick={() => toggleCategory(c)}
-                >
-                  {c}
-                </button>
-              </>
-            ))}
+                        : {}
+                    }
+                    onClick={() => toggleCategory(c)}
+                  >
+                    {c}
+                  </button>
+                </>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* <div className="single-filter">
+          {/* <div className="single-filter">
           <label>תצוגה</label>
           <div className="filter-options">
             {["snippet", "citation", "title"].map((v) => (
@@ -286,18 +286,18 @@ const GalleryPage = () => {
             ))}
           </div>
         </div> */}
+        </div>
       </div>
-</div>
       <div
         className="text-gallery"
         ref={galleryRef}
-        style={{
-          filter: openBoxes.length > 0 ? `blur(${(openBoxes.length * 0.9)}px)` : "none",
-          opacity: openBoxes.length > 0
-            ? Math.max(1 - openBoxes.length * 0.02, 0.25)
-            : 1,
-          transition: "filter 0.5s, opacity 0.5s"
-        }}
+        // style={{
+        //   filter: openBoxes.length > 0 ? `blur(${(openBoxes.length * 0.9)}px)` : "none",
+        //   opacity: openBoxes.length > 0
+        //     ? Math.max(1 - openBoxes.length * 0.02, 0.25)
+        //     : 1,
+        //   transition: "filter 0.5s, opacity 0.5s"
+        // }}
       >
         {filtered.map((text, i) => (
           <TextCard
