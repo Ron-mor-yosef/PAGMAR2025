@@ -11,7 +11,7 @@ li {
   background: #F0F8FF;
   border: 2px solid #222222;
   border-radius: 4px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 
   /* box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); */
   width: 450px;
@@ -112,28 +112,55 @@ li {
 
 
 .floating-info-box-filters {
+
+  height: 2rem;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   padding: 1rem;
   font-size: 0.8rem;
   border-top: 1px solid #222222;
   border-bottom: 1px solid #222222;
   letter-spacing: 0.02rem;
+  height: 2rem;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
 
 }
 
-.floating-info-box-filters ul {
-  display: flex;
+.floating-info-box-filters label {
+  width: 4rem;
+  font-weight: 300;
+}
+
+.floating-info-box-filters .tags {
   width: 50%;
-  gap: 8px;
+  flex-wrap: nowrap;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.floating-info-box-filters .tags,
+.floating-info-box-filters ul {
   font-size: medium;
-  flex-wrap: wrap;
   padding: 0;
   margin: 0;
 }
 
-.floating-info-box-filters ul li {
+.floating-info-box-filters .tags ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  padding: 0;
+  margin: 0;
+  align-items: flex-start;
+}
+
+.floating-info-box-filters .tags li {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -142,6 +169,7 @@ li {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  cursor: pointer;
 }
 
 
@@ -250,4 +278,75 @@ li {
 
 .extra-quote-item:last-child {
   border-bottom: none;
+}
+
+.highlight-category, .category-tag {
+  direction: rtl;
+  /* background: #ffe9b3; */
+  /* border-radius: 4px; */
+  /* display: inline-flex; */
+  padding: 2px 4px;
+  /* transition: box-shadow 0.2s; */
+}
+
+.highlight-emotion, .emotion-tag {
+  background-repeat: repeat-x;
+  background-position: 0 110%;
+  background-size: auto 10px;
+  border-bottom: 10px solid transparent;
+  padding-bottom: 4px;
+
+}
+
+.עייפות.active{
+  background-image: url('../../public/assets/underline/עייפות.svg');
+}
+
+.פחד.active {
+  background-image: url('../../public/assets/underline/פחד.svg');
+}
+
+.בדידות.active {
+  background-image: url('../../public/assets/underline/בדידות.svg');
+}
+
+.עוצמה.active {
+  background-image: url('../../public/assets/underline/עוצמה.svg');
+}
+
+.חמלה.active {
+  background-image: url('../../public/assets/underline/חמלה.svg');
+}
+
+.תקווה.active {
+  background-image: url('../../public/assets/underline/תקווה.svg');
+}
+
+.תסכול.active {
+  background-image: url('../../public/assets/underline/תסכול.svg');
+}
+
+.נפש.active {
+  /* Example for category-specific style */
+  background-color: #FFA463;
+}
+
+.זוגיות.active {
+  /* Example for category-specific style */
+  background-color: #63fff2;
+}
+
+.גוף.active {
+  /* Example for category-specific style */
+  background-color: #c663ff;
+}
+
+.ילדים.active {
+  /* Example for category-specific style */
+  background-color: #ff638a;
+}
+
+.תעסוקה.active {
+  /* Example for category-specific style */
+  background-color: #ddff63;
 }

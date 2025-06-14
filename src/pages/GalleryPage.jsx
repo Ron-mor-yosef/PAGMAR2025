@@ -13,13 +13,14 @@ const GalleryPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [emotionIcons, setEmotionIcons] = useState({});
   const [categoryIcons, setCategoryIcons] = useState({});
-  const [allEmotionIcon, setAllEmotionIcon] = useState(Math.floor(Math.random() * 3) + 1);
-  const [allCategoryIcon, setAllCategoryIcon] = useState(Math.floor(Math.random() * 3) + 1);
-  const [viewIcons, setViewIcons] = useState({
-    snippet: Math.floor(Math.random() * 3) + 1,
-    citation: Math.floor(Math.random() * 3) + 1,
-    title: Math.floor(Math.random() * 3) + 1,
-  });
+  // const [emotionColors, setEmotionColors] = useState({});
+  // const [allEmotionIcon, setAllEmotionIcon] = useState(Math.floor(Math.random() * 3) + 1);
+  // const [allCategoryIcon, setAllCategoryIcon] = useState(Math.floor(Math.random() * 3) + 1);
+  // const [viewIcons, setViewIcons] = useState({
+  //   snippet: Math.floor(Math.random() * 3) + 1,
+  //   citation: Math.floor(Math.random() * 3) + 1,
+  //   title: Math.floor(Math.random() * 3) + 1,
+  // });
   const galleryRef = useRef(null);
   const [scrollIndex, setScrollIndex] = useState(0);
   const [floatingInfo, setFloatingInfo] = useState(null);
@@ -28,9 +29,10 @@ const GalleryPage = () => {
   const [openBoxes, setOpenBoxes] = useState([]);
   const [nextZIndex, setNextZIndex] = useState(1001);
   const [twitchIndexes, setTwitchIndexes] = useState([]);
+  const [filterOptionRotation, setFilterOptionsRotates] = useState({});
 
   useEffect(() => {
-    loadCSV("/texts.csv").then((data) => {
+    loadCSV("/texts_new2.csv").then((data) => {
       // Add index property to each row
       const dataWithIndex = data.map((row, idx) => ({ ...row, index: idx }));
       setTexts(dataWithIndex);
@@ -39,7 +41,7 @@ const GalleryPage = () => {
       const allEmotions = [
         ...new Set(
           dataWithIndex.flatMap((t) =>
-            (t["רגשות"] || "")
+            (t["רגש"] || "")
               .split(/,|\n/)
               .map((e) => e.trim())
               .filter(Boolean)
@@ -52,7 +54,7 @@ const GalleryPage = () => {
       const allCategories = [
         ...new Set(
           dataWithIndex.flatMap((t) =>
-            (t["קטגוריות"] || "")
+            (t["קטגוריה"] || "")
               .split(/,|\n/)
               .map((e) => e.trim())
               .filter(Boolean)
@@ -65,43 +67,58 @@ const GalleryPage = () => {
 
   // Multi-selection toggle logic
   const toggleEmotion = (emotion) => {
+    const colors = {};
+    // Generate a random color for the emotion
     setSelectedEmotions((prev) => {
+
       if (prev.includes(emotion)) {
         // Remove emotion and its icon
         const { [emotion]: _, ...rest } = emotionIcons;
         setEmotionIcons(rest);
         return prev.filter((e) => e !== emotion);
       } else {
-        // Add emotion and assign a random icon index (1-3)
+        // Add emotion and assign a random icon index (1-5)
         setEmotionIcons({
           ...emotionIcons,
-          [emotion]: Math.floor((Math.random() + 1) * 3),
+          [emotion]: Math.floor((Math.random() * 5) + 1),
         });
+        setFilterOptionsRotates((prev) => ({
+          ...prev,
+          [emotion]: `${Math.random() * 10 - 5}deg`
+        }));
         return [...prev, emotion];
       }
     });
   };
 
-  const toggleCategory = (category) => {
+  const toggleCategory = (c) => {
     setSelectedCategories((prev) => {
-      if (prev.includes(category)) {
-        const { [category]: _, ...rest } = categoryIcons;
+      if (prev.includes(c)) {
+        // Remove emotion and its icon
+        const { [c]: _, ...rest } = categoryIcons;
         setCategoryIcons(rest);
-        return prev.filter((c) => c !== category);
+        return prev.filter((e) => e !== c);
       } else {
+        // Add emotion and assign a random icon index (1-5)
         setCategoryIcons({
           ...categoryIcons,
-          [category]: Math.floor(Math.random() * 3) + 1,
+          [c]: Math.floor((Math.random() * 5) + 1),
         });
-        return [...prev, category];
+        setFilterOptionsRotates((prev) => ({
+          ...prev,
+          [c]: `${Math.random() * 10 - 5}deg`
+        }));
+        return [...prev, c];
       }
     });
+
+
   };
 
   // Filtering logic for multi-selection
   const filtered = texts.filter((t) => {
-    const textEmotions = (t["רגשות"] || "").split(/,|\n/g).map((e) => e.trim()).filter(Boolean);
-    const textCategories = (t["קטגוריות"] || "").split(/,|\n/g).map((e) => e.trim()).filter(Boolean);
+    const textEmotions = (t["רגש"] || "").split(/,|\n/g).map((e) => e.trim()).filter(Boolean);
+    const textCategories = (t["קטגוריה"] || "").split(/,|\n/g).map((e) => e.trim()).filter(Boolean);
 
     const emotionMatch =
       selectedEmotions.length === 0 ||
@@ -175,10 +192,10 @@ const GalleryPage = () => {
             {" "}
             <label>[ {filtered.length} ] </label>
           </div>
-          <div className="single-filter right">
+          <div className="single-filter emotions-filter">
             <label>רגשות</label>
             <div className="filter-options">
-              <button
+              {/* <button
                 type="button"
                 className={selectedEmotions.length === 0 ? "active" : ""}
                 style={
@@ -192,9 +209,12 @@ const GalleryPage = () => {
                 }}
               >
                 הכל
-              </button>
-              {emotions.map((e) => (
+              </button> */}
+              {emotions.map((e, idx) => (
                 <>
+                  {idx > 0 ? (
+                    <label>/</label>
+                  ) : null}
                   <button
                     key={e}
                     type="button"
@@ -204,6 +224,7 @@ const GalleryPage = () => {
                       selectedEmotions.includes(e)
                         ? {
                           "--svg-url-emotion": `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`,
+                          "--circle-rotate": filterOptionRotation[e] || "0deg"
                         }
                         : {}
                     }
@@ -211,13 +232,13 @@ const GalleryPage = () => {
                   >
                     {e}
                   </button>
-                  <label> / </label>
+
                 </>
               ))}
             </div>
           </div>
 
-          <div className="single-filter">
+          <div className="single-filter category-filter">
             <label>נושאים</label>
             <div className="filter-options">
               {/* <button
@@ -235,9 +256,11 @@ const GalleryPage = () => {
             >
               הכל
             </button> */}
-              {categories.map((c) => (
+              {categories.map((c, idx) => (
                 <>
-                  <div> / </div>
+                {idx > 0 ? (
+                    <label>/</label>
+                  ) : null}
                   <button
                     key={c}
                     type="button"
@@ -247,6 +270,8 @@ const GalleryPage = () => {
                       selectedCategories.includes(c)
                         ? {
                           "--svg-url-category": `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`,
+                          "--circle-rotate": filterOptionRotation[c] || "0deg"
+
                         }
                         : {}
                     }
@@ -291,13 +316,13 @@ const GalleryPage = () => {
       <div
         className="text-gallery"
         ref={galleryRef}
-        // style={{
-        //   filter: openBoxes.length > 0 ? `blur(${(openBoxes.length * 0.9)}px)` : "none",
-        //   opacity: openBoxes.length > 0
-        //     ? Math.max(1 - openBoxes.length * 0.02, 0.25)
-        //     : 1,
-        //   transition: "filter 0.5s, opacity 0.5s"
-        // }}
+      // style={{
+      //   filter: openBoxes.length > 0 ? `blur(${(openBoxes.length * 0.9)}px)` : "none",
+      //   opacity: openBoxes.length > 0
+      //     ? Math.max(1 - openBoxes.length * 0.02, 0.25)
+      //     : 1,
+      //   transition: "filter 0.5s, opacity 0.5s"
+      // }}
       >
         {filtered.map((text, i) => (
           <TextCard

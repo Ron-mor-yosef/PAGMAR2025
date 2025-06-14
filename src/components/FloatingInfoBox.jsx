@@ -7,6 +7,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
     const [offset, setOffset] = useState({ x: 0, y: 0 });
     const [boxPos, setBoxPos] = useState(position);
     const [collapsed, setCollapsed] = useState(false);
+    const [activeTags, setActiveTag] = useState([]);
 
     useEffect(() => {
         setBoxPos(position);
@@ -44,6 +45,35 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
         }
     };
 
+    const highlightCategories = (text, activeTags) => {
+        // Regex to match <קטגוריה: ...> ... </קטגוריה>
+        return text.replace(/קטגוריה: ([^>]+)([\s\S]*?)קטגוריה/g, (match, cat, content) => {
+            const className = `highlight-category ${cat}`;
+            // Only highlight if this category is active
+            if (activeTags.includes(cat.trim())) {
+                return `span class="${className} active"${content}/span`;
+            }
+            return `span class="${className}"${content}/span`;
+        });
+    };
+    const highlightEmotion = (text, activeTags ) => {
+        // Regex to match <רגש: ...> ... </רגש>
+        return text.replace(/רגש: ([^>]+)([\s\S]*?)רגש/g, (match, emo, content) => {
+            const className = `highlight-emotion ${emo.trim()}`;
+            // Only highlight if this emotion is active
+            if (activeTags.includes(emo.trim())) {
+                return `span class="${className} active"${content}/span`;
+            }
+            return `span class="${className}"${content}/span`;
+        });
+    };
+    const highlightTags = (text, activeTags) => {
+        // Highlight categories
+        const categoryText = highlightCategories(text, activeTags);
+        // Highlight emotions
+        return highlightEmotion(categoryText, activeTags);
+    };
+
     return (
         <div
             ref={boxRef}
@@ -71,30 +101,67 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
                     </span>
                 </div>
                 <div className="make-scrollbar-right">
-                    <p className="floating-info-box-content">
-                        {text['הטקסט']?.split(/\r|\n/g).map((line, i) => <div key={i}>{line.trim()}</div>)}
-                    </p>
+                    {/* <p className="floating-info-box-content">
+                        {
+                            text['הטקסט']?.split(/\r|\n/g).map((line, i) =>
+                                <div key={i} dangerouslySetInnerHTML={{
+                                    __html: highlightTags(line.trim(), activeCategory)
+                                }}></div>)}
+                    </p> */}
+                    <p className="floating-info-box-content"
+                        dangerouslySetInnerHTML={{
+                            __html: highlightTags(
+                                (text['הטקסט'] || "")
+                                    .split(/\r?\n/)
+                                    .map(line => line.trim())
+                                    .join('<br>'),
+                                activeTags
+                            )
+                        }}
+                    />
                 </div>
             </div>
 
             {/* Filters and extra button always visible, move up when collapsed */}
             <div className={`floating-info-box-filters${collapsed ? " collapsed" : ""}`}>
-                <ul>
-                    נושאים |
-                    <li className="categories">
-                        {text['קטגוריות']?.split(/,|\r/g).map((category, i) => (
-                            <li key={i} className="category-tag">{category.trim()}</li>
+                <div className="tags">
+
+                    <label>נושאים |</label>
+                    <ul className="tags">
+                        {text['קטגוריה']?.split(/,|\r|\n/g).map((category, i) => (
+                            <li
+                                key={i}
+                                className={`category-tag ${activeTags.includes(category.trim()) ? `${category.trim()} active` : ""}`}
+                                onClick={() => setActiveTag((prev) => {
+                                    if (prev.includes(category.trim())) {
+                                        return prev.filter(tag => tag !== category.trim());
+                                    } else {
+                                        return [...prev, category.trim()];
+                                    }
+                                })}
+                            >
+                                {category.trim()}
+                            </li>
                         ))}
-                    </li>
-                </ul>
-                <ul>
-                    רגשות |
-                    <li className="emotions">
-                        {text['רגשות']?.split(/,|\r/g).map((emotion, i) => (
-                            <span key={i} className="emotion-tag">{emotion.trim()}</span>
+                    </ul>
+                </div>
+                <div className="tags">
+                    <label>רגשות |</label>
+                    <ul>
+                        {text['רגש']?.split(/,|\r|\n/g).map((emotion, i) => (
+                            <li key={i} className={`emotion-tag ${activeTags.includes(emotion.trim()) ? `${emotion.trim()} active` : ""}`}
+                                onClick={() => setActiveTag((prev) => {
+                                    if (prev.includes(emotion.trim())) {
+                                        return prev.filter(tag => tag !== emotion.trim());
+                                    } else {
+                                        return [...prev, emotion.trim()];
+                                    }
+                                })}>
+                                {emotion.trim()}
+                            </li>
                         ))}
-                    </li>
-                </ul>
+                    </ul>
+                </div>
             </div>
 
             <div
@@ -110,26 +177,26 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
             {collapsed && (
                 <div className="extra-quotes-list">
                     <ul>
-                <div className="make-scrollbar-right ">
+                        <div className="make-scrollbar-right ">
 
-                        {extraQuotes.length > 0 ? (
-                            extraQuotes.map((q, i) => (
-                                <li
-                                    key={q.index}
-                                    className="extra-quote-item"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        onOpenNewBox(q, { clientX: e.clientX, clientY: e.clientY }); // Pass the quote object (should include row index/id)
-                                    }}
-                                >
-                                    <div className="content" dangerouslySetInnerHTML={{ __html: q.text.slice(0, 100)?.replace(/\r+\n+/g, "<br>") }}></div>
-                                    <div className="author">{q.author}</div>
-                                </li>
-                            ))
-                        ) : (
-                            <li>אין ציטוטים נוספים</li>
-                        )}
-                </div>
+                            {extraQuotes.length > 0 ? (
+                                extraQuotes.map((q, i) => (
+                                    <li
+                                        key={q.index}
+                                        className="extra-quote-item"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            onOpenNewBox(q, { clientX: e.clientX, clientY: e.clientY }); // Pass the quote object (should include row index/id)
+                                        }}
+                                    >
+                                        <div className="content" dangerouslySetInnerHTML={{ __html: q.text.slice(0, 100)?.replace(/\r+\n+/g, "<br>") }}></div>
+                                        <div className="author">{q.author}</div>
+                                    </li>
+                                ))
+                            ) : (
+                                <li>אין ציטוטים נוספים</li>
+                            )}
+                        </div>
 
                     </ul>
                 </div>

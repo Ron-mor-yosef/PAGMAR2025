@@ -51,6 +51,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
     background-color: #FFFBF2; /* Set default background color */
+    
 
 }
 
@@ -62,7 +63,17 @@ main {
   max-width: 100%;
   height: 100%;
   margin: 0 8rem;
-  border-left: 1px solid #222;
-  border-right: 1px solid #222;
+  border: 1px solid #222;
+  border-top: none;
   background-color: inherit; /* Set default background color */
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-family: 'Masada', sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #222;
+  text-align: right;
 }

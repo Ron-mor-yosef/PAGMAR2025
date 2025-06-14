@@ -7,6 +7,7 @@ main.intro-page {
     p {
         max-width: 500px;
         margin-left: 4rem;
+        padding-bottom: 1rem;
     }
 
 }
@@ -24,7 +25,7 @@ main.intro-page .intro-page-content {
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
-    height: calc(100vh - 12.5rem);
+    height: calc(100vh - 12.5rem - 1px);
     align-items: flex-start;
     align-content: flex-start;
     /* gap: 1rem; */

@@ -38,12 +38,13 @@ select:focus {
 
 .text-card {
   break-inside: avoid;
-  margin-bottom: 2rem; /* Space between cards must match the column gap */
+  margin-bottom: 2rem;
+  /* Space between cards must match the column gap */
 }
 
 .gallery-header {
   position: sticky;
-  top: calc(7rem );
+  top: calc(7rem);
   z-index: 10;
   background: inherit;
   /* padding-bottom: 1rem; */
@@ -52,10 +53,20 @@ select:focus {
 }
 
 .gallery-filters {
+
   display: flex;
   align-items: stretch;
   gap: 0;
   position: relative;
+
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+
 }
 
 div.count-filter>label {
@@ -64,7 +75,7 @@ div.count-filter>label {
   align-items: center;
   justify-content: center;
   padding: 2rem 2rem;
-  padding-right: 0;
+  /* padding-right: 0; */
   /* margin: 2rem; */
   line-height: 100%;
   width: 5rem;
@@ -72,20 +83,30 @@ div.count-filter>label {
   font-weight: 500;
 }
 
+.count-filter {
+  min-width: 10%;
+
+}
+
 .single-filter {
-  flex: 1 0 0;
+  /* flex: 1 0 0; */
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   gap: 0.5rem;
   border: 0.6px solid #222;
-  border-radius: 0.2rem;
   padding: 1rem 1.5rem;
   margin: 0;
+  width: 45%;
 }
 
-.single-filter.right {
-  margin-left: -0.6px;
+.single-filter.emotions-filter {
+  border-left:none;
+  border-radius: 0 8px 8px 0;
+
+}
+.single-filter.category-filter {
+border-radius: 8px 0 0 8px;
 }
 
 .filter-options {
@@ -106,15 +127,37 @@ div.count-filter>label {
   cursor: pointer;
   transition: color 0.18s;
   background: no-repeat center/cover;
-  background-origin: padding-box
+  background-origin: padding-box;
+  background-repeat: no-repeat;
+  background-position: center 8px;
+  /* adjust as needed */
+  background-size: 32px 32px;
+  /* adjust as needed */
+  position: relative;
+}
+
+.filter-options button.active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  padding: 10px;
+  right: -10%;
+  bottom: 10%;
+  height: 110%;
+  width: 80%;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center bottom;
+  z-index: 2;
+  opacity: 0.8;
+  transform: rotate(var(--circle-rotate, 0deg));
+  transition: transform 0.2s;
 }
 
 .filter-options button.active {
   content: "";
   position: absolute;
-  height: 90%;
-  width: 90%;
-  /* SVG size */
 
 }
 
@@ -124,21 +167,24 @@ div.count-filter>label {
   overflow: visible;
 }
 
-
 /* For emotions */
-.filter-options .active[data-svg-type="emotion"] {
+.filter-options .active[data-svg-type="emotion"]::after {
   background-image: var(--svg-url-emotion);
 }
 
 /* For categories */
-.filter-options .active[data-svg-type="category"] {
+.filter-options .active[data-svg-type="category"]::after {
   background-image: var(--svg-url-category);
 }
 
-.filter-options .active[data-svg-type="view"] {
+.filter-options .active[data-svg-type="view"]::after {
   background-image: var(--svg-url-view);
 }
 
+.single-filter label{
+  font-weight: 200;
+  margin: 0 0.5rem;
+}
 .single-filter:not(:last-child)::after {
   content: "";
   position: absolute;

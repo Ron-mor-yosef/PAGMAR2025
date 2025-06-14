@@ -1,6 +1,6 @@
 .text-card {
   /* /* border-top: #222 0.5px solid; */
-  border: #222 0.5px solid; 
+  border: #222 0.5px solid;
   padding: 1.2rem 1.5rem;
   cursor: pointer;
   transition: background 0.2s, background-color 0.2s;
@@ -8,14 +8,15 @@
   flex-direction: column;
   justify-content: wrap;
   text-align: left;
-  background:transparent; /* initial background */
+  background: transparent;
+  /* initial background */
 }
 
 .text-card:hover {
   /* background: #fcf6d7; slightly darker, adjust as needed */
   /* Optional: add a subtle shadow or scale */
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .text-card p {
@@ -29,7 +30,7 @@
   direction: rtl;
 }
 
- .text-card-info {
+.text-card-info {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -37,56 +38,88 @@
   margin: 1rem 0.5rem 0 0.5rem;
   font-family: 'masada', sans-serif;
   font-weight: 200;
+  height: 2rem;
 }
-.text-card-category {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+.text-card-tags {
+  justify-content: space-evenly left;
   gap: 0.3em;
   list-style: none;
   padding: 0;
   font-size: small;
   font-family: 'NarkissBlock-Thin', sans-serif;
   font-weight: 500;
-
-  /* margin: 0.5em 0 0 0; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  direction: ltr;
+  gap: 0.3em;
+  /* align-items: flex-start; */
+  margin-right: 1em;
+  /* display: inline-flex; */
+  vertical-align: top;
+  max-width: 60%;
 }
 
-.text-card-category li {
+.text-card-tags li {
   display: inline;
   position: relative;
   padding: 0 0.3em;
 }
 
-.text-card-category li:not(:last-child)::after {
+.text-card-tags li:not(:last-child)::after {
   color: #888;
   margin: 0 0.3em;
   pointer-events: none;
 }
 
 @keyframes twitch {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-1px) rotate(-1deg); }
+  0% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-1px) rotate(-1deg);
+  }
+
   /* 40% { transform: translateX(1px) rotate(1deg); }
   60% { transform: translateX(-1px) rotate(-1deg); } */
-  80% { transform: translateX(1px) rotate(1deg); }
-  100% { transform: translateX(0); }
+  80% {
+    transform: translateX(1px) rotate(1deg);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .text-card.twitch {
   animation: twitch 0.5s;
 }
+
 .text-card-author {
-  width: fit-content;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+  /* or rtl if needed */
+  display: inline-block;
+  vertical-align: top;
+  min-width: fit-content;
+  max-width: 100%;
 }
+
 .text-card-content {
   display: -webkit-box;
-  -webkit-line-clamp: 2;      /* Limit to 2 lines */
-  line-clamp: 2;              /* Standard property for compatibility */
+  -webkit-line-clamp: 2;
+  /* Limit to 2 lines */
+  line-clamp: 2;
+  /* Standard property for compatibility */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 3em;          /* Adjust as needed for your font-size/line-height */
-  line-height: 1.5em;         /* Adjust to match your design */
+  max-height: 3em;
+  /* Adjust as needed for your font-size/line-height */
+  line-height: 1.5em;
+  /* Adjust to match your design */
 }
