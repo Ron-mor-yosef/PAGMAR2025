@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./FloatingInfoBox.css";
+import { processTaggedText } from "../utils/parseCSV"; // Adjust the import path as necessary
 
 const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes = [], onOpenNewBox }) => {
     const boxRef = useRef(null);
@@ -46,33 +47,34 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
     };
 
     const highlightCategories = (text, activeTags) => {
-        // Regex to match <קטגוריה: ...> ... </קטגוריה>
-        return text.replace(/קטגוריה: ([^>]+)([\s\S]*?)קטגוריה/g, (match, cat, content) => {
-            const className = `highlight-category ${cat}`;
-            // Only highlight if this category is active
-            if (activeTags.includes(cat.trim())) {
-                return `span class="${className} active"${content}/span`;
+        return text.replace(
+            /<קטגוריה:\s*([^>]+)>([\s\S]*?)<\/?\s*קטגוריה(:)?\s*[^>]*>/g,
+            (match, cat, content) => {
+                const trimmedCat = cat.trim();
+                const className = `highlight-category ${trimmedCat}${activeTags.includes(trimmedCat) ? " active" : ""}`;
+                return `<span class="${className}">${content}</span>`;
             }
-            return `span class="${className}"${content}/span`;
-        });
+        );
     };
-    const highlightEmotion = (text, activeTags ) => {
-        // Regex to match <רגש: ...> ... </רגש>
-        return text.replace(/רגש: ([^>]+)([\s\S]*?)רגש/g, (match, emo, content) => {
-            const className = `highlight-emotion ${emo.trim()}`;
-            // Only highlight if this emotion is active
-            if (activeTags.includes(emo.trim())) {
-                return `span class="${className} active"${content}/span`;
+
+    const highlightEmotion = (text, activeTags) => {
+        return text.replace(
+            /<רגש:\s*([^>]+)>([\s\S]*?)<\/?\s*רגש(:)?\s*[^>]*>/g,
+            (match, emo, content) => {
+                const trimmedEmo = emo.trim();
+                const className = `highlight-emotion ${trimmedEmo}${activeTags.includes(trimmedEmo) ? " active" : ""}`;
+                return `<span class="${className}">${content}</span>`;
             }
-            return `span class="${className}"${content}/span`;
-        });
+        );
     };
+
+    // const highlightTags = (text, activeTags) => {
+    //     const categoryText = highlightCategories(text, activeTags);
+    //     return highlightEmotion(categoryText, activeTags);
+    // };
     const highlightTags = (text, activeTags) => {
-        // Highlight categories
-        const categoryText = highlightCategories(text, activeTags);
-        // Highlight emotions
-        return highlightEmotion(categoryText, activeTags);
-    };
+    return processTaggedText(text, activeTags);
+};
 
     return (
         <div
@@ -131,7 +133,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
                         {text['קטגוריה']?.split(/,|\r|\n/g).map((category, i) => (
                             <li
                                 key={i}
-                                className={`category-tag ${activeTags.includes(category.trim()) ? `${category.trim()} active` : ""}`}
+                                className={`highlight-category ${activeTags.includes(category.trim()) ? `${category.trim()} active` : ""}`}
                                 onClick={() => setActiveTag((prev) => {
                                     if (prev.includes(category.trim())) {
                                         return prev.filter(tag => tag !== category.trim());
@@ -149,7 +151,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
                     <label>רגשות |</label>
                     <ul>
                         {text['רגש']?.split(/,|\r|\n/g).map((emotion, i) => (
-                            <li key={i} className={`emotion-tag ${activeTags.includes(emotion.trim()) ? `${emotion.trim()} active` : ""}`}
+                            <li key={i} className={`highlight-emotion ${activeTags.includes(emotion.trim()) ? `${emotion.trim()} active` : ""}`}
                                 onClick={() => setActiveTag((prev) => {
                                     if (prev.includes(emotion.trim())) {
                                         return prev.filter(tag => tag !== emotion.trim());

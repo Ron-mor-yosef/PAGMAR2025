@@ -280,7 +280,7 @@ li {
   border-bottom: none;
 }
 
-.highlight-category, .category-tag {
+.highlight-category {
   direction: rtl;
   /* background: #ffe9b3; */
   /* border-radius: 4px; */
@@ -289,7 +289,7 @@ li {
   /* transition: box-shadow 0.2s; */
 }
 
-.highlight-emotion, .emotion-tag {
+.highlight-emotion {
   background-repeat: repeat-x;
   background-position: 0 110%;
   background-size: auto 10px;
@@ -298,7 +298,16 @@ li {
 
 }
 
-.עייפות.active{
+li.highlight-emotion {
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+  background-size: auto 8px;
+  background-position: 0 120%;
+
+}
+
+.עייפות.active {
   background-image: url('../../public/assets/underline/עייפות.svg');
 }
 
@@ -315,6 +324,7 @@ li {
 }
 
 .חמלה.active {
+
   background-image: url('../../public/assets/underline/חמלה.svg');
 }
 
