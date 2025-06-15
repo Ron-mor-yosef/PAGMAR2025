@@ -1,0 +1,71 @@
+.stat-category-section {
+    direction: rtl;
+    margin: 1rem;
+        display: flex;
+        
+
+}
+
+.stat-list label {
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 200;
+    font-size: 1rem;
+}
+
+.stat-category-visual {
+    display: flex;
+
+}
+
+.stat-list input[type="checkbox"] {
+    margin-left: 0.5rem;
+
+}
+
+/* Grid styles */
+.percent-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 14px);
+    grid-template-rows: repeat(10, 14px);
+    gap: 2px;
+    margin-bottom: 1.2rem;
+    background: #e0e0e0;
+    border-radius: 4px;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.percent-cell {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    transition: background 0.2s;
+}
+
+.stat-percent-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 8px #0002;
+    padding: 1.2rem 1rem;
+    min-width: 120px;
+}
+
+.stat-percent-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+    text-align: center;
+}
+
+.stat-percent-desc {
+    font-size: 1.1rem;
+    color: #444;
+    text-align: center;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}

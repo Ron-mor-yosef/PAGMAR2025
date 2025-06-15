@@ -1,41 +1,98 @@
-.category-nefesh {
-  --category-color: #F28B82;
-  --category-font: 'David', serif;
-  --category-font-weight: bold;
-  --category-font-style: normal;
+main.statistics-page {
+  background: #f9f9f4;
+  min-height: 100vh;
+  padding: 2rem 0;
+  font-family: 'NarkissBlock-Thin', 'Masada', Arial, sans-serif;
+  direction: rtl;
 }
 
-.category-guf {
-  --category-color: #A7FFEB;
-  --category-font: 'Arial', sans-serif;
-  --category-font-weight: normal;
-  --category-font-style: italic;
+.stat-category-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  margin: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px #0001;
+  padding: 2rem 2.5rem;
+  background: #f6fff6;
 }
 
-.category-zugiyut {
-  --category-color: #CBF0F8;
-  --category-font: 'Courier New', monospace;
-  --category-font-weight: bold;
-  --category-font-style: italic;
+.stat-category-content {
+  flex: 2;
+  min-width: 220px;
 }
 
-.category-yeladim {
-  --category-color: #FFD6A5;
-  --category-font: 'Comic Sans MS', cursive;
-  --category-font-weight: normal;
-  --category-font-style: normal;
+.stat-category-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2a4d3b;
+  margin-bottom: 1rem;
+  text-align: right;
 }
 
-.category-taasukah {
-  --category-color: #D7AEFB;
-  --category-font: 'Tahoma', sans-serif;
-  --category-font-weight: bold;
-  --category-font-style: normal;
+.stat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: right;
 }
 
-.category-other {
-  --category-color: #E6C9A8;
-  --category-font: 'Verdana', sans-serif;
-  --category-font-weight: normal;
-  --category-font-style: normal;
+.stat-list-item {
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.1rem;
+}
+
+.stat-list-item input[type="checkbox"] {
+  accent-color: #4a90e2;
+  width: 18px;
+  height: 18px;
+}
+
+.stat-category-visual {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-percent-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px #0002;
+  padding: 2rem 1.5rem;
+  min-width: 120px;
+}
+
+.stat-percent-value {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+  text-align: center;
+}
+
+.stat-percent-desc {
+  font-size: 1.1rem;
+  color: #444;
+  text-align: center;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .stat-category-section {
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.2rem 0.7rem;
+  }
+  .stat-category-visual {
+    min-width: 100px;
+    padding-top: 1rem;
+  }
 }

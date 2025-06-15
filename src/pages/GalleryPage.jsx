@@ -186,6 +186,12 @@ const GalleryPage = () => {
 
   return (
     <main className="gallery-page">
+          {/* Smudg overlay */}
+      <div
+        className="smudge-overlay"
+        style={{ "--smudge-intensity": `${openBoxes.length * 2}px` }}
+      />
+
       <div className="gallery-header">
         <div className="gallery-filters">
           <div className="count-filter">
@@ -270,9 +276,7 @@ const GalleryPage = () => {
                         ? {
                           "--svg-url-category": `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`,
                           "--circle-rotate": filterOptionRotation[c] || "0deg",
-                          "--after-bottom": categoryIcons[c] === 5 ? "-15%" : "10%",
-
-
+                          "--after-bottom": categoryIcons[c] === 5 ? "-15%" : "10%"
                         }
                         : {}
                     }

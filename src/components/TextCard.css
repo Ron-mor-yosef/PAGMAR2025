@@ -107,6 +107,7 @@
   vertical-align: top;
   min-width: fit-content;
   max-width: 100%;
+  font-weight: 400;
 }
 
 .text-card-content {
