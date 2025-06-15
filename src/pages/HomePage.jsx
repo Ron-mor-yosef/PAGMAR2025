@@ -2,6 +2,8 @@ import './HomePage.css';
 
 const HomePage = () => (
   <main className='home-page'>
+    <div className='home-mid-box'> 
+    <div className='home-logo'> <img src="/assets/images/hebrew-logo.svg" alt="Logo" className="logo" /></div>
     <p>כיום בישראל יש כ־98,000 בנות זוג של משרתי מילואים.</p>
     <p>
       בקו הדק שבין הבית לחזית &mdash;
@@ -10,9 +12,10 @@ const HomePage = () => (
        מספרים, סיפורים ותחושות המצטברים יחד. <br />
       מוזמנות ומוזמנים לראות, לקרוא ולהרגיש.
     </p>
-    <p className="highlight">
+    <p>
       זהו סיפורן של הנשים העומדות בחזית העורף
     </p>
+    </div>
   </main>
 );
 

@@ -1,13 +1,30 @@
-main.home-page>p {
+main.home-page p {
     font-family: 'masada';
-    font-size: 4rem;
-    font-weight: 400;
-    line-height: 6rem;
-    padding-bottom: 2rem;
-    max-width: 90%;
+    font-size: min(1.5vw,1.5rem);
+    font-weight: 300;
+    /* line-height: 6rem; */
+    padding:  1.5rem 0;
+    width: 100%;
+    border-top: #222 1px solid;
+    text-align: center;
+}
+
+main.home-page .home-mid-box {
+    min-width: 600px;
+    max-width: 400px;
+    margin: auto auto;
+    border: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main.home-page img.logo {
+    height: 150px;
 }
 
 main.home-page {
+    display: flex;
     padding: 2rem;
     /* padding-top: 5rem; */
     /* padding-top: 0; */

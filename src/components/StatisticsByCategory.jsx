@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./StatisticsByCategory.css";
 
-const COLORS = {
-  "נפש": "#4a90e2",
-  "גוף": "#7b61ff",
-  "זוגיות": "#00bfae",
-  "ילדים": "#ffb300",
-  "תעסוקה": "#b2dfdb",
-};
+// const COLORS = {
+//   "נפש": "#4a90e2",
+//   "גוף": "#7b61ff",
+//   "זוגיות": "#00bfae",
+//   "ילדים": "#ffb300",
+//   "תעסוקה": "#b2dfdb",
+// };
 
 function getPercent(stat) {
   return Number(stat.percent);
@@ -67,14 +67,15 @@ const StatisticsByCategory = ({ category, label, statistics }) => {
 
   const selectedStat = selectedIdx !== null ? statistics[selectedIdx] : null;
   const percent = selectedStat ? getPercent(selectedStat) : 0;
-  const color = COLORS[category] || "#4a90e2";
+  const color = /* COLORS[category] ||*/ "#5678FF";
 
   return (
     <section
       className="stat-category-section"
       style={{
         background: "#f6fff6",
-        borderRight: `8px solid ${color}`,
+        margin: "1rem"
+        // borderRight: `8px solid ${color}`,
       }}
     >
       <div className="stat-category-content">
@@ -98,7 +99,7 @@ const StatisticsByCategory = ({ category, label, statistics }) => {
           {selectedStat && (
             <div className="stat-percent-block">
               <div className="stat-percent-value" style={{ color }}>
-                {selectedStat.percent}
+                {selectedStat.percent}%
               </div>
               <div className="stat-percent-desc">{selectedStat.explanation}</div>
             </div>
