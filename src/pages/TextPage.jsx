@@ -10,7 +10,7 @@ const TextPage = () => {
   const [text, setText] = useState(null);
 
   useEffect(() => {
-    loadCSV('/texts.csv').then(data => setText(data[id]));
+    loadCSV('/texts_tagged.csv').then(data => setText(data[id]));
   }, [id]);
 
   if (!text) return <div>טוען...</div>;

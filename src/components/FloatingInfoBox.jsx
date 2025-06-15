@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import "./FloatingInfoBox.css";
 import { processTaggedText } from "../utils/parseCSV"; // Adjust the import path as necessary
 
-const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes = [], onOpenNewBox }) => {
+const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions = [], onOpenNewBox }) => {
     const boxRef = useRef(null);
     const [dragging, setDragging] = useState(false);
     const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -46,37 +46,48 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
         }
     };
 
-    const highlightCategories = (text, activeTags) => {
-        return text.replace(
-            /<קטגוריה:\s*([^>]+)>([\s\S]*?)<\/?\s*קטגוריה(:)?\s*[^>]*>/g,
-            (match, cat, content) => {
-                const trimmedCat = cat.trim();
-                const className = `highlight-category ${trimmedCat}${activeTags.includes(trimmedCat) ? " active" : ""}`;
-                return `<span class="${className}">${content}</span>`;
-            }
-        );
+    const isValidSuggestion = (quote, activeTags) => {
+        // If no tags are active, show all quotes
+        if (activeTags.length === 0) return true;
+
+        // Check if the quote has any tags that match the active tags
+        const quoteTags = quote.tags || [];
+        return activeTags.every(tag => quoteTags.includes(tag));
     };
 
-    const highlightEmotion = (text, activeTags) => {
-        return text.replace(
-            /<רגש:\s*([^>]+)>([\s\S]*?)<\/?\s*רגש(:)?\s*[^>]*>/g,
-            (match, emo, content) => {
-                const trimmedEmo = emo.trim();
-                const className = `highlight-emotion ${trimmedEmo}${activeTags.includes(trimmedEmo) ? " active" : ""}`;
-                return `<span class="${className}">${content}</span>`;
-            }
-        );
-    };
+    // const highlightCategories = (text, activeTags) => {
+    //     return text.replace(
+    //         /<קטגוריה:\s*([^>]+)>([\s\S]*?)<\/?\s*קטגוריה(:)?\s*[^>]*>/g,
+    //         (match, cat, content) => {
+    //             const trimmedCat = cat.trim();
+    //             const className = `highlight-category ${trimmedCat}${activeTags.includes(trimmedCat) ? " active" : ""}`;
+    //             return `<span class="${className}">${content}</span>`;
+    //         }
+    //     );
+    // };
+
+    // const highlightEmotion = (text, activeTags) => {
+    //     return text.replace(
+    //         /<רגש:\s*([^>]+)>([\s\S]*?)<\/?\s*רגש(:)?\s*[^>]*>/g,
+    //         (match, emo, content) => {
+    //             const trimmedEmo = emo.trim();
+    //             const className = `highlight-emotion ${trimmedEmo}${activeTags.includes(trimmedEmo) ? " active" : ""}`;
+    //             return `<span class="${className}">${content}</span>`;
+    //         }
+    //     );
+    // };
 
     // const highlightTags = (text, activeTags) => {
     //     const categoryText = highlightCategories(text, activeTags);
     //     return highlightEmotion(categoryText, activeTags);
     // };
     const highlightTags = (text, activeTags) => {
-    return processTaggedText(text, activeTags);
-};
+        console.log(text);
+        return processTaggedText(text, activeTags);
+    };
 
     return (
+
         <div
             ref={boxRef}
             className="floating-info-box"
@@ -181,8 +192,8 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, extraQuotes
                     <ul>
                         <div className="make-scrollbar-right ">
 
-                            {extraQuotes.length > 0 ? (
-                                extraQuotes.map((q, i) => (
+                            {suggestions.length > 0 ? (
+                                suggestions.filter(q => isValidSuggestion(q, activeTags)).slice(0, 7).map((q, i) => (
                                     <li
                                         key={q.index}
                                         className="extra-quote-item"

@@ -212,9 +212,7 @@ const GalleryPage = () => {
               </button> */}
               {emotions.map((e, idx) => (
                 <>
-                  {idx > 0 ? (
-                    <label>/</label>
-                  ) : null}
+                  {idx > 0 ? <label>/</label> : null}
                   <button
                     key={e}
                     type="button"
@@ -224,7 +222,9 @@ const GalleryPage = () => {
                       selectedEmotions.includes(e)
                         ? {
                           "--svg-url-emotion": `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`,
-                          "--circle-rotate": filterOptionRotation[e] || "0deg"
+                          "--circle-rotate": filterOptionRotation[e] || "0deg",
+                          // If the red-circle icon 5 is selected, add an extra translateY offset:
+                          "--after-bottom": emotionIcons[e] === 5 ? "-10%" : "10%",
                         }
                         : {}
                     }
@@ -232,7 +232,6 @@ const GalleryPage = () => {
                   >
                     {e}
                   </button>
-
                 </>
               ))}
             </div>
@@ -258,7 +257,7 @@ const GalleryPage = () => {
             </button> */}
               {categories.map((c, idx) => (
                 <>
-                {idx > 0 ? (
+                  {idx > 0 ? (
                     <label>/</label>
                   ) : null}
                   <button
@@ -270,7 +269,9 @@ const GalleryPage = () => {
                       selectedCategories.includes(c)
                         ? {
                           "--svg-url-category": `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`,
-                          "--circle-rotate": filterOptionRotation[c] || "0deg"
+                          "--circle-rotate": filterOptionRotation[c] || "0deg",
+                          "--after-bottom": categoryIcons[c] === 5 ? "-15%" : "10%",
+
 
                         }
                         : {}
@@ -311,6 +312,7 @@ const GalleryPage = () => {
             ))}
           </div>
         </div> */}
+
         </div>
       </div>
       <div
@@ -343,13 +345,16 @@ const GalleryPage = () => {
           zIndex={box.zIndex}
           onClose={() => handleCloseBox(box.id)}
           onFocus={() => handleFocusBox(box.id)}
-          extraQuotes={texts
+          suggestions={texts
             .filter(t => t.index !== box.text.index)
-            .slice(0, 5)
             .map(t => ({
               index: t.index,
               text: t['הטקסט'] || "",
-              author: t['שם כותבת'] || "ללא שם"
+              author: t['שם כותבת'] || "ללא שם",
+              tags: [
+                ...(t['רגש'] || "").split(/,|\n|\r/).map(e => e.trim()).filter(Boolean),
+                ...(t['קטגוריה'] || "").split(/,|\n|\r/).map(c => c.trim()).filter(Boolean)
+              ]
             }))}
           onOpenNewBox={(quote, location) => handleCardClick(texts[quote.index], location)}
         />

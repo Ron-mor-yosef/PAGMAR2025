@@ -75,6 +75,7 @@ div.count-filter>label {
   align-items: center;
   justify-content: center;
   padding: 2rem 2rem;
+  margin: auto;
   /* padding-right: 0; */
   /* margin: 2rem; */
   line-height: 100%;
@@ -101,16 +102,21 @@ div.count-filter>label {
 }
 
 .single-filter.emotions-filter {
-  border-left:none;
+  border-left: none;
   border-radius: 0 8px 8px 0;
 
 }
+
 .single-filter.category-filter {
-border-radius: 8px 0 0 8px;
+  border-radius: 8px 0 0 8px;
 }
 
 .filter-options {
   display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
   /* gap: 0.5rem; */
   border-bottom: 0.5px solid #222;
   padding: 0 1rem;
@@ -170,21 +176,26 @@ border-radius: 8px 0 0 8px;
 /* For emotions */
 .filter-options .active[data-svg-type="emotion"]::after {
   background-image: var(--svg-url-emotion);
+  bottom: var(--after-bottom, 10%);
+
 }
 
 /* For categories */
 .filter-options .active[data-svg-type="category"]::after {
   background-image: var(--svg-url-category);
+  bottom: var(--after-bottom, 10%);
+
 }
 
 .filter-options .active[data-svg-type="view"]::after {
   background-image: var(--svg-url-view);
 }
 
-.single-filter label{
+.single-filter label {
   font-weight: 200;
   margin: 0 0.5rem;
 }
+
 .single-filter:not(:last-child)::after {
   content: "";
   position: absolute;
