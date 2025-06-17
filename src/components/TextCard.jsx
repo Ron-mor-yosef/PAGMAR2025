@@ -1,5 +1,7 @@
 import "./TextCard.css";
 import FloatingInfoBox from "./FloatingInfoBox";
+import { processTaggedText } from "../utils/parseCSV"; // Adjust the import path as necessary
+
 
 const TextCard = ({ text, index, view, onCardClick, twitch }) => {
 
@@ -11,7 +13,14 @@ const TextCard = ({ text, index, view, onCardClick, twitch }) => {
       onClick={(e) => onCardClick(text, e)}
     >
       <div className="text-card-content">
-        {<p dangerouslySetInnerHTML={{ __html: text['הטקסט']?.replace(/\r+|\n+/g, "<br>") }} />}
+
+        {<p dangerouslySetInnerHTML={{
+          __html: processTaggedText(
+            (text['הטקסט'] || "")
+              .split(/\r?\n/g)
+              .map(line => line.trim())
+              .join('<br>'), [])
+        }} />}
       </div>
       <div className="text-card-info">
         <div className="text-card-author">

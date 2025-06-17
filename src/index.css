@@ -7,6 +7,13 @@
 }
 @font-face {
   font-family: 'Masada';
+  src: url('../public/assets/fonts/Masada-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Masada';
   src: url('../public/assets/fonts/Masada-LightItalic.woff') format('woff');
   font-weight: 300;
   font-style: italic;

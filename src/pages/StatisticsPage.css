@@ -6,7 +6,7 @@ main.statistics-page {
   direction: rtl;
 }
 
-.stat-category-section {
+/* .stat-category-section {
   display: flex;
   align-items: flex-start;
   gap: 2.5rem;
@@ -15,7 +15,7 @@ main.statistics-page {
   box-shadow: 0 1px 8px #0001;
   padding: 2rem 2.5rem;
   background: #f6fff6;
-}
+} */
 
 .stat-category-content {
   flex: 2;

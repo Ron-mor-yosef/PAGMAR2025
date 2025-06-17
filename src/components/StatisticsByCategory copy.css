@@ -1,0 +1,154 @@
+/* .stat-category-section {
+    direction: rtl;
+    margin: 1rem;
+        display: flex;
+        
+
+} */
+
+.stat-list label {
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 200;
+    font-size: 1rem;
+}
+
+.stat-category-visual {
+    display: flex;
+
+}
+
+.stat-list input[type="checkbox"] {
+    margin-left: 0.5rem;
+
+}
+
+/* Grid styles */
+.percent-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 14px);
+    grid-template-rows: repeat(10, 14px);
+    gap: 2px;
+    margin-bottom: 1.2rem;
+    background: #e0e0e0;
+    border-radius: 4px;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.percent-cell {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    transition: background 0.2s;
+}
+
+.stat-percent-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 8px #0002;
+    padding: 1.2rem 1rem;
+    min-width: 120px;
+}
+
+.stat-percent-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+    text-align: center;
+}
+
+.stat-percent-desc {
+    font-size: 1.1rem;
+    color: #444;
+    text-align: center;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+
+section.stat-category-section {
+  background: repeating-linear-gradient(
+      0deg, #e0e0e0 0, #e0e0e0 1px, transparent 1px, transparent 20px
+    ),
+    repeating-linear-gradient(
+      90deg, #e0e0e0 0, #e0e0e0 1px, transparent 1px, transparent 20px
+    );
+  padding: 2rem 1rem;
+  border-radius: 16px;
+    background-position: left calc(50% - 100px) top 50%; /* Adjust as needed */
+
+  /* margin: 1rem 0; */
+}
+
+.stat-category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 2fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.stat-category-left {
+  text-align: left;
+  min-width: 120px;
+}
+
+.stat-category-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.percent-grid-bg {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: transparent;
+  /* The background grid is already on the section */
+}
+
+.percent-grid-overlay {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 2px;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.percent-cell {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  transition: background 0.3s, opacity 0.3s;
+}
+
+.stat-category-right {
+  text-align: right;
+}
+
+.stat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stat-list-item {
+  margin-bottom: 0.5rem;
+}
+
+.stat-percent-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.stat-percent-desc {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}

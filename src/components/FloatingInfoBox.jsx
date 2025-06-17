@@ -82,7 +82,6 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
     //     return highlightEmotion(categoryText, activeTags);
     // };
     const highlightTags = (text, activeTags) => {
-        console.log(text);
         return processTaggedText(text, activeTags);
     };
 
@@ -125,7 +124,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
                         dangerouslySetInnerHTML={{
                             __html: highlightTags(
                                 (text['הטקסט'] || "")
-                                    .split(/\r?\n/)
+                                    .split(/\r?\n/g)
                                     .map(line => line.trim())
                                     .join('<br>'),
                                 activeTags
@@ -137,10 +136,10 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
 
             {/* Filters and extra button always visible, move up when collapsed */}
             <div className={`floating-info-box-filters${collapsed ? " collapsed" : ""}`}>
-                <div className="tags">
+                <div className="tags" style={{ borderLeft: "#222222 0.6px solid",  margin: "0 0.5rem 0 0.1rem" }}>
 
-                    <label>נושאים |</label>
-                    <ul className="tags">
+                    <label>נושא </label>
+                    <ul>
                         {text['קטגוריה']?.split(/,|\r|\n/g).map((category, i) => (
                             <li
                                 key={i}
@@ -158,8 +157,9 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
                         ))}
                     </ul>
                 </div>
-                <div className="tags">
-                    <label>רגשות |</label>
+                <div className="tags" style={{ margin: "0 0.5rem 0 0.7rem" }}>
+                    <label >רגש </label>
+                    
                     <ul>
                         {text['רגש']?.split(/,|\r|\n/g).map((emotion, i) => (
                             <li key={i} className={`highlight-emotion ${activeTags.includes(emotion.trim()) ? `${emotion.trim()} active` : ""}`}

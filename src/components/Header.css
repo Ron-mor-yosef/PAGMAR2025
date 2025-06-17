@@ -1,5 +1,7 @@
 .intro-page {
-  background-color: #FFF0FF;
+  /* background-color: #FFF0FF; */
+    background: #FFFBF2;
+
 }
 
 .gallery-page {
@@ -8,7 +10,9 @@
 }
 
 .statistics-page {
-  background-color: #EFFFE8;
+  /* background-color: #EFFFE8; */
+    background: #FFFBF2;
+
 }
 
 .header {
