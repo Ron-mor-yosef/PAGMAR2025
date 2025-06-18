@@ -8,13 +8,13 @@ function getPercent(stat) {
 }
 
 function getFilledGridBackground(percent, color, gridSize = 20) {
-  const total = 100;
+  const total = 12**2;
   const filled = Math.round((percent / 100) * total);
   const layers = [];
 
   for (let i = 0; i < filled; i++) {
-    const row = Math.floor(i / 10);
-    const col = i % 10;
+    const row = Math.floor(i / 12);
+    const col = i % 12;
     layers.push(
       `linear-gradient(${color}80 0 0) no-repeat ${col * gridSize}px ${row * gridSize}px / ${gridSize}px ${gridSize}px`
     );
@@ -50,6 +50,7 @@ const StatisticsByCategory = ({ category, label, statistics, indx }) => {
     <section
       className="stat-category-section"
       style={{
+        "--grid-size": `${GRID_SIZE}px`,
         background: mathPaperBg,
         backgroundRepeat: "no-repeat, repeat, repeat",
         backgroundPosition: `center center, left top, left top`,
@@ -60,7 +61,7 @@ const StatisticsByCategory = ({ category, label, statistics, indx }) => {
         <div className="stat-category-left">
           {selectedStat ? (
             <>
-              <div className="stat-percent-value" style={{ color }}>
+              <div className="stat-percent-value">
                 {selectedStat.percent}%
               </div>
               <div className="stat-percent-desc">{selectedStat.explanation}</div>
@@ -71,8 +72,10 @@ const StatisticsByCategory = ({ category, label, statistics, indx }) => {
         </div>
         {/* Center: 10x10 grid area (empty, grid is in background) */}
         <div className="stat-category-center" style={{
-          width: `calc(${GRID_SIZE}px * 10)`,
-          height: `calc(${GRID_SIZE}px * 10)`,
+          width: `calc(${GRID_SIZE}px * 12)`,
+          height: `calc(${GRID_SIZE}px * 12)`,
+          border: ` solid 1px #22222240`,
+          margin: `${GRID_SIZE*2}px 0`,
           background: filledBg,
           backgroundRepeat: "no-repeat, repeat, repeat",
           backgroundPosition: `center center, left top, left top`,
@@ -80,7 +83,8 @@ const StatisticsByCategory = ({ category, label, statistics, indx }) => {
         {/* Right: Checkboxes */}
         <div className="stat-category-right">
           <ul className="stat-list">
-            <div className="stat-category-title">{indx}. {label}
+            <div className="stat-category-title">{indx}. {label}            </div>
+
               {statistics.map((stat, idx) => (
                 <li key={idx} className="stat-list-item">
                   <label className="custom-checkbox-label">
@@ -101,8 +105,9 @@ const StatisticsByCategory = ({ category, label, statistics, indx }) => {
                           alt="checked"
                           style={{
                             position: 'absolute',
-                            top: -7,
-                            left: 2,
+                            rotate: `${Math.round(Math.random()*30)}deg`,
+                            top: -14,
+                            left: 4,
                           }}
                         />
                       )}
@@ -112,7 +117,6 @@ const StatisticsByCategory = ({ category, label, statistics, indx }) => {
                   </label>
                 </li>
               ))}
-            </div>
           </ul>
         </div>
       </div>

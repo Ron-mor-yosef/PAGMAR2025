@@ -115,6 +115,7 @@ div.count-filter>label {
   align-content: center;
   justify-content: center;
   text-align: center;
+  min-width: 90%;
   /* gap: 0.5rem; */
   border-bottom: 0.5px solid #222;
   padding: 0 1rem;

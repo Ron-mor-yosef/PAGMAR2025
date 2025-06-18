@@ -9,69 +9,8 @@ main.statistics-page {
 }
 
 
-.stat-category-content {
-  flex: 2;
-  min-width: 220px;
-  height: max-content;
-}
-
-.stat-category-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2a4d3b;
-  margin-bottom: 1rem;
-  text-align: right;
-}
-
-.stat-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: right;
-}
-
-.stat-list-item {
-  margin-bottom: 0.7rem;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  font-size: 1.1rem;
-}
-
-.stat-list-item input[type="checkbox"] {
-  accent-color: #4a90e2;
-  width: 18px;
-  height: 18px;
-}
-
-.stat-category-visual {
-  flex: 1;
-  min-width: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.stat-percent-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 1px 8px #0002;
-  padding: 2rem 1.5rem;
-  min-width: 120px;
-}
 
 
-
-.stat-percent-desc {
-  font-size: 1.1rem;
-  color: #444;
-  text-align: center;
-  margin-top: 0.5rem;
-  line-height: 1.5;
-}
 
 @media (max-width: 900px) {
   .stat-category-section {
@@ -79,6 +18,7 @@ main.statistics-page {
     gap: 1.2rem;
     padding: 1.2rem 0.7rem;
   }
+
   .stat-category-visual {
     min-width: 100px;
     padding-top: 1rem;
