@@ -48,12 +48,13 @@ const StatisticsPage = () => {
 
     return (
         <main className="statistics-page">
-            {CATEGORY_ORDER.filter((cat) => statsByCategory[cat]).map((cat) => (
+            {CATEGORY_ORDER.filter((cat) => statsByCategory[cat]).map((cat, i) => (
                 <StatisticsByCategory
                     key={cat}
                     category={cat}
                     label={CATEGORY_LABELS[cat] || cat}
                     statistics={statsByCategory[cat]}
+                    indx={i+1}
                 />
             ))}
         </main>

@@ -19,10 +19,10 @@
     }
     .narkiss {
       font-family: 'NarkissBlock-Thin', Arial, sans-serif;
-      font-size: 32px;
+      font-size: 32.1px;
       font-weight: 200;
     }
   </style>
-  <text x="10" y="41" class="masada">העורף</text>
+  <text x="10" y="40" class="masada">העורף</text>
   <text x="92" y="40" class="narkiss">בחזית</text>
 </svg>

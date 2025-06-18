@@ -13,7 +13,7 @@ const Header = () => {
         <Link to="/statistics" className={location.pathname === "/statistics" ? "active statistics-page" : "statistics-page"}>נתונים</Link>
         <Link to="/gallery" className={location.pathname === "/gallery" ? "active gallery-page" : "gallery-page"}>טקסטים</Link>
         <Link to="/intro" className={location.pathname === "/intro" ? "active intro-page" : "intro-page"}>אודות</Link>
-        {/* <Link to="storytelling" className={location.pathname === "/storytelling" ? "active statistics-grid-page" : "statistics-grid-page"}>גריד</Link> */}
+        {/* <Link to="/statistics-grid" className={location.pathname === "/statistics-grid" ? "active statistics-grid-page" : "statistics-grid-page"}>גריד</Link> */}
       </nav>
     </div>
   );

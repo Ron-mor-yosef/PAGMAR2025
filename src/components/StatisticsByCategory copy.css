@@ -79,7 +79,8 @@ section.stat-category-section {
     );
   padding: 2rem 1rem;
   border-radius: 16px;
-    background-position: left calc(50% - 100px) top 50%; /* Adjust as needed */
+  background-position: left calc(50% - 100px) top 50%; /* Adjust as needed */
+  height: calc( 15 * var (--grid-size));
 
   /* margin: 1rem 0; */
 }

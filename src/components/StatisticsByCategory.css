@@ -1,47 +1,72 @@
 :root {
-    --grid-size: 15px;
+    --grid-size: 20px;
 }
 
 
 div.stat-category-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr 2fr;
+    display: flex;
+    /* grid-template-columns: 1fr 1.5fr 2fr; */
     align-items: center;
     /* gap: 2rem; */
     direction: ltr;
+    gap: calc(var(--grid-size) * 5);
+    /* padding: 0 auto ; */
 
     div {
         direction: rtl;
     }
 }
+
 .stat-category-title {
-    margin-right: calc( var(--grid-size) * 3px);
+    margin-right: calc(var(--grid-size) * 3px);
 
 }
+
+.stat-category-section {
+    direction: ltr;
+    height: calc(20 * var(--grid-size));
+}
+
 .stat-category-center {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: calc(var(--grid-size) * 10);
-    min-height: calc(var(--grid-size) * 10);
+    width: calc(var(--grid-size) * 10);
+    height: calc(var(--grid-size) * 10);
 }
 
 .stat-category-left {
+    /* flex-grow: 2; */
     text-align: left;
-    min-width: 120px;
+    padding: var(--grid-size);
+    width: calc(var(--grid-size) * 30);
+
+    div {
+        text-align: right;
+    }
 }
 
 .stat-category-right {
+    flex-grow: 1;
     text-align: right;
-    max-width: calc(var(--grid-size) * 100);
+    padding: calc(var(--grid-size) * 3);
+
+    ul {
+        max-width: 400px;
+        font-weight: 200;
+        font-family: 'NarkissBlock-Hairline';
+    }
 
 }
 
-.stat-list {
+.stat-category-title{
     list-style: none;
-    padding: 0;
+    padding: var(--grid-size);
     margin: 0;
     gap: 0;
+    background-color:#FFFBF2 ;
+    border: #222 0.6px solid;
+
 }
 
 .stat-list-item {
@@ -49,12 +74,13 @@ div.stat-category-grid {
     padding: 0;
     line-height: var(--grid-size)px;
     margin-bottom: var(--grid-size)px;
-    font-size: 12px;
+    font-size: var(--grid-size);
 }
 
 .stat-percent-value {
     font-size: 2.5rem;
-    font-weight: bold;
+    font-family: 'NarkissBlock-Thin';
+    /* font-weight: bold; */
 }
 
 .stat-percent-desc {
@@ -75,9 +101,26 @@ div.stat-category-grid {
 }
 
 .custom-checkbox-svg {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--grid-size);
-    height: var(--grid-size);
+    height: max-content;
+
+    img {
+        display: inline-flex;
+        align-items: center;
+        width: var(--grid-size);
+    }
+}
+
+.stat-category-center {
+
+    padding: auto calc(var(--grid-size) * 5);
+    left: calc(50% - (var(--grid-size) * 5));
+    top: calc((var(--grid-size) * 2));
+    width: calc(var(--grid-size) * 10);
+    height: calc(var(--grid-size) * 10);
+    background-image:
+        repeating-linear-gradient(0deg, #e0e0e0 0, #e0e0e0 1px, transparent 1px, transparent var(--grid-size)),
+        repeating-linear-gradient(90deg, #e0e0e0 0, #e0e0e0 1px, transparent 1px, transparent var(--grid-size));
+    background-repeat: repeat;
+    background-position: top left;
+    z-index: 0;
 }
