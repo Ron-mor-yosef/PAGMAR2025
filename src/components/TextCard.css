@@ -3,21 +3,22 @@
   border: #222 0.5px solid;
   padding: 1.2rem 1.5rem;
   cursor: pointer;
-  transition: background 0.2s, background-color 0.2s;
+  /* transition: background 0.2s, background-color 0.2s; */
   display: flex;
   flex-direction: column;
   justify-content: wrap;
   text-align: left;
-  filter: drop-shadow(2px -0.5px 0 rgb(136, 149, 224)) hue-rotate(180deg) drop-shadow(-2px 0.5px 0 rgb(134, 147, 172)) blur(0.6px) opacity(0.7) sepia(0.1);
+  /* filter: drop-shadow(2px -0.5px 0 rgb(136, 149, 224)) hue-rotate(180deg) drop-shadow(-2px 0.5px 0 rgb(134, 147, 172)) blur(0.6px) opacity(0.7) sepia(0.1); */
   /* background: #ffffff42; */
   /* initial background */
 }
 
 .text-card:hover {
   filter: none;
+  background-color: #F0F8FF;
   /* background: #fcf6d7; slightly darker, adjust as needed */
   /* Optional: add a subtle shadow or scale */
-  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.9s;
+  /* transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.9s; */
   /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.18); */
 }
 
@@ -46,7 +47,6 @@
 
 .text-card-tags {
   justify-content: space-evenly left;
-  gap: 0.3em;
   list-style: none;
   padding: 0;
   font-size: small;
@@ -57,10 +57,9 @@
   flex-direction: row;
   direction: ltr;
   gap: 0.3em;
-  /* align-items: flex-start; */
   margin-right: 1em;
-  /* display: inline-flex; */
   vertical-align: top;
+  width: 110%;
 }
 
 .text-card-tags li {

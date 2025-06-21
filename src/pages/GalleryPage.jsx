@@ -146,7 +146,7 @@ const GalleryPage = () => {
         {
           id: Date.now() + Math.random(),
           text: memory,
-          position: { x: event.clientX, y: event.clientY },
+          position: { x: event.clientX-220, y: event.clientY-200 },
           zIndex: nextZIndex,
         },
       ];

@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import "./SingleStatistic.css";
 
-
-function getPercent(stat) {
-    return Number(stat.percent);
-}
 function getfilledColor(percentIndx, percent, color) {
     const total = 12 ** 2;
     const filled = total - Math.round((percent / 100) * total);
     return percentIndx >= filled ? color : '#FFFBF2'
 
 }
-const GRID_SIZE = 20;
 
 function SingleStatistic({ statistic }) {
     return (
