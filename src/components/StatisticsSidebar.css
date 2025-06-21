@@ -5,12 +5,11 @@
 aside {
     width: fit-content;
     height: fit-content;
-    border-bottom: 1.5px solid #22222250;;
-    border-left:  1.5px solid #22222250;;
+    border-bottom: 1.5px solid #22222250;
+    border-left: 1.5px solid #22222250;
 }
 
 .statistics-sidebar ul {
-    /* display: flex; */
     width: max-content;
     padding: calc(var(--grid-size) * 2);
 }
@@ -27,26 +26,43 @@ li.statistics-sidebar-category:hover {
     cursor: pointer;
 }
 
-li.statistics-sidebar-category::before {
-    content: "[\00A0\00A0\00A0\00A0]";
+/* --- layout helper --- */
+.statistics-sidebar-category {
+    position: relative;
+    padding-right: 2.4em;
+    /* room for [ ● ] */
+}
+
+/* left and right brackets – always black */
+.statistics-sidebar-category::before {
+    content: "]";
+    position: absolute;
+    right: 0.7rem;
+    color: #000;
+}
+
+.statistics-sidebar-category::after {
+    content: "[";
+    position: absolute;
+    right: -0.5rem;
+    color: #000;
+}
+
+/* the coloured bullet */
+.sidebar-dot {
     position: absolute;
     right: 0;
     color: var(--cat-color, #222);
 }
 
-li.statistics-sidebar-category.active::before, 
-li.statistics-sidebar-category.active:hover::before {
-    content: "[ ● ]";
-    /*"[●]";*/
-    position: absolute;
-    right: 0;
+/* coloured dot when item is active or hovered */
+.statistics-sidebar-category.active .sidebar-dot::before,
+.statistics-sidebar-category.active:hover .sidebar-dot::before {
+    content: "●";
     color: var(--cat-color, #222);
 }
 
-li.statistics-sidebar-category:hover::before {
-    content: "[ * ]";
-    /*"[●]";*/
-    position: absolute;
-    right: 0;
+.statistics-sidebar-category:hover .sidebar-dot::before {
+    content: "* ";
     color: var(--cat-color, #222);
 }
