@@ -1,3 +1,10 @@
+html{        /* be safe and include <html> */
+  /* always allocate scrollbar space */
+  overflow-y: scroll;          /* fallback – works everywhere */
+  scrollbar-gutter: stable;    /* modern spec, avoids overlay-scrollbars */
+}
+
+
 label {
   font-weight: bold;
   margin-left: 0.5rem;
@@ -23,7 +30,7 @@ select:focus {
   /* position: relative; */
   /* height: 100%; */
   padding: 2rem 0;
-  overflow: auto;
+  overflow: hidden;
   filter: blur(var(--gallery-blur, 0px)) sepia(0.3);
   transition: filter 0.6s;
 }
@@ -54,9 +61,8 @@ select:focus {
 .gallery-filters {
     display: grid;
     grid-template-columns: 
-        minmax(max-content, 1fr) 
         minmax(max-content, 3fr) 
-        minmax(max-content, 3fr);
+        minmax(max-content, 2fr);
     width: 100%;
     border-collapse: collapse;
 }
@@ -67,26 +73,26 @@ select:focus {
     border: none;
 }
 
-div.count-filter>label {
+.gallery-buttom-header{
   display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 2rem;
-  margin: auto;
-  /* padding-right: 0; */
-  /* margin: 2rem; */
+  height: fit-content;
+  border-bottom: #222 1px solid;
+}
+.count-filter {
+  padding: 1rem;
   line-height: 100%;
   width: 5rem;
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 300;
 }
-
-.count-filter {
-  min-width: 10%;
-
+ul.gallery-active-tags{
+    display: flex;
+    gap: 1rem;
+    font-size: small;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
 }
-
 .single-filter {
   /* flex: 1 0 0; */
   display: flex;
@@ -168,7 +174,6 @@ div.count-filter>label {
 .filter-options button.active {
   position: relative;
   z-index: 1;
-  overflow: visible;
 }
 
 /* For emotions */

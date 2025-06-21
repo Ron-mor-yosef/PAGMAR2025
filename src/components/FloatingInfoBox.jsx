@@ -1,6 +1,20 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./FloatingInfoBox.css";
 import { processTaggedText } from "../utils/parseCSV"; // Adjust the import path as necessary
+// FloatingInfoBox.jsx  (put just above the component or inside it)
+const clampToViewport = (x, y, boxEl) => {
+    if (!boxEl) return { x, y };
+
+    const { offsetWidth: w, offsetHeight: h } = boxEl;
+    const maxX = window.innerWidth - w;
+    const maxY = window.innerHeight - h;
+
+    return {
+        x: Math.max(0, Math.min(x, maxX)),
+        y: Math.max(0, Math.min(y, maxY)),
+    };
+};
+
 
 const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions = [], onOpenNewBox }) => {
     const boxRef = useRef(null);
@@ -14,13 +28,20 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
         setBoxPos(position);
     }, [position]);
 
+    // after the other useEffects
+    useEffect(() => {
+        const fit = () => setBoxPos(prev => clampToViewport(prev.x, prev.y, boxRef.current));
+        fit();                       // run once after mount
+        window.addEventListener('resize', fit);
+        return () => window.removeEventListener('resize', fit);
+    }, []);
+
     useEffect(() => {
         const handleMouseMove = (e) => {
             if (dragging) {
-                setBoxPos({
-                    x: e.clientX - offset.x,
-                    y: e.clientY - offset.y,
-                });
+                setBoxPos(
+                    clampToViewport(e.clientX - offset.x, e.clientY - offset.y, boxRef.current)
+                );
             }
         };
         const handleMouseUp = () => setDragging(false);
@@ -113,13 +134,6 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
                     </span>
                 </div>
                 <div className="make-scrollbar-right">
-                    {/* <p className="floating-info-box-content">
-                        {
-                            text['הטקסט']?.split(/\r|\n/g).map((line, i) =>
-                                <div key={i} dangerouslySetInnerHTML={{
-                                    __html: highlightTags(line.trim(), activeCategory)
-                                }}></div>)}
-                    </p> */}
                     <p className="floating-info-box-content"
                         dangerouslySetInnerHTML={{
                             __html: highlightTags(
@@ -136,7 +150,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
 
             {/* Filters and extra button always visible, move up when collapsed */}
             <div className={`floating-info-box-filters${collapsed ? " collapsed" : ""}`}>
-                <div className="tags" style={{ borderLeft: "#222222 0.6px solid",  margin: "0 0.5rem 0 0.1rem" }}>
+                <div className="tags" style={{ borderLeft: "#222222 0.6px solid", margin: "0 0.5rem 0 0.1rem" }}>
 
                     <label>נושא </label>
                     <ul>
@@ -159,7 +173,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
                 </div>
                 <div className="tags" style={{ margin: "0 0.5rem 0 0.7rem" }}>
                     <label >רגש </label>
-                    
+
                     <ul>
                         {text['רגש']?.split(/,|\r|\n/g).map((emotion, i) => (
                             <li key={i} className={`highlight-emotion ${activeTags.includes(emotion.trim()) ? `${emotion.trim()} active` : ""}`}
@@ -202,7 +216,16 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
                                             onOpenNewBox(q, { clientX: e.clientX, clientY: e.clientY }); // Pass the quote object (should include row index/id)
                                         }}
                                     >
-                                        <div className="content" dangerouslySetInnerHTML={{ __html: q.text.slice(0, 100)?.replace(/\r+\n+/g, "<br>") }}></div>
+                                        <div className="content" dangerouslySetInnerHTML={{
+                                            __html: highlightTags(
+                                                (q.text || "")
+                                                    .split(/\r?\n/g)
+                                                    .map(line => { console.log(line); return line.trim() })
+                                                    .join('<br>'),
+                                                []
+                                            ).slice(0, 100)
+                                        }}
+                                        ></div>
                                         <div className="author">{q.author}</div>
                                     </li>
                                 ))

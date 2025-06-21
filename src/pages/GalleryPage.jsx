@@ -285,58 +285,19 @@ const GalleryPage = () => {
             </div>
           </div>
 
-          {/* <div className="single-filter">
-          <label>תצוגה</label>
-          <div className="filter-options">
-            {["snippet", "citation", "title"].map((v) => (
-              <button
-                key={v}
-                type="button"
-                className={view === v ? "active" : ""}
-                style={
-                  view === v
-                    ? { "--svg-url-view": `url('/assets/images/red_circles/${viewIcons[v]}.svg')` }
-                    : {}
-                }
-                onClick={() => {
-                  setView(v);
-                  setViewIcons((prev) => ({
-                    ...prev,
-                    [v]: Math.floor(Math.random() * 3) + 1, // new random on click
-                  }));
-                }}
-                data-svg-type="view"
-              >
-                {v === "snippet" ? "מקטע" : v === "citation" ? "ציטוט" : "כותרת"}
-              </button>
-            ))}
-          </div>
-        </div> */}
-
         </div>
         <div className="gallery-buttom-header">
-          <div className="count-filter">
-            <label>[ {filtered.length} ] </label>
-          </div>
-          <div className="gallery-active-tags">
-            <ul>
-              {[...selectedEmotions, ...selectedCategories].map(t => {
+          <label className="count-filter">[ {filtered.length} ] </label>
+            <ul className="gallery-active-tags">
+              {[...selectedEmotions, ...selectedCategories].map(t =>
                 <li> [{t.trim()}] </li>
-              }
-              )}</ul>
-          </div>
+              )}
+            </ul>
         </div>
       </div>
       <div
         className="text-gallery"
         ref={galleryRef}
-      // style={{
-      //   filter: openBoxes.length > 0 ? `blur(${(openBoxes.length * 0.9)}px)` : "none",
-      //   opacity: openBoxes.length > 0
-      //     ? Math.max(1 - openBoxes.length * 0.02, 0.25)
-      //     : 1,
-      //   transition: "filter 0.5s, opacity 0.5s"
-      // }}
       >
         {filtered.map((text, i) => (
           <TextCard

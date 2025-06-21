@@ -15,13 +15,10 @@ const GRID_SIZE = 20;
 
 function SingleStatistic({ statistic }) {
     return (
-        <section className="single-statistic" style={{
-            // width: `calc(${GRID_SIZE}px * 12)`
-        }}>
+        <section className="single-statistic">
             <div className="single-statistic-grid">
                 <div className="on-hover-source">
                     {statistic.source}
-
                 </div>
                 {Array.from({ length: 12 * 12 }).map((_, percentIndx) => (
                     <div className="single-percent" key={percentIndx} style={{

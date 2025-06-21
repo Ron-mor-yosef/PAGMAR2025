@@ -8,6 +8,11 @@ main{
     margin: 0;
   }
 }
+
+body{
+  overflow-y: visible;
+
+}
 .App {
   text-align: center;
 }

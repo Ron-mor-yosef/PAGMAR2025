@@ -186,15 +186,12 @@ li {
   margin: 0;
   font-size: 0.8rem;
   font-weight: 400;
-  /* font-family: 'NarkissBlock-Thin'; */
   align-items: center;
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   cursor: pointer;
 }
-
-
 
 .floating-info-box-main {
   transition: max-height 0.5s, opacity 0.4s;
@@ -290,7 +287,6 @@ li {
 
   .author {
     font-weight: 200;
-
     font-size: 0.8rem;
     margin-top: 0.2em;
     direction: rtl;
@@ -305,11 +301,7 @@ li {
 
 .highlight-category {
   direction: rtl;
-  /* background: #ffe9b3; */
-  /* border-radius: 4px; */
-  /* display: inline-flex; */
   padding: 2px 4px;
-  /* transition: box-shadow 0.2s; */
 }
 
 .highlight-emotion {
@@ -327,59 +319,12 @@ li.highlight-emotion {
   border-bottom: none;
   background-size: auto 8px;
   background-position: 0 120%;
-
 }
 
-.עייפות.active {
+.highlight-emotion.active {
   background-image: url('../../public/assets/underline/עייפות.svg');
 }
 
-.פחד.active {
-  background-image: url('../../public/assets/underline/פחד.svg');
-}
-
-.בדידות.active {
-  background-image: url('../../public/assets/underline/בדידות.svg');
-}
-
-.עוצמה.active {
-  background-image: url('../../public/assets/underline/עוצמה.svg');
-}
-
-.חמלה.active {
-
-  background-image: url('../../public/assets/underline/חמלה.svg');
-}
-
-.תקווה.active {
-  background-image: url('../../public/assets/underline/תקווה.svg');
-}
-
-.תסכול.active {
-  background-image: url('../../public/assets/underline/תסכול.svg');
-}
-
-.נפש.active {
-  /* Example for category-specific style */
-  background-color: #FFA463;
-}
-
-.זוגיות.active {
-  /* Example for category-specific style */
-  background-color: #63fff2;
-}
-
-.גוף.active {
-  /* Example for category-specific style */
-  background-color: #c663ff;
-}
-
-.ילדים.active {
-  /* Example for category-specific style */
+.highlight-category.active {
   background-color: #ff638a;
-}
-
-.תעסוקה.active {
-  /* Example for category-specific style */
-  background-color: #ddff63;
 }
