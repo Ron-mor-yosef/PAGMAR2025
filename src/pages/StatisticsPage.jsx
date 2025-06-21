@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from "react";
+import StatisticsSidebar from "../components/StatisticsSidebar";
 import StatisticsByCategory from "../components/StatisticsByCategory";
 import "./StatisticsPage.css";
 import { loadCSV } from "../utils/parseCSV";
 
-const CATEGORY_LABELS = {
-    "נפש": "מצב נפשי",
-    "גוף": "מצב גופני",
-    "זוגיות": "מצב זוגי",
-    "ילדים": "מצב ילדים",
-    "תעסוקה": "מצב תעסוקתי",
-};
-
-const CATEGORY_ORDER = ["נפש", "גוף", "זוגיות", "ילדים", "תעסוקה"];
 
 function parseCSV(table) {
     const parsedTable = {};
 
     for (let r = 0; r < table.length; r++) {
         const row = table[r];
-        const explanation = row['הסבר'] || '';
+        console.log(row);
+        const explanation = row['הסבר'] || '-';
         const rawPercent = row['אחוזים'] || '0%';
         const category = row['קטגוריה'] || 'אחר';
+        const color = `#${row['צבע'].replace('#', '')}` || '#5678FF';
+        const source = row['מקורות'] || '-';
         const percent = parseFloat(rawPercent.replace('%', '').trim());
 
         if (isNaN(percent)) continue;
 
-        const parsedRow = { explanation, percent }
+        const parsedRow = { explanation, percent, color, source }
         if (parsedTable[category]) {
             parsedTable[category].push(parsedRow)
         } else {
@@ -38,25 +33,40 @@ function parseCSV(table) {
 
 const StatisticsPage = () => {
     const [statsByCategory, setStatsByCategory] = useState({});
+    const [selectedCategory, setSelectedCategory] = useState([]);
+    const [selectedCategoryKey, setSelectedCategoryKey] = useState('');
+
+
+    const handleCategorySelect = (category) => {
+        setSelectedCategoryKey(category);
+        setSelectedCategory(statsByCategory[category] ?? []);
+    };
+    const getSelectedCategoryKey = ()=> selectedCategoryKey;
 
     useEffect(() => {
         loadCSV("/statistics.csv").then((table) => {
-            
-                setStatsByCategory(parseCSV(table));
-            });
+            const parsed = parseCSV(table);
+            setStatsByCategory(parsed);
+
+            // choose the first category once we have data
+            const first = Object.keys(parsed)[0];
+            if (first) {
+                setSelectedCategory(parsed[first]);
+                setSelectedCategoryKey(first);
+            }
+        });
     }, []);
 
     return (
         <main className="statistics-page">
-            {CATEGORY_ORDER.filter((cat) => statsByCategory[cat]).map((cat, i) => (
-                <StatisticsByCategory
-                    key={cat}
-                    category={cat}
-                    label={CATEGORY_LABELS[cat] || cat}
-                    statistics={statsByCategory[cat]}
-                    indx={i+1}
+            <div className="statistics-page-inner-div">
+                <StatisticsSidebar
+                    statistics={statsByCategory}
+                    onSelectStatistic={handleCategorySelect}
+                    getSelectedStat={getSelectedCategoryKey}
                 />
-            ))}
+                <StatisticsByCategory statistics={selectedCategory} />
+            </div>
         </main>
     );
 };

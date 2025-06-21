@@ -186,7 +186,7 @@ const GalleryPage = () => {
 
   return (
     <main className="gallery-page">
-          {/* Smudg overlay */}
+      {/* Smudg overlay */}
       <div
         className="smudge-overlay"
         style={{ "--smudge-intensity": `${openBoxes.length * 2}px` }}
@@ -194,10 +194,6 @@ const GalleryPage = () => {
 
       <div className="gallery-header">
         <div className="gallery-filters">
-          <div className="count-filter">
-            {" "}
-            <label>[ {filtered.length} ] </label>
-          </div>
           <div className="single-filter emotions-filter">
             <label>רגשות</label>
             <div className="filter-options">
@@ -317,6 +313,18 @@ const GalleryPage = () => {
           </div>
         </div> */}
 
+        </div>
+        <div className="gallery-buttom-header">
+          <div className="count-filter">
+            <label>[ {filtered.length} ] </label>
+          </div>
+          <div className="gallery-active-tags">
+            <ul>
+              {[...selectedEmotions, ...selectedCategories].map(t => {
+                <li> [{t.trim()}] </li>
+              }
+              )}</ul>
+          </div>
         </div>
       </div>
       <div
