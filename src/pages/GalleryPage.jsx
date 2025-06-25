@@ -148,6 +148,7 @@ const GalleryPage = () => {
           text: memory,
           position: { x: event.clientX-220, y: event.clientY-200 },
           zIndex: nextZIndex,
+          randHeight: Math.round(Math.random()*3)
         },
       ];
     });
@@ -313,6 +314,7 @@ const GalleryPage = () => {
       {openBoxes.map((box) => (
         <FloatingInfoBox
           key={box.id}
+          randomHeigh={box.randHeight}
           text={box.text}
           position={box.position}
           zIndex={box.zIndex}

@@ -16,7 +16,7 @@ const clampToViewport = (x, y, boxEl) => {
 };
 
 
-const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions = [], onOpenNewBox }) => {
+const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, onFocus, suggestions = [], onOpenNewBox }) => {
     const boxRef = useRef(null);
     const contentRef = useRef(null);
     const [dragging, setDragging] = useState(false);
@@ -24,6 +24,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
     const [boxPos, setBoxPos] = useState(position);
     const [collapsed, setCollapsed] = useState(false);
     const [activeTags, setActiveTag] = useState([]);
+    const maxHeight = [40, 60, 80]
 
     useEffect(() => {
         setBoxPos(position);
@@ -148,6 +149,7 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
                     </span>
                 </div>
                 <div className="make-scrollbar-right"
+                style={{maxHeight:`${maxHeight[randomHeigh]}vh`}}
                 ref={contentRef} >
                     <p className="floating-info-box-content"
                         dangerouslySetInnerHTML={{
