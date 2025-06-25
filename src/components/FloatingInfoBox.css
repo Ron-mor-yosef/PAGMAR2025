@@ -268,12 +268,10 @@ li {
   border-bottom: 1px solid #222222;
   font-family: 'masada', sans-serif;
 
-  .content {
+  .quote-content {
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    /* Limit to 1 line */
-    line-clamp: 1;
-    /* Standard property for compatibility */
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -282,7 +280,8 @@ li {
     font-weight: 300;
     direction: rtl;
     text-align: right;
-    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    height: 4;
   }
 
   .author {
@@ -292,7 +291,6 @@ li {
     direction: rtl;
     text-align: left;
   }
-
 }
 
 .extra-quote-item:last-child {
@@ -310,7 +308,6 @@ li {
   background-size: auto 10px;
   border-bottom: 10px solid transparent;
   padding-bottom: 4px;
-
 }
 
 li.highlight-emotion {
@@ -326,5 +323,6 @@ li.highlight-emotion {
 }
 
 .highlight-category.active {
-  background-color: #ff638a;
+  background-color: #222222;
+  color: #F0F8FF;
 }

@@ -216,16 +216,15 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
                                             onOpenNewBox(q, { clientX: e.clientX, clientY: e.clientY }); // Pass the quote object (should include row index/id)
                                         }}
                                     >
-                                        <div className="content" dangerouslySetInnerHTML={{
-                                            __html: highlightTags(
-                                                (q.text || "")
-                                                    .split(/\r?\n/g)
-                                                    .map(line => { console.log(line); return line.trim() })
-                                                    .join('<br>'),
-                                                []
-                                            ).slice(0, 100)
-                                        }}
-                                        ></div>
+                                        <div className="quote-content">
+                                            <p className="content" dangerouslySetInnerHTML={{
+                                                __html: processTaggedText(
+                                                    (q.text || "")
+                                                        .split(/\r?\n/g)
+                                                        .map(line => line.trim())
+                                                        .join('<br>'), [])
+                                            }} />
+                                        </div>
                                         <div className="author">{q.author}</div>
                                     </li>
                                 ))
