@@ -18,6 +18,7 @@ const clampToViewport = (x, y, boxEl) => {
 
 const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions = [], onOpenNewBox }) => {
     const boxRef = useRef(null);
+    const contentRef = useRef(null);
     const [dragging, setDragging] = useState(false);
     const [offset, setOffset] = useState({ x: 0, y: 0 });
     const [boxPos, setBoxPos] = useState(position);
@@ -55,6 +56,19 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
             window.removeEventListener("mouseup", handleMouseUp);
         };
     }, [dragging, offset]);
+
+     useEffect(() => {
+    if (!contentRef.current || activeTags.length === 0) return;
+
+    const selector = [activeTags[activeTags.length-1]]
+      .map(t => `.highlight-category.${t}.active, .highlight-emotion.${t}.active`)
+      .join(", ");
+
+    const firstActive = contentRef.current.querySelector(selector);
+    if (firstActive) {
+      firstActive.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [activeTags, text]);
 
     const startDrag = (e) => {
         if (boxRef.current) {
@@ -133,7 +147,8 @@ const FloatingInfoBox = ({ text, position, onClose, zIndex, onFocus, suggestions
                         {text['כותרת'] ? text['כותרת'] : "ללא כותרת"} / {text['שם כותבת'] || "ללא שם"}
                     </span>
                 </div>
-                <div className="make-scrollbar-right">
+                <div className="make-scrollbar-right"
+                ref={contentRef} >
                     <p className="floating-info-box-content"
                         dangerouslySetInnerHTML={{
                             __html: highlightTags(
