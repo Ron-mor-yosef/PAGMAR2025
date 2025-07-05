@@ -65,7 +65,8 @@ const TextCard = ({
                 className={isActive ? "active" : ""}
                 style={
                   isActive
-                    ? { "--svg-url-emotion": `url('/assets/images/red_circles/${iconIndex}.svg')` }
+                    ? { "--svg-url-emotion": `url('/assets/images/red_circles/${ Math.floor((Math.random() * 5) + 1)}.svg')`, 
+                  "--circle-rotate": `${Math.floor((Math.random() * 20)-10)}deg` }
                     : {}
                 }
               >

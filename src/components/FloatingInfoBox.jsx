@@ -134,7 +134,7 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
     }, [text, initialActiveTag]);
 
     // Blur increases the further the box is from the top zIndex
-    const blurAmount = (topZIndex - zIndex) *0.6; // 2px per zIndex step
+    const blurAmount = topZIndex===zIndex? 0 : 1; // 2px per zIndex step
 
     return (
 

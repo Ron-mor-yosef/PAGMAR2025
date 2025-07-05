@@ -6,6 +6,7 @@ li {
 }
 
 .floating-info-box {
+  color: #0022AB;
   position: fixed;
   z-index: 1000;
   background: #F0F8FF;
@@ -57,7 +58,7 @@ li {
   font-size: 1.2rem;
   width: 100%;
   font-family: 'Masada';
-  font-weight: 200;
+  font-weight: 3400;
 }
 
 .make-scrollbar-right {
@@ -106,6 +107,8 @@ li {
   font-weight: 300;
   direction: rtl;
   height: fit-content;
+  color: #0022AB;
+
   /* Scrollbar on right */
   text-align: right;
   /* Text stays right-aligned */
@@ -219,6 +222,7 @@ li.highlight-category.active{
 
 .floating-info-box-filters,
 .floating-info-box-extra {
+  
   transition: transform 0.5s;
 }
 
@@ -271,6 +275,10 @@ li.highlight-category.active{
   border-top: 1px solid #222222;
   max-height: 100%;
   overflow-y: hidden;
+  p.content{
+  color: #0022AB;
+
+  }
 }
 
 .extra-quote-item {
@@ -280,6 +288,7 @@ li.highlight-category.active{
   font-family: 'masada', sans-serif;
 
   .quote-content {
+    
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -293,6 +302,8 @@ li.highlight-category.active{
     text-align: right;
     margin: 0.5rem 0;
     height: 4;
+  color: #0022AB;
+
   }
 
   .author {
