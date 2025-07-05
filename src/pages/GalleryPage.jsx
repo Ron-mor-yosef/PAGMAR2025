@@ -159,6 +159,15 @@ const GalleryPage = () => {
 
   return (
     <main className="gallery-page">
+            {openBoxes.length > 0 && (
+        <button
+          className="close-all-floating-btn"
+          onClick={() => setOpenBoxes([])}
+        >
+          <img src="/assets/images/close.svg" alt="סגור" />
+          סגור הכל
+        </button>
+      )}
       {/* Smudg overlay */}
       <div
         className="smudge-overlay"

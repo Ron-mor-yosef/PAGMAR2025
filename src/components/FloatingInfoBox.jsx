@@ -155,7 +155,7 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
         >
             {/* Always show close button */}
             <button className="floating-info-box-close" onClick={onClose}>
-                ×
+                <img src="/assets/images/close.svg" alt="סגור" />
             </button>
 
             {/* Slide up/hide main content when collapsed */}

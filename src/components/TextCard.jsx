@@ -8,7 +8,6 @@ const TextCard = ({
   index,
   view,
   onCardClick,
-  twitch,
   selectedEmotions = [],
   selectedCategories = [],
   emotionIcons = {},
@@ -37,7 +36,7 @@ const TextCard = ({
   return (
 
     <div
-      className={`text-card${twitch ? " twitch" : ""}`}
+      className={`text-card`}
       onClick={(e) => onCardClick(text, e)}
     >
       <div className="text-card-content">

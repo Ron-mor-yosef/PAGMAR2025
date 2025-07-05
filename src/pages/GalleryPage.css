@@ -1,7 +1,10 @@
-html{        /* be safe and include <html> */
+html {
+  /* be safe and include <html> */
   /* always allocate scrollbar space */
-  overflow-y: scroll;          /* fallback – works everywhere */
-  scrollbar-gutter: stable;    /* modern spec, avoids overlay-scrollbars */
+  overflow-y: scroll;
+  /* fallback – works everywhere */
+  scrollbar-gutter: stable;
+  /* modern spec, avoids overlay-scrollbars */
 }
 
 
@@ -58,26 +61,27 @@ select:focus {
   padding: 2rem;
   padding-bottom: 0;
 }
+
 .gallery-filters {
-    display: grid;
-    grid-template-columns: 
-        minmax(max-content, 3fr) 
-        minmax(max-content, 2fr);
-    width: 100%;
-    border-collapse: collapse;
+  display: grid;
+  grid-template-columns:
+    minmax(max-content, 3fr) minmax(max-content, 2fr);
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.gallery-filters > * {
-    padding: 0;
-    margin: 0;
-    border: none;
+.gallery-filters>* {
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
-.gallery-buttom-header{
+.gallery-buttom-header {
   display: flex;
   height: fit-content;
   border-bottom: #222 1px solid;
 }
+
 .count-filter {
   padding: 1rem;
   line-height: 100%;
@@ -86,14 +90,16 @@ select:focus {
   font-size: 1.5rem;
   font-weight: 200;
 }
-ul.gallery-active-tags{
-    display: flex;
-    gap: 1rem;
-    font-size: small;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
+
+ul.gallery-active-tags {
+  display: flex;
+  gap: 1rem;
+  font-size: small;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
 }
+
 .single-filter {
   /* flex: 1 0 0; */
   display: flex;
@@ -149,7 +155,7 @@ ul.gallery-active-tags{
 
 }
 
-.filter-options button:hover{
+.filter-options button:hover {
   font-weight: 300;
   font-size: 15.5px;
 }
@@ -237,9 +243,31 @@ ul.gallery-active-tags{
   /* transition: backdrop-filter 0.1s ease; */
 }
 
-/* Existing styles… */
 .gallery-page {
   position: relative;
 }
 
-/* (Rest of the GalleryPage.css file remains unchanged) */
+.close-all-floating-btn {
+  display: flex;
+  position: absolute;
+  top: -3rem;
+  left: -6rem;
+  z-index: 5000;
+  background: transparent;
+  color: #222;
+  border-color: transparent;
+  font-weight: 300;
+  font-size: 14px;
+  font-family: 'NarkissBlock';
+  cursor: url('../../public/assets/images/close.svg'), pointer;
+  transition: background 0.2s, color 0.2s;
+
+  img{
+    padding:0 8px ;
+  }
+}
+
+.close-all-floating-btn:hover {
+  /* background: #0022AB;
+  color: #fff; */
+}
