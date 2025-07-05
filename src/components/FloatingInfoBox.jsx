@@ -18,7 +18,9 @@ const clampToViewport = (x, y, boxEl) => {
 
   function cleanTextForClamp(text) {
     // Remove trailing commas or periods before ellipsis, but allow '?'
-    return text.replace(/([,-]+)</g, '<').replace(/\s+</, ' <');
+    const withoutTags = text.replace(/([,-]+)</g, '<').replace(/\s+</, ' <').replace(/<[/]?span[^\>]*>/g,'');
+    console.log("cleanTextForClamp", withoutTags);
+    return withoutTags;
   }
 
 const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZIndex = 0, // <-- receive this prop
@@ -145,7 +147,7 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
                 top: boxPos?.y,
                 left: boxPos?.x,
                 zIndex: zIndex,
-                filter: blurAmount > 0 ? `blur(${blurAmount}px)` : "none",
+                filter: blurAmount > 0 ? `blur(${blurAmount}px) sepia(5%)` : "none",
                 transition: "filter 0.3s"
             }}
             onMouseDown={(e) => {
@@ -184,7 +186,7 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
 
             {/* Filters and extra button always visible, move up when collapsed */}
             <div className={`floating-info-box-filters${collapsed ? " collapsed" : ""}`}>
-  <div className="tags" style={{ borderLeft: "#222222 0.6px solid", margin: "0 0.5rem 0 0.1rem" }}>
+  <div className="tags" style={{ borderLeft: "#0022AB 0.6px solid", margin: "0 0.5rem 0 0.1rem" }}>
     <label>נושא </label>
     <ul>
       {text['קטגוריה']?.split(/,|\r|\n/g).map((category, i) => (
@@ -203,7 +205,7 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
       ))}
     </ul>
   </div>
-  <div className="tags" style={{ margin: "0 0.5rem 0 0.7rem" }}>
+  <div className="tags" style={{ margin: "0 0.5rem 0 1.5rem" }}>
     <label >רגש </label>
     <ul>
       {text['רגש']?.split(/,|\r|\n/g).map((emotion, i) => (
@@ -228,8 +230,9 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
                 className={`floating-info-box-extra${collapsed ? " expanded" : ""}`}
                 onClick={() => setCollapsed((prev) => !prev)}
             >
-                <span>
-                    {collapsed ? "- טקסטים נוספים" : "+ טקסטים נוספים"}
+                <span className="toggle-extra">
+                    {collapsed ? <img src="/assets/images/-.svg" alt="-"/> : <img src="/assets/images/+.svg" alt="+"/>}
+                    טקסטים נוספים
                 </span>
             </div>
 

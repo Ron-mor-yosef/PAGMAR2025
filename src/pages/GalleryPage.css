@@ -40,16 +40,17 @@ select:focus {
 
 .gallery-page>.text-gallery,
 .text-gallery {
-  padding-right: 2rem;
-  padding-left: 2rem;
-  columns: 3 357px;
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
+  margin-right: 2rem;
+
 }
 
 .text-card {
   break-inside: avoid;
-  margin-bottom: 2rem;
-  /* Space between cards must match the column gap */
+  min-width: 357px;
+  width: calc(33.2% - 5rem);
 }
 
 .gallery-header {
@@ -57,7 +58,6 @@ select:focus {
   top: calc(7rem);
   z-index: 10;
   background: inherit;
-  /* padding-bottom: 1rem; */
   padding: 2rem;
   padding-bottom: 0;
 }
@@ -129,7 +129,6 @@ ul.gallery-active-tags {
   justify-content: center;
   text-align: center;
   min-width: 90%;
-  /* gap: 0.5rem; */
   border-bottom: 0.5px solid #222;
   padding: 0 1rem;
 }
@@ -151,7 +150,7 @@ ul.gallery-active-tags {
   background-size: 32px 32px;
   /* adjust as needed */
   position: relative;
-  font-size: 16px;
+  font-size: 1rem;
 
 }
 
@@ -211,6 +210,7 @@ ul.gallery-active-tags {
 .single-filter label {
   font-weight: 200;
   margin: 0 0.5rem;
+  font-size: 1rem;
 }
 
 .single-filter:not(:last-child)::after {
@@ -224,7 +224,7 @@ ul.gallery-active-tags {
 }
 
 .single-filter>label {
-  font-size: 1.2rem;
+  /* font-size: 1rem; */
   font-family: 'NarkissBlock', sans-serif;
   font-weight: 200;
   color: #222;
@@ -249,9 +249,9 @@ ul.gallery-active-tags {
 
 .close-all-floating-btn {
   display: flex;
-  position: absolute;
-  top: -3rem;
-  left: -6rem;
+  position: fixed;
+  top: 3rem;
+  left: 2rem;
   z-index: 5000;
   background: transparent;
   color: #222;
@@ -259,11 +259,11 @@ ul.gallery-active-tags {
   font-weight: 300;
   font-size: 14px;
   font-family: 'NarkissBlock';
-  cursor: url('../../public/assets/images/close.svg'), pointer;
+  cursor: pointer;
   transition: background 0.2s, color 0.2s;
 
-  img{
-    padding:0 8px ;
+  img {
+    padding: 0 8px;
   }
 }
 

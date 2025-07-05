@@ -1,6 +1,6 @@
 const fs = require('fs');
-const parse = require('csv-parse/lib/sync');
-const stringify = require('csv-stringify/lib/sync');
+const { parse } = require('csv-parse/sync');
+const { stringify } = require('csv-stringify/sync');
 
 const inputPath = 'public/texts_new2.csv';
 const outputPath = 'public/texts_new2_aligned.csv';

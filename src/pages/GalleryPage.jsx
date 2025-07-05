@@ -19,7 +19,8 @@ const GalleryPage = () => {
   const [filterOptionRotation, setFilterOptionsRotates] = useState({});
 
   useEffect(() => {
-    loadCSV("/texts_new2.csv").then((data) => {
+    // loadCSV("/texts_new2.csv").then((data) => {
+    loadCSV("/texts_new2_aligned.csv").then((data) => {
       // Add index property to each row
       const dataWithIndex = data.map((row, idx) => ({ ...row, index: idx }));
       setTexts(dataWithIndex);
@@ -179,21 +180,6 @@ const GalleryPage = () => {
           <div className="single-filter emotions-filter">
             <label>רגשות</label>
             <div className="filter-options">
-              {/* <button
-                type="button"
-                className={selectedEmotions.length === 0 ? "active" : ""}
-                style={
-                  selectedEmotions.length === 0
-                    ? { "--svg-url-emotion": `url('/assets/images/red_circles/${allEmotionIcon}.svg')` }
-                    : {}
-                }
-                onClick={() => {
-                  setSelectedEmotions([]);
-                  setAllEmotionIcon(Math.floor(Math.random() * 3) + 1); // new random on click
-                }}
-              >
-                הכל
-              </button> */}
               {emotions.map((e, idx) => (
                 <>
                   {idx > 0 ? <label>/</label> : null}
@@ -224,21 +210,7 @@ const GalleryPage = () => {
           <div className="single-filter category-filter">
             <label>נושאים</label>
             <div className="filter-options">
-              {/* <button
-              type="button"
-              className={selectedCategories.length === 0 ? "active" : ""}
-              style={
-                selectedCategories.length === 0
-                  ? { "--svg-url-category": `url('/assets/images/red_circles/${allCategoryIcon}.svg')` }
-                  : {}
-              }
-              onClick={() => {
-                setSelectedCategories([]);
-                setAllCategoryIcon(Math.floor(Math.random() * 3) + 1); // new random on click
-              }}
-            >
-              הכל
-            </button> */}
+            
               {categories.map((c, idx) => (
                 <>
                   {idx > 0 ? (
