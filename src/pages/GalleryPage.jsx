@@ -109,11 +109,11 @@ const GalleryPage = () => {
 
     const emotionMatch =
       selectedEmotions.length === 0 ||
-      selectedEmotions.some((e) => textEmotions.includes(e));
+      selectedEmotions.every((e) => textEmotions.includes(e));
 
     const categoryMatch =
       selectedCategories.length === 0 ||
-      selectedCategories.some((c) => textCategories.includes(c));
+      selectedCategories.every((c) => textCategories.includes(c));
 
     return emotionMatch && categoryMatch;
   });

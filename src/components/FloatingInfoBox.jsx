@@ -16,6 +16,11 @@ const clampToViewport = (x, y, boxEl) => {
 };
 
 
+  function cleanTextForClamp(text) {
+    // Remove trailing commas or periods before ellipsis, but allow '?'
+    return text.replace(/([,-]+)</g, '<').replace(/\s+</, ' <');
+  }
+
 const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZIndex = 0, // <-- receive this prop
  onFocus, suggestions = [], onOpenNewBox, initialActiveTag }) => {
     const boxRef = useRef(null);
@@ -247,12 +252,12 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
                                     >
                                         <div className="quote-content">
                                             <p className="content" dangerouslySetInnerHTML={{
-                                                __html: processTaggedText(
+                                                __html: cleanTextForClamp(processTaggedText(
                                                     (q.text || "")
                                                         .split(/\r?\n/g)
                                                         .map(line => line.trim())
                                                         .join('<br>'), [])
-                                            }} />
+                                )}} />
                                         </div>
                                         <div className="author">{q.author}</div>
                                     </li>
