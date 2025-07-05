@@ -1,5 +1,4 @@
 :root {
-  /* --border-color: #222222; */
   --border-color: #0022AB;
   --text-color: #0022AB;
 }
@@ -19,8 +18,6 @@ li {
   border: 2px solid var(--border-color);
   border-radius: 4px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-
-  /* box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); */
   width: 550px;
   min-height: 300px;
   max-height: 100vh;
@@ -51,7 +48,6 @@ li {
   background: transparent;
   font-size: 18px;
   cursor: pointer;
-  /* margin: auto 0 0; */
   margin-right: -5px;
   position: absolute;
   top: 12px;
@@ -77,20 +73,15 @@ li {
   padding: 0 0.8rem;
   direction: ltr;
   max-height: 80vh;
-  /* Adjust as needed for your layout */
 }
 
 .make-scrollbar-right::-webkit-scrollbar {
   width: 10px;
   background: transparent;
-  /* Match your floating-info-box background */
 }
 
 .make-scrollbar-right::-webkit-scrollbar-thumb {
-  /* background: #506474; */
   background: transparent;
-
-  /* Slightly darker for visibility */
   border-radius: 8px;
 }
 
@@ -102,7 +93,6 @@ li {
 /* For Firefox */
 .make-scrollbar-right {
   scrollbar-color: #506474 transparent;
-  /* Thumb color and track color */
   scrollbar-width: thin;
 }
 
@@ -117,30 +107,19 @@ li {
   direction: rtl;
   height: fit-content;
   color: var(--text-color);
-
-  /* Scrollbar on right */
   text-align: right;
-  /* Text stays right-aligned */
 }
 
 
 .floating-info-box-filters {
-  /* flex: 1 1; */
   min-height: 2rem;
   display: flex;
   flex-direction: row;
-  /* flex-wrap: nowrap; */
-  /* padding: 1rem; */
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   letter-spacing: 0.02rem;
-  /* height: 2rem; */
-  /* justify-content: flex-start; */
   align-content: flex-start;
   align-items: center;
-
-  /* gap: 0.5rem; */
-  /* gap: 0.5rem; */
   .tags {
     margin: 1rem;
 
@@ -318,11 +297,8 @@ li.highlight-category.active {
 .extra-quote-item {
   cursor: pointer;
   padding: 1rem 0.5rem;
-  /* border-bottom: 1px solid #222222; */
   font-family: 'masada', sans-serif;
-
   .quote-content {
-
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -331,17 +307,12 @@ li.highlight-category.active {
     display: -webkit-box;
     font-size: 0.9rem;
     line-height: 2;
-    font-weight: 300;
     direction: rtl;
     text-align: right;
     margin: 0.5rem 0;
     height: 4;
     color: var(--text-color);
-
   }
-
-
-
   .author {
     font-weight: 200;
     font-size: 0.8rem;
@@ -349,6 +320,11 @@ li.highlight-category.active {
     direction: rtl;
     text-align: left;
   }
+}
+li.extra-quote-item:hover .author,
+li.extra-quote-item:hover p.content {
+  font-weight: 400;
+  ;
 }
 
 .extra-quote-item:last-child {
