@@ -194,7 +194,7 @@ li {
 }
 
 .floating-info-box-filters .tags li:hover {
-  font-weight: 400;
+  font-weight: 300;
   font-size: calc(13px - 0.035em);
   /* Slightly smaller to compensate for boldness */
 
@@ -346,4 +346,14 @@ li.highlight-emotion {
   color: #F0F8FF;
   /* font-weight: 300; */
 
+}
+
+.line-img-start,
+.line-img-end {
+  display: inline;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+  pointer-events: none;
+  user-select: none;
 }

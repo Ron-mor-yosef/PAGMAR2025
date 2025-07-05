@@ -1,33 +1,26 @@
 .text-card {
-  /* /* border-top: #222 0.5px solid; */
   border: #222 0.5px solid;
+  border-radius: 0.3rem;
   padding: 1.2rem 1.5rem;
   cursor: pointer;
-  /* transition: background 0.2s, background-color 0.2s; */
   display: flex;
   flex-direction: column;
   justify-content: wrap;
   text-align: left;
-  /* filter: drop-shadow(2px -0.5px 0 rgb(136, 149, 224)) hue-rotate(180deg) drop-shadow(-2px 0.5px 0 rgb(134, 147, 172)) blur(0.6px) opacity(0.7) sepia(0.1); */
-  /* background: #ffffff42; */
-  /* initial background */
+
 }
 
 .text-card:hover {
   filter: none;
   background-color: #F0F8FF;
-  /* background: #fcf6d7; slightly darker, adjust as needed */
-  /* Optional: add a subtle shadow or scale */
-  /* transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.9s; */
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.18); */
-}
+  }
 
 .text-card p {
   margin: 0;
   padding-right: 0.5rem;
-  font-size: 1.3rem;
-  font-weight: 500;
-  line-height: 1.4;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 30px;
   color: #222;
   text-align: right;
   direction: rtl;
@@ -51,7 +44,7 @@
   padding: 0;
   font-size: small;
   font-family: 'NarkissBlock', sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -74,29 +67,6 @@
   pointer-events: none;
 }
 
-@keyframes twitch {
-  0% {
-    transform: translateX(0);
-  }
-
-  20% {
-    transform: translateX(-1px) rotate(-1deg);
-  }
-
-  /* 40% { transform: translateX(1px) rotate(1deg); }
-  60% { transform: translateX(-1px) rotate(-1deg); } */
-  80% {
-    transform: translateX(1px) rotate(1deg);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.text-card.twitch {
-  animation: twitch 0.5s;
-}
 
 .text-card-author {
   white-space: nowrap;
@@ -114,14 +84,12 @@
 .text-card-content {
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  /* Limit to 2 lines */
   line-clamp: 2;
-  /* Standard property for compatibility */
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: "...";
   max-height: 4rem;
-  /* Adjust as needed for your font-size/line-height */
   line-height: 1.5em;
-  /* Adjust to match your design */
+  font-size: 28px;
+  font-weight: 700;
 }

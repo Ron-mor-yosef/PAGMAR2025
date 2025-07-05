@@ -5,6 +5,11 @@ import { processTaggedText } from "../utils/parseCSV"; // Adjust the import path
 
 const TextCard = ({ text, index, view, onCardClick, twitch }) => {
 
+  function cleanTextForClamp(text) {
+    // Remove trailing commas or periods before ellipsis, but allow '?'
+    return text.replace(/([,-]+)</g, '<').replace(/\s+</, ' <');
+  }
+
   return (
 
     <div
@@ -15,11 +20,11 @@ const TextCard = ({ text, index, view, onCardClick, twitch }) => {
       <div className="text-card-content">
 
         {<p dangerouslySetInnerHTML={{
-          __html: processTaggedText(
+          __html: cleanTextForClamp(processTaggedText(
             (text['הטקסט'] || "")
               .split(/\r?\n/g)
               .map(line => line.trim())
-              .join('<br>'), [])
+              .join('<br>'), []))
         }} />}
       </div>
       <div className="text-card-info">

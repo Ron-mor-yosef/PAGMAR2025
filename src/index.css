@@ -58,6 +58,12 @@
   font-weight: 200;
   font-style: normal;
 }
+@font-face {
+  font-family: 'NarkissBlock';
+  src: url('../public/assets/fonts/NarkissBlock-Regular.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
 
 /* Set as default font stack */
 body {
@@ -66,7 +72,7 @@ body {
   font-family:  'NarkissBlock', 'Masada', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-      font-weight: 300;
+      font-weight: 200;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
     background-color: #FFFBF2; /* Set default background color */
@@ -91,7 +97,7 @@ p {
   margin: 0;
   padding: 0;
   font-family: 'Masada', sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   line-height: 1.5;
   color: #222;
   text-align: right;

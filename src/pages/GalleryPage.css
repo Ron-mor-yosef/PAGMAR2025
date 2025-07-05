@@ -84,7 +84,7 @@ select:focus {
   padding-left: 0;
   width: 5rem;
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 200;
 }
 ul.gallery-active-tags{
     display: flex;
@@ -150,8 +150,8 @@ ul.gallery-active-tags{
 }
 
 .filter-options button:hover{
-  font-weight: 400;
-  font-size: 15px;
+  font-weight: 300;
+  font-size: 15.5px;
 }
 
 .filter-options button.active::after {
@@ -220,7 +220,7 @@ ul.gallery-active-tags{
 .single-filter>label {
   font-size: 1.2rem;
   font-family: 'NarkissBlock', sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   color: #222;
 }
 
