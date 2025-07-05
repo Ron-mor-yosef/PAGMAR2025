@@ -10,9 +10,11 @@
 
 }
 
-.text-card:hover {
+.text-card:hover, .text-card-content:hover {
   filter: none;
   background-color: #F0F8FF;
+  color: #0022AB;
+  border-color: #0022AB;
   }
 
 .text-card p {
@@ -21,7 +23,7 @@
   font-size: 28px;
   font-weight: 700;
   line-height: 30px;
-  color: #222;
+  color: inherit;
   text-align: right;
   direction: rtl;
 }
@@ -67,6 +69,28 @@
   pointer-events: none;
 }
 
+.text-card-tags li.active::after {
+    content: "";
+  display: block;
+  right: 40%;
+  top: -130%;
+  height: 160%;
+  width: 150%;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  z-index: 2;
+  opacity: 0.8;
+  transform: rotate(var(--circle-rotate, 0deg));
+  transition: transform 0.2s;
+  background-image: var(--svg-url-emotion, url('../../public/assets/images/red_circles/1.svg'));
+  color: #fff; /* Optional: for contrast */
+  font-weight: 700;
+  position: relative;
+  transition: background 0.2s;
+}
+
 
 .text-card-author {
   white-space: nowrap;
@@ -92,4 +116,5 @@
   line-height: 1.5em;
   font-size: 28px;
   font-weight: 700;
+  color: inherit;
 }

@@ -13,22 +13,9 @@ const GalleryPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [emotionIcons, setEmotionIcons] = useState({});
   const [categoryIcons, setCategoryIcons] = useState({});
-  // const [emotionColors, setEmotionColors] = useState({});
-  // const [allEmotionIcon, setAllEmotionIcon] = useState(Math.floor(Math.random() * 3) + 1);
-  // const [allCategoryIcon, setAllCategoryIcon] = useState(Math.floor(Math.random() * 3) + 1);
-  // const [viewIcons, setViewIcons] = useState({
-  //   snippet: Math.floor(Math.random() * 3) + 1,
-  //   citation: Math.floor(Math.random() * 3) + 1,
-  //   title: Math.floor(Math.random() * 3) + 1,
-  // });
   const galleryRef = useRef(null);
-  const [scrollIndex, setScrollIndex] = useState(0);
-  const [floatingInfo, setFloatingInfo] = useState(null);
-  const [selectedText, setSelectedText] = useState(null);
-  const [boxPos, setBoxPos] = useState(null);
   const [openBoxes, setOpenBoxes] = useState([]);
   const [nextZIndex, setNextZIndex] = useState(1001);
-  const [twitchIndexes, setTwitchIndexes] = useState([]);
   const [filterOptionRotation, setFilterOptionsRotates] = useState({});
 
   useEffect(() => {
@@ -168,6 +155,8 @@ const GalleryPage = () => {
     setNextZIndex((z) => z + 1);
   };
 
+  const topZIndex = openBoxes.length > 0 ? Math.max(...openBoxes.map(box => box.zIndex)) : 0;
+
   return (
     <main className="gallery-page">
       {/* Smudg overlay */}
@@ -289,7 +278,10 @@ const GalleryPage = () => {
             text={text}
             index={i}
             onCardClick={handleCardClick}
-            twitch={twitchIndexes.includes(i)}
+            selectedEmotions={selectedEmotions}
+            selectedCategories={selectedCategories}
+            emotionIcons={emotionIcons}
+            categoryIcons={categoryIcons}
           />
         ))}
       </div>
@@ -301,6 +293,7 @@ const GalleryPage = () => {
           text={box.text}
           position={box.position}
           zIndex={box.zIndex}
+          topZIndex={topZIndex} // <-- pass the highest zIndex
           onClose={() => handleCloseBox(box.id)}
           onFocus={() => handleFocusBox(box.id)}
           suggestions={texts
@@ -315,6 +308,9 @@ const GalleryPage = () => {
               ]
             }))}
           onOpenNewBox={(quote, location) => handleCardClick(texts[quote.index], location)}
+          initialActiveTag={
+            [...selectedEmotions, ...selectedCategories].slice(-1)[0] || null
+          }
         />
       ))}
     </main>

@@ -16,14 +16,15 @@ const clampToViewport = (x, y, boxEl) => {
 };
 
 
-const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, onFocus, suggestions = [], onOpenNewBox }) => {
+const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZIndex = 0, // <-- receive this prop
+ onFocus, suggestions = [], onOpenNewBox, initialActiveTag }) => {
     const boxRef = useRef(null);
     const contentRef = useRef(null);
     const [dragging, setDragging] = useState(false);
     const [offset, setOffset] = useState({ x: 0, y: 0 });
     const [boxPos, setBoxPos] = useState(position);
     const [collapsed, setCollapsed] = useState(false);
-    const [activeTags, setActiveTag] = useState([]);
+    const [activeTags, setActiveTag] = useState(initialActiveTag ? [initialActiveTag] : []);
     const maxHeight = [40, 60, 80]
 
     useEffect(() => {
@@ -121,6 +122,15 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, onFocus
         return processTaggedText(text, activeTags);
     };
 
+    // If the text changes (i.e., a new box is opened), update the active tag
+    useEffect(() => {
+        if (initialActiveTag) setActiveTag([initialActiveTag]);
+        else setActiveTag([]);
+    }, [text, initialActiveTag]);
+
+    // Blur increases the further the box is from the top zIndex
+    const blurAmount = (topZIndex - zIndex) *0.6; // 2px per zIndex step
+
     return (
 
         <div
@@ -130,6 +140,8 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, onFocus
                 top: boxPos?.y,
                 left: boxPos?.x,
                 zIndex: zIndex,
+                filter: blurAmount > 0 ? `blur(${blurAmount}px)` : "none",
+                transition: "filter 0.3s"
             }}
             onMouseDown={(e) => {
                 onFocus && onFocus();
@@ -167,46 +179,45 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, onFocus
 
             {/* Filters and extra button always visible, move up when collapsed */}
             <div className={`floating-info-box-filters${collapsed ? " collapsed" : ""}`}>
-                <div className="tags" style={{ borderLeft: "#222222 0.6px solid", margin: "0 0.5rem 0 0.1rem" }}>
-
-                    <label>נושא </label>
-                    <ul>
-                        {text['קטגוריה']?.split(/,|\r|\n/g).map((category, i) => (
-                            <li
-                                key={i}
-                                className={`highlight-category ${activeTags.includes(category.trim()) ? `${category.trim()} active` : ""}`}
-                                onClick={() => setActiveTag((prev) => {
-                                    if (prev.includes(category.trim())) {
-                                        return prev.filter(tag => tag !== category.trim());
-                                    } else {
-                                        return [...prev, category.trim()];
-                                    }
-                                })}
-                            >
-                                {category.trim()}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="tags" style={{ margin: "0 0.5rem 0 0.7rem" }}>
-                    <label >רגש </label>
-
-                    <ul>
-                        {text['רגש']?.split(/,|\r|\n/g).map((emotion, i) => (
-                            <li key={i} className={`highlight-emotion ${activeTags.includes(emotion.trim()) ? `${emotion.trim()} active` : ""}`}
-                                onClick={() => setActiveTag((prev) => {
-                                    if (prev.includes(emotion.trim())) {
-                                        return prev.filter(tag => tag !== emotion.trim());
-                                    } else {
-                                        return [...prev, emotion.trim()];
-                                    }
-                                })}>
-                                {emotion.trim()}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
+  <div className="tags" style={{ borderLeft: "#222222 0.6px solid", margin: "0 0.5rem 0 0.1rem" }}>
+    <label>נושא </label>
+    <ul>
+      {text['קטגוריה']?.split(/,|\r|\n/g).map((category, i) => (
+        <li
+          key={i}
+          className={`highlight-category ${activeTags.includes(category.trim()) ? `${category.trim()} active` : ""}`}
+          onClick={() => setActiveTag((prev) => {
+            const cat = category.trim();
+            // Remove any existing category, then add the new one if not already active
+            const otherTags = prev.filter(tag => !text['קטגוריה']?.split(/,|\r|\n/g).map(c => c.trim()).includes(tag));
+            return prev.includes(cat) ? otherTags : [...otherTags, cat];
+          })}
+        >
+          {category.trim()}
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div className="tags" style={{ margin: "0 0.5rem 0 0.7rem" }}>
+    <label >רגש </label>
+    <ul>
+      {text['רגש']?.split(/,|\r|\n/g).map((emotion, i) => (
+        <li
+          key={i}
+          className={`highlight-emotion ${activeTags.includes(emotion.trim()) ? `${emotion.trim()} active` : ""}`}
+          onClick={() => setActiveTag((prev) => {
+            const emo = emotion.trim();
+            // Remove any existing emotion, then add the new one if not already active
+            const otherTags = prev.filter(tag => !text['רגש']?.split(/,|\r|\n/g).map(e => e.trim()).includes(tag));
+            return prev.includes(emo) ? otherTags : [...otherTags, emo];
+          })}
+        >
+          {emotion.trim()}
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
 
             <div
                 className={`floating-info-box-extra${collapsed ? " expanded" : ""}`}
@@ -221,7 +232,8 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, onFocus
             {collapsed && (
                 <div className="extra-quotes-list">
                     <ul>
-                        <div className="make-scrollbar-right ">
+                        <div className="make-scrollbar-right "
+                        style={{maxHeight:`${maxHeight[randomHeigh]}vh`}}>
 
                             {suggestions.length > 0 ? (
                                 suggestions.filter(q => isValidSuggestion(q, activeTags)).slice(0, 7).map((q, i) => (

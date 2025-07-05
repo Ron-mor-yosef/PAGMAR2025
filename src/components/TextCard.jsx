@@ -3,7 +3,31 @@ import FloatingInfoBox from "./FloatingInfoBox";
 import { processTaggedText } from "../utils/parseCSV"; // Adjust the import path as necessary
 
 
-const TextCard = ({ text, index, view, onCardClick, twitch }) => {
+const TextCard = ({
+  text,
+  index,
+  view,
+  onCardClick,
+  twitch,
+  selectedEmotions = [],
+  selectedCategories = [],
+  emotionIcons = {},
+  categoryIcons = {},
+}) => {
+  // Check if this card matches a selected emotion or category
+  const cardEmotions = (text['רגש'] || '').split(/,|\n|\r/).map(e => e.trim()).filter(Boolean);
+  const cardCategories = (text['קטגוריה'] || '').split(/,|\n|\r/).map(e => e.trim()).filter(Boolean);
+
+  // Find the first matching emotion/category (for icon)
+  const matchedEmotion = cardEmotions.find(e => selectedEmotions.includes(e));
+  const matchedCategory = cardCategories.find(c => selectedCategories.includes(c));
+
+  // Pick icon index (emotion has priority)
+  const iconIndex = matchedEmotion
+    ? emotionIcons[matchedEmotion]
+    : matchedCategory
+      ? categoryIcons[matchedCategory]
+      : null;
 
   function cleanTextForClamp(text) {
     // Remove trailing commas or periods before ellipsis, but allow '?'
@@ -14,7 +38,6 @@ const TextCard = ({ text, index, view, onCardClick, twitch }) => {
 
     <div
       className={`text-card${twitch ? " twitch" : ""}`}
-      style={{ position: "relative" }}
       onClick={(e) => onCardClick(text, e)}
     >
       <div className="text-card-content">
@@ -32,21 +55,23 @@ const TextCard = ({ text, index, view, onCardClick, twitch }) => {
           {text['שם כותבת'] || 'ללא שם'}
         </div>
         <ul className="text-card-tags">
-          {text['רגש']?.split(/,|\n|\r/g).map((emotion, i) => {
-            if (emotion.trim() !== "") {
-              return <li key={i} className="emotion-tag">{emotion.trim()}</li>;
-            } else {
-              return null;
-            }
-          })}
-          {/* </ul>
-          <ul className="text-card-category"> */}
-          {text['קטגוריה']?.split(/,|\n|\r/g).map((category, i) => {
-            if (category.trim() !== "") {
-              return <li key={i} className="category-tag">{category.trim()}</li>;
-            } else {
-              return null;
-            }
+          {cardEmotions.concat(cardCategories).map((tag, i) => {
+            const isActive = selectedEmotions.includes(tag) || selectedCategories.includes(tag);
+            // Pick the correct icon index
+            const iconIndex = emotionIcons[tag] || categoryIcons[tag] || 1;
+            return (
+              <li
+                key={i}
+                className={isActive ? "active" : ""}
+                style={
+                  isActive
+                    ? { "--svg-url-emotion": `url('/assets/images/red_circles/${iconIndex}.svg')` }
+                    : {}
+                }
+              >
+                {tag}
+              </li>
+            );
           })}
         </ul>
       </div>

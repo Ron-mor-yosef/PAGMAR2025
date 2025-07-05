@@ -22,6 +22,7 @@ li {
   direction: rtl;
   display: flex;
   flex-direction: column;
+  transition: filter 0.3s;
 }
 
 .floating-info-box-header {
@@ -184,6 +185,8 @@ li {
   list-style: none;
   padding: 0;
   margin: 0;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
   font-size: 13px;
   font-family: 'NarkissBlock', sans-serif;
   font-weight: 200;
@@ -193,7 +196,8 @@ li {
   cursor: pointer;
 }
 
-.floating-info-box-filters .tags li:hover {
+.floating-info-box-filters .tags li:hover ,
+li.highlight-category.active{
   font-weight: 300;
   font-size: calc(13px - 0.035em);
   /* Slightly smaller to compensate for boldness */
@@ -306,6 +310,8 @@ li {
 
 .highlight-category {
   direction: rtl;
+  margin: -0.5em;  /* Negative margin to let bg overflow */
+  border: 0.5em solid transparent;
 }
 
 .highlight-emotion {
@@ -314,38 +320,29 @@ li {
   background-size: auto 8px;
   border-bottom: 5px solid transparent;
   padding-bottom: 4px;
-}
-
-li.highlight-category.active {
-  font-weight: 400;
-}
-
-li.highlight-emotion {
-  padding: 0;
-  margin: 0;
-  border-bottom: none;
-  background-size: auto 7px;
-  background-position: 0 100%;
+  margin: -0.3em;  /* Negative margin to let bg overflow */
+  border: 0.3em solid transparent;
 }
 
 
 .highlight-emotion.active {
   /* background-blend-mode: multiply; */
   background-image: url('../../public/assets/underline/underline.svg');
+
 }
 
 .highlight-category.active {
   background-color: transparent;
-  background-image: url('../../public/assets/images/highlight/3.png'),
-    url('../../public/assets/images/highlight/7.png');
+  background-image: url('../../public/assets/images/highlight/2.png'), url('../../public/assets/images/highlight/6.png');
   background-repeat: repeat-x;
-  background-position-x: 0, 1rem;
-  background-position-y: -0.5px;
-  /* line-height: 1.2rem; */
+  /* left:0; */
+  background-position: center top;
+  background-position-x: 0 , 1rem;
+  /* background-position-y: -0.5px; */
   background-size: 1.5rem 1.1rem;
   color: #F0F8FF;
-  /* font-weight: 300; */
-
+  font-weight: 350;
+  opacity: 0.8;
 }
 
 .line-img-start,
