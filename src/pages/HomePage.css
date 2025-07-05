@@ -52,7 +52,69 @@ main.home-page .home-nav-btns {
         font-size: 20px;
         color: inherit;
     }
+
     button:hover {
         font-weight: 400;
     }
+}
+
+.idle-toggle-box {
+    margin-top: 2em;
+    font-size: 1em;
+    font-weight: 200;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+}
+
+.idle-toggle-box input[type="number"] {
+    font-size: 1em;
+    padding: 0.2em 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid #ccc;
+}
+
+.idle-burger-container {
+    position: fixed;
+    top: 2.5rem;
+    left: 2.5rem;
+    z-index: 1001;
+}
+
+.idle-burger-btn {
+    background-color: transparent;
+    border-color: transparent;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.idle-burger-btn span {
+    display: block;
+    width: 20px;
+    height: 3px;
+    transition: background 0.2s;
+}
+
+.idle-burger-btn:hover {
+    background: #F0F8FF;
+}
+
+.idle-toggle-popup {
+    position: absolute;
+    left: 0;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    z-index: 1002;
 }

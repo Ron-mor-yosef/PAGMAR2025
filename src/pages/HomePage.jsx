@@ -1,8 +1,29 @@
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-const HomePage = () => {
+const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) => {
   const navigate = useNavigate();
+
+  // Local state for input (if parent does not provide)
+  const [localTimeout, setLocalTimeout] = useState(idleTimeout ?? 120);
+  const [localEnabled, setLocalEnabled] = useState(idleEnabled ?? true);
+
+  // Burger menu state
+  const [showIdleMenu, setShowIdleMenu] = useState(false);
+
+  // Use parent setters if provided, else local state
+  const handleTimeoutChange = (e) => {
+    const val = Math.max(10, Number(e.target.value));
+    setLocalTimeout(val);
+    setIdleTimeout?.(val);
+  };
+  const handleToggle = () => {
+    setLocalEnabled((prev) => {
+      setIdleEnabled?.(!prev);
+      return !prev;
+    });
+  };
 
   return (
     <main className='home-page'>
@@ -33,6 +54,42 @@ const HomePage = () => {
           <button className="home-nav-btn" onClick={() => navigate('/intro')}>
             אודות
           </button>
+        </div>
+        {/* Burger for idle toggle */}
+        <div className="idle-burger-container">
+          <button
+            className="idle-burger-btn"
+            onClick={() => setShowIdleMenu((prev) => !prev)}
+            aria-label="הגדרות חוסר פעילות"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          {showIdleMenu && (
+            <div className="idle-toggle-box idle-toggle-popup">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={idleEnabled ?? localEnabled}
+                  onChange={handleToggle}
+                />
+                ניתוב אוטומטי לדף הבית ({idleEnabled ?? localEnabled ? "פעיל" : "כבוי"})
+              </label>
+              <label style={{ marginRight: "1em" }}>
+                זמן חוסר פעילות (שניות):{" "}
+                <input
+                  type="number"
+                  min={10}
+                  max={600}
+                  value={idleTimeout ?? localTimeout}
+                  onChange={handleTimeoutChange}
+                  style={{ width: "4em" }}
+                  disabled={!(idleEnabled ?? localEnabled)}
+                />
+              </label>
+            </div>
+          )}
         </div>
       </div>
     </main>
