@@ -102,3 +102,19 @@ p {
   color: #222;
   text-align: right;
 }
+
+.fade-overlay {
+  position: fixed;
+  inset: 0;
+  background: #FFFBF2;
+  opacity: 0;
+  pointer-events: none;
+  animation: fadeOutToHome 0.8s forwards;
+  z-index: 9999;
+}
+
+@keyframes fadeOutToHome {
+  to {
+    opacity: 1;
+  }
+}
