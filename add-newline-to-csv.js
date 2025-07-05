@@ -1,11 +1,33 @@
 const fs = require('fs');
+const parse = require('csv-parse/lib/sync');
+const stringify = require('csv-stringify/lib/sync');
 
-const inputPath = 'C:\\Users\\yuval_c\\Desktop\\emotion-site\\emotion-site-react\\public\\texts.csv';
-const outputPath = 'C:\\Users\\yuval_c\\Desktop\\emotion-site\\emotion-site-react\\public\\texts_new.csv';
+const inputPath = 'public/texts_new2.csv';
+const outputPath = 'public/texts_new2_aligned.csv';
 
-const data = fs.readFileSync(inputPath, 'utf8');
-const lines = data.split(/\r?\n/);
-const newLines = lines.map(line => line + '\\n');
-fs.writeFileSync(outputPath, newLines.join('\n'), 'utf8');
+const csv = fs.readFileSync(inputPath, 'utf8');
+const records = parse(csv, { columns: true });
+const columns = Object.keys(records[0] || {});
 
-console.log('Done!');
+function extractTags(text, tag) {
+  if (!text) return [];
+  // <קטגוריה: ...> or <רגש: ...>
+  const regex = new RegExp(`<${tag}:\\s*([^>/]+)>|<${tag}:\\s*([^>/]+)/>`, 'g');
+  const tags = new Set();
+  let match;
+  while ((match = regex.exec(text))) {
+    const val = match[1] || match[2];
+    if (val) tags.add(val.trim());
+  }
+  return Array.from(tags).sort();
+}
+
+for (const row of records) {
+  const text = row['הטקסט'] || '';
+  row['קטגוריה'] = extractTags(text, 'קטגוריה').join('\n');
+  row['רגש'] = extractTags(text, 'רגש').join('\n');
+}
+
+const output = stringify(records, { header: true, columns });
+fs.writeFileSync(outputPath, output, 'utf8');
+console.log('Done! Saved to', outputPath);

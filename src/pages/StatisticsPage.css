@@ -4,8 +4,9 @@ main.statistics-page {
   height: fit-content;
   /* overflow-y: auto; */
   padding: var(--grid-size);
-  font-family: 'NarkissBlock-Thin', 'Masada', Arial, sans-serif;
+  font-family: 'NarkissBlock', 'Masada', Arial, sans-serif;
   direction: rtl;
+  font-weight: 300;
 
 }
 

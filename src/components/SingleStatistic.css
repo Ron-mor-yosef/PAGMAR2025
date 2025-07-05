@@ -65,6 +65,6 @@ div.single-stat-explain{
     padding: calc(var(--grid-size) * 0.3 ) 0;
     font-size: calc(var(--grid-size) * 0.9);
     line-height:  calc(var(--grid-size) * 1.1);
-    font-family: 'NarkissBlock-Thin';
-    font-weight: 400;
+    font-family: 'NarkissBlock';
+    font-weight: 300;
 }

@@ -81,6 +81,7 @@ select:focus {
 .count-filter {
   padding: 1rem;
   line-height: 100%;
+  padding-left: 0;
   width: 5rem;
   font-size: 1.5rem;
   font-weight: 300;
@@ -144,6 +145,13 @@ ul.gallery-active-tags{
   background-size: 32px 32px;
   /* adjust as needed */
   position: relative;
+  font-size: 16px;
+
+}
+
+.filter-options button:hover{
+  font-weight: 400;
+  font-size: 15px;
 }
 
 .filter-options button.active::after {
@@ -211,7 +219,7 @@ ul.gallery-active-tags{
 
 .single-filter>label {
   font-size: 1.2rem;
-  font-family: 'NarkissBlock-Thin', sans-serif;
+  font-family: 'NarkissBlock', sans-serif;
   font-weight: 300;
   color: #222;
 }

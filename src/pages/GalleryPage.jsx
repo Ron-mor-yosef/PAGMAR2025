@@ -168,23 +168,6 @@ const GalleryPage = () => {
     setNextZIndex((z) => z + 1);
   };
 
-  // Twitch effect: randomly pick cards to twitch every 2 seconds
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (filtered.length === 0) return;
-  //     // Pick 1-2 random indexes to twitch
-  //     const count = Math.floor(Math.random() * 2) + 1;
-  //     const indexes = [];
-  //     for (let i = 0; i < count; i++) {
-  //       indexes.push(Math.floor(Math.random() * filtered.length));
-  //     }
-  //     setTwitchIndexes(indexes);
-  //     // Remove twitch after animation duration
-  //     setTimeout(() => setTwitchIndexes([]), 350);
-  //   }, 2000);
-  //   return () => clearInterval(interval);
-  // }, [filtered.length]);
-
   return (
     <main className="gallery-page">
       {/* Smudg overlay */}
@@ -291,7 +274,7 @@ const GalleryPage = () => {
           <label className="count-filter">[ {filtered.length} ] </label>
             <ul className="gallery-active-tags">
               {[...selectedEmotions, ...selectedCategories].map(t =>
-                <li> [{t.trim()}] </li>
+                <li> {t.trim()} </li>
               )}
             </ul>
         </div>

@@ -30,12 +30,3 @@ main.home-page {
     /* padding-top: 0; */
     height: calc(100vh - 12.5rem - 1px);
 }
-
-/* main.home-page>p.highlight {
-    font-family: 'NarkissBlock-Thin', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen';
-
-    font-weight: 200;
-    font-size: 5rem;
-    direction: ltr;
-    transform: translatey( -2rem);
-} */
