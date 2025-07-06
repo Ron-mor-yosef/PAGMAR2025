@@ -375,9 +375,9 @@ li.highlight-category, li.highlight-emotion {
   margin: 0;
   border-width: 0;
 }
-li.highlight-emotion.active{
+li.highlight-emotion, li.highlight-emotion.active {
   padding-bottom: 2px;
-  margin-bottom: -9px;
+  margin-bottom: -5px;
 }
 
 .line-img-start,
