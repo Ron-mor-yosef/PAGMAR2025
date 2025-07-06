@@ -80,15 +80,18 @@ select:focus {
   display: flex;
   height: fit-content;
   border-bottom: #222 1px solid;
+  font-weight: 200;
 }
 
 .count-filter {
   padding: 1rem;
   line-height: 100%;
   padding-left: 0;
-  width: 5rem;
-  font-size: 1.5rem;
+  width:3rem;
+  font-size: 20px;
   font-weight: 200;
+
+  /* font-weight: 300; */
 }
 
 ul.gallery-active-tags {
@@ -155,7 +158,7 @@ ul.gallery-active-tags {
 }
 
 .filter-options button:hover {
-  font-weight: 300;
+  font-weight: 500;
   font-size: 15.5px;
 }
 
@@ -208,7 +211,7 @@ ul.gallery-active-tags {
 }
 
 .single-filter label {
-  font-weight: 200;
+  font-weight: 300;
   margin: 0 0.5rem;
   font-size: 1rem;
 }
@@ -226,7 +229,7 @@ ul.gallery-active-tags {
 .single-filter>label {
   /* font-size: 1rem; */
   font-family: 'NarkissBlock', sans-serif;
-  font-weight: 200;
+  font-weight: 300;
   color: #222;
 }
 

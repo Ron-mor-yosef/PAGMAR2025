@@ -44,7 +44,7 @@ main.intro-page {
         justify-content: space-evenly;
         height: calc(100vh - 12.5rem - 1px);
         align-items: flex-start;
-        height: 40vh;
+        height: 57vh;
 
         .intro-page-credits-name {
             background-repeat: repeat-x;
@@ -90,19 +90,16 @@ main.intro-page {
     }
 
     .intro-page-footer {
-        height: 25vh;
+        height: 8vh;
         direction: ltr;
+        height: fit-content;
 
         img {
-            height: 140%;
+            height: 80px;
             /* Increase to zoom in and hide borders */
             width: auto;
-            object-fit: cover;
-            object-position: center bottom;
-            margin: 0;
-            display: block;
-            max-width: none;
-            max-height: none;
+            margin: 2rem;
+
         }
 
     }

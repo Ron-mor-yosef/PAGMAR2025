@@ -3,6 +3,28 @@ import { loadCSV } from "../utils/parseCSV";
 import TextCard from "../components/TextCard";
 import FloatingInfoBox from "../components/FloatingInfoBox";
 import "./GalleryPage.css";
+import { motion } from 'framer-motion';
+
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: 30
+  },
+  in: {
+    opacity: 1,
+    y: 0
+  },
+  out: {
+    // opacity: 0,
+    // y: -30
+  }
+};
+
+const pageTransition = {
+  type: "tween",
+  ease: "easeInOut",
+  duration: 0.5
+};
 
 const GalleryPage = () => {
   const [texts, setTexts] = useState([]);
@@ -159,7 +181,14 @@ const GalleryPage = () => {
   const topZIndex = openBoxes.length > 0 ? Math.max(...openBoxes.map(box => box.zIndex)) : 0;
 
   return (
-    <main className="gallery-page">
+     <motion.main
+      className="gallery-page"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
             {openBoxes.length > 0 && (
         <button
           className="close-all-floating-btn"
@@ -294,8 +323,7 @@ const GalleryPage = () => {
           }
         />
       ))}
-    </main>
-  );
+</motion.main>  );
 };
 
 export default GalleryPage;

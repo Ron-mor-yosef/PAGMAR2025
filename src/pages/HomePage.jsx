@@ -1,18 +1,36 @@
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: 30
+  },
+  in: {
+    opacity: 1,
+    y: 0
+  },
+  out: {
+    // opacity: 0,
+    // y: -300,
+    // x: 500
+  }
+};
+
+const pageTransition = {
+  type: "tween",
+  ease: "easeInOut",
+  duration: 0.5
+};
 
 const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) => {
   const navigate = useNavigate();
-
-  // Local state for input (if parent does not provide)
   const [localTimeout, setLocalTimeout] = useState(idleTimeout ?? 120);
   const [localEnabled, setLocalEnabled] = useState(idleEnabled ?? true);
-
-  // Burger menu state
   const [showIdleMenu, setShowIdleMenu] = useState(false);
 
-  // Use parent setters if provided, else local state
   const handleTimeoutChange = (e) => {
     const val = Math.max(10, Number(e.target.value));
     setLocalTimeout(val);
@@ -26,22 +44,24 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
   };
 
   return (
-    <main className='home-page'>
+    <motion.main
+      className='home-page'
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <div className='home-mid-box'>
         <div className='home-logo'>
           <img src="/assets/images/hebrew-logo.svg" alt="Logo" className="logo" />
         </div>
         <p>
           כיום בישראל יש כ־98,000 בני ובנות זוג של משרתי מילואים.
-          97% מהם הן נשים.        <br />
-          <br />
-          בין הבית לחזית &mdash;
-          <br />
-          האתר הזה אוסף את הקולות שלהן:
-          <br />
-          סיפורים, תחושות ומספרים המצטברים יחד.
-          <br />
-          <br />
+          97% מהם הן נשים. <br /><br />
+          בין הבית לחזית &mdash;<br />
+          האתר הזה אוסף את הקולות שלהן:<br />
+          סיפורים, תחושות ומספרים המצטברים יחד.<br /><br />
           זהו סיפורן של הנשים העומדות בחזית העורף.
         </p>
         <div className="home-nav-btns">
@@ -55,11 +75,11 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
             אודות
           </button>
         </div>
-        {/* Burger for idle toggle */}
+        {/* Burger toggle for idle settings */}
         <div className="idle-burger-container">
           <button
             className="idle-burger-btn"
-            onClick={() => setShowIdleMenu((prev) => !prev)}
+            onClick={() => setShowIdleMenu(prev => !prev)}
             aria-label="הגדרות חוסר פעילות"
           >
             <span />
@@ -92,7 +112,7 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
           )}
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 };
 
