@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3df21a1c.css",
+    "main.js": "/static/js/main.f8d1c31a.js",
+    "static/media/image.png": "/static/media/image.45611bab836b7ad0c13f.png",
+    "static/media/2.png": "/static/media/2.220fb23094711069842d.png",
+    "static/media/6.png": "/static/media/6.5cef438124fd78930d11.png",
+    "static/media/Masada-MediumItalic.woff": "/static/media/Masada-MediumItalic.044b2b8ca618d6f5f10b.woff",
+    "static/media/Masada-Medium.woff": "/static/media/Masada-Medium.e6221af2df6468413f48.woff",
+    "static/media/Masada-LightItalic.woff": "/static/media/Masada-LightItalic.1696be16f9b1d4f98a0b.woff",
+    "static/media/Masada-Bold.woff": "/static/media/Masada-Bold.9ec4e79bafab97d627e0.woff",
+    "static/media/Masada-Light.woff": "/static/media/Masada-Light.e34aae7f88f0aab4dbb6.woff",
+    "static/media/Masada-Book.woff": "/static/media/Masada-Book.9a70714c823baafd6ad7.woff",
+    "static/media/NarkissBlock-Thin.woff": "/static/media/NarkissBlock-Thin.e53ce959a1fab41daadd.woff",
+    "static/media/NarkissBlock-Hairline.woff": "/static/media/NarkissBlock-Hairline.a6b34d41bd11288ec38f.woff",
+    "static/media/NarkissBlock-Semibold.woff": "/static/media/NarkissBlock-Semibold.dd34bab37849f8e72be5.woff",
+    "static/media/NarkissBlock-Medium.woff": "/static/media/NarkissBlock-Medium.03f76f49a8d44e1d6877.woff",
+    "static/media/NarkissBlock-Light.woff": "/static/media/NarkissBlock-Light.16097a94d5869359196d.woff",
+    "static/media/NarkissBlock-Regular.woff": "/static/media/NarkissBlock-Regular.70b0beae01f2a43ad945.woff",
+    "static/media/5.svg": "/static/media/5.7093ff681ee9223ca4b4.svg",
+    "static/media/1.svg": "/static/media/1.74626d65c4798280dfdc.svg",
+    "index.html": "/index.html",
+    "static/media/underline.svg": "/static/media/underline.86835a68142b171ef411.svg",
+    "main.3df21a1c.css.map": "/static/css/main.3df21a1c.css.map",
+    "main.f8d1c31a.js.map": "/static/js/main.f8d1c31a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3df21a1c.css",
+    "static/js/main.f8d1c31a.js"
+  ]
+}
