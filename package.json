@@ -2,7 +2,6 @@
   "name": "emotion-site-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ron-mor-yosef.github.io/pagmar-2025",
   "dependencies": {
     "csv-parse": "^5.6.0",
     "csv-stringify": "^6.5.2",
