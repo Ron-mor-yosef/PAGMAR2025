@@ -58,7 +58,7 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
         </div>
         <p>
           כיום בישראל יש כ־98,000 בני ובנות זוג של משרתי מילואים.
-          97% מהם הן נשים. <br /><br />
+          מתוכם 97% נשים. <br /><br />
           בין הבית לחזית &mdash;<br />
           האתר הזה אוסף את הקולות שלהן:<br />
           סיפורים, תחושות ומספרים המצטברים יחד.<br /><br />
