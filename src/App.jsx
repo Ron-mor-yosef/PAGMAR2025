@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import IntroPage from "./pages/IntroPage";
 import GalleryPage from "./pages/GalleryPage";
@@ -24,8 +24,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/intro" element={<IntroPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/text/:id" element={<TextPage />} />
           <Route path="/statistics" element={<StatisticsPage />} />
+          <Route path="/PAGMAR2025" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
     </>

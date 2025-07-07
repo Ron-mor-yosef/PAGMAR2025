@@ -7,6 +7,7 @@ main.home-page p {
     font-size: min(1.5vw, 1.5rem);
     font-weight: 200;
     padding: 1.5rem 0;
+    margin-top: 20px;
     width: 100%;
     line-height: min(2vw, 2rem);
     text-align: center;
@@ -125,7 +126,7 @@ main.home-page .home-nav-btns {
 
 .home-bg-video {
   position: fixed;
-  top: 27;
+  top: 20px;
   left: 0;
   min-width: 100vw;
   min-height: 100vh;
