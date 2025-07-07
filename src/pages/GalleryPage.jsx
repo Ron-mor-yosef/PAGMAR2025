@@ -43,7 +43,7 @@ const GalleryPage = () => {
 
   useEffect(() => {
     // loadCSV("/texts_new2.csv").then((data) => {
-    loadCSV("/texts_new2_aligned.csv").then((data) => {
+    loadCSV(process.env.PUBLIC_URL + "/texts_new2_aligned.csv").then((data) => {
       // Add index property to each row
       const dataWithIndex = data.map((row, idx) => ({ ...row, index: idx }));
       setTexts(dataWithIndex);
@@ -204,7 +204,7 @@ const GalleryPage = () => {
     className="close-all-floating-btn"
     onClick={handleCloseAll} // <-- use the new handler
   >
-    <img src="/assets/images/close.svg" alt="סגור" />
+    <img src={process.env.PUBLIC_URL + "/assets/images/close.svg"} alt="סגור" />
     סגור הכל
   </button>
 )}
@@ -230,7 +230,7 @@ const GalleryPage = () => {
                     style={
                       selectedEmotions.includes(e)
                         ? {
-                          "--svg-url-emotion": `url('/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`,
+                          "--svg-url-emotion": `url('${process.env.PUBLIC_URL}/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`,
                           "--circle-rotate": filterOptionRotation[e] || "0deg",
                           // If the red-circle icon 5 is selected, add an extra translateY offset:
                           "--after-bottom": emotionIcons[e] === 5 ? "-10%" : "10%",
@@ -263,7 +263,7 @@ const GalleryPage = () => {
                     style={
                       selectedCategories.includes(c)
                         ? {
-                          "--svg-url-category": `url('/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`,
+                          "--svg-url-category": `url('${process.env.PUBLIC_URL}/assets/images/red_circles/${categoryIcons[c] || 1}.svg')`,
                           "--circle-rotate": filterOptionRotation[c] || "0deg",
                           "--after-bottom": categoryIcons[c] === 5 ? "-15%" : "10%"
                         }

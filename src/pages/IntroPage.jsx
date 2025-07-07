@@ -5,7 +5,7 @@ const IntroPage = () => {
   const [introParagraphs, setIntroParagraphs] = useState([]);
 
   useEffect(() => {
-    fetch("/intro.txt")
+    fetch(process.env.PUBLIC_URL + "/intro.txt")
       .then(res => res.text())
       .then(text => {
         // Split by \n for paragraphs, replace \r with <br>
@@ -30,7 +30,7 @@ const IntroPage = () => {
         </div>
       </div>
       <div className="intro-page-footer">
-        <img src="/assets/images/logo-bezalel.png" alt="Bezalel logo" />
+        <img src={process.env.PUBLIC_URL + "/assets/images/logo-bezalel.png"} alt="Bezalel logo" />
       </div>
 
     </main>

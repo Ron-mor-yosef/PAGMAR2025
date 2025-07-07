@@ -19,7 +19,7 @@ function SingleStatistic({ statistic }) {
                     return (
                         <img
                             className="single-percent"
-                            src={`/assets/images/squares/${Math.ceil(Math.random() * 6)}.png`}
+                            src={process.env.PUBLIC_URL + `/assets/images/squares/${Math.ceil(Math.random() * 6)}.png`}
                             key={percentIndx}
                             style={{
                                 rotate: `${(Math.ceil(Math.random() * 3) * 90) + (Math.random() * 3)}deg`,

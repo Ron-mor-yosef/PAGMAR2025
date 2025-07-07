@@ -55,14 +55,14 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
       {/* Video background */}
       <video
         className="home-bg-video"
-        src="/assets/images/open animation/comp square.mp4"
+        src={process.env.PUBLIC_URL + "/assets/images/open animation/comp square.mp4"}
         autoPlay
         muted
         playsInline
       />
       <div className='home-mid-box'>
         <div className='home-logo'>
-          <img src="/assets/images/hebrew-logo.svg" alt="Logo" className="logo" />
+          <img src={process.env.PUBLIC_URL + "/assets/images/hebrew-logo.svg"} alt="Logo" className="logo" />
         </div>
         <p>
           כיום בישראל יש כ־98,000 בני ובנות זוג של משרתי מילואים.

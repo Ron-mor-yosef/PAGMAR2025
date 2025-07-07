@@ -44,7 +44,7 @@ const StatisticsPage = () => {
     const getSelectedCategoryKey = ()=> selectedCategoryKey;
 
     useEffect(() => {
-        loadCSV("/statistics.csv").then((table) => {
+        loadCSV(process.env.PUBLIC_URL + "/statistics.csv").then((table) => {
             const parsed = parseCSV(table);
             setStatsByCategory(parsed);
 

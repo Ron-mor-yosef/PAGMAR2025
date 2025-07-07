@@ -130,7 +130,7 @@ const FloatingInfoBox = ({
         >
             {/* Always show close button */}
             <button className="floating-info-box-close" onClick={handleClose}>
-                <img src="/assets/images/close.svg" alt="סגור" />
+                <img src={process.env.PUBLIC_URL + "/assets/images/close.svg"} alt="סגור" />
             </button>
 
             {/* Slide up/hide main content when collapsed */}
@@ -204,7 +204,7 @@ const FloatingInfoBox = ({
                 onClick={() => setCollapsed((prev) => !prev)}
             >
                 <span className="toggle-extra">
-                    {collapsed ? <img src="/assets/images/-.svg" alt="-"/> : <img src="/assets/images/+.svg" alt="+"/>}
+                    {collapsed ? <img src={process.env.PUBLIC_URL + "/assets/images/-.svg"} alt="-"/> : <img src={process.env.PUBLIC_URL + "/assets/images/+.svg"} alt="+"/>}
                     טקסטים נוספים
                 </span>
             </div>
