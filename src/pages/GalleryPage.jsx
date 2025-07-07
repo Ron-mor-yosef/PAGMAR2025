@@ -39,6 +39,7 @@ const GalleryPage = () => {
   const [openBoxes, setOpenBoxes] = useState([]);
   const [nextZIndex, setNextZIndex] = useState(1001);
   const [filterOptionRotation, setFilterOptionsRotates] = useState({});
+  const [closingAll, setClosingAll] = useState(false);
 
   useEffect(() => {
     // loadCSV("/texts_new2.csv").then((data) => {
@@ -180,6 +181,15 @@ const GalleryPage = () => {
 
   const topZIndex = openBoxes.length > 0 ? Math.max(...openBoxes.map(box => box.zIndex)) : 0;
 
+  const handleCloseAll = () => {
+    setClosingAll(true);
+    // Remove all after animation duration (match your CSS, e.g. 220ms)
+    setTimeout(() => {
+      setOpenBoxes([]);
+      setClosingAll(false);
+    }, 220);
+  };
+
   return (
      <motion.main
       className="gallery-page"
@@ -190,14 +200,14 @@ const GalleryPage = () => {
       transition={pageTransition}
     >
             {openBoxes.length > 0 && (
-        <button
-          className="close-all-floating-btn"
-          onClick={() => setOpenBoxes([])}
-        >
-          <img src="/assets/images/close.svg" alt="סגור" />
-          סגור הכל
-        </button>
-      )}
+  <button
+    className="close-all-floating-btn"
+    onClick={handleCloseAll} // <-- use the new handler
+  >
+    <img src="/assets/images/close.svg" alt="סגור" />
+    סגור הכל
+  </button>
+)}
       {/* Smudg overlay */}
       <div
         className="smudge-overlay"
@@ -303,7 +313,7 @@ const GalleryPage = () => {
           text={box.text}
           position={box.position}
           zIndex={box.zIndex}
-          topZIndex={topZIndex} // <-- pass the highest zIndex
+          topZIndex={topZIndex}
           onClose={() => handleCloseBox(box.id)}
           onFocus={() => handleFocusBox(box.id)}
           suggestions={texts
@@ -321,6 +331,7 @@ const GalleryPage = () => {
           initialActiveTag={
             [...selectedEmotions, ...selectedCategories].slice(-1)[0] || null
           }
+          closingAll={closingAll} // <-- add this line
         />
       ))}
 </motion.main>  );

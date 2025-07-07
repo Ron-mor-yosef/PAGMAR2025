@@ -387,3 +387,20 @@ li.highlight-emotion, li.highlight-emotion.active {
   pointer-events: none;
   user-select: none;
 }
+
+@keyframes popin {
+  0%   { opacity: 0; transform: scale(0.85);}
+  80%  { opacity: 1; transform: scale(1.001);}
+  100% { opacity: 1; transform: scale(1);}
+}
+@keyframes popout {
+  0%   { opacity: 1; transform: scale(1);}
+  100% { opacity: 0; transform: scale(0.85);}
+}
+
+.popup-animate-in {
+  animation: popin 0.22s cubic-bezier(.4,0,.2,1);
+}
+.popup-animate-out {
+  animation: popout 0.2s cubic-bezier(.4,0,.2,1) forwards;
+}

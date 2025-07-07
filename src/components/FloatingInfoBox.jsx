@@ -1,30 +1,27 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./FloatingInfoBox.css";
-import { processTaggedText } from "../utils/parseCSV"; // Adjust the import path as necessary
-// FloatingInfoBox.jsx  (put just above the component or inside it)
+import { processTaggedText } from "../utils/parseCSV";
+
 const clampToViewport = (x, y, boxEl) => {
     if (!boxEl) return { x, y };
-
     const { offsetWidth: w, offsetHeight: h } = boxEl;
     const maxX = window.innerWidth - w;
     const maxY = window.innerHeight - h;
-
     return {
         x: Math.max(0, Math.min(x, maxX)),
         y: Math.max(0, Math.min(y, maxY)),
     };
 };
 
-
-  function cleanTextForClamp(text) {
-    // Remove trailing commas or periods before ellipsis, but allow '?'
+function cleanTextForClamp(text) {
     const withoutTags = text.replace(/([,-]+)</g, '<').replace(/\s+</, ' <').replace(/<[/]?span[^\>]*>/g,'');
-    console.log("cleanTextForClamp", withoutTags);
     return withoutTags;
-  }
+}
 
-const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZIndex = 0, // <-- receive this prop
- onFocus, suggestions = [], onOpenNewBox, initialActiveTag }) => {
+const FloatingInfoBox = ({
+  randomHeigh, text, position, onClose, zIndex, topZIndex = 0,
+  onFocus, suggestions = [], onOpenNewBox, initialActiveTag, closingAll
+}) => {
     const boxRef = useRef(null);
     const contentRef = useRef(null);
     const [dragging, setDragging] = useState(false);
@@ -32,16 +29,17 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
     const [boxPos, setBoxPos] = useState(position);
     const [collapsed, setCollapsed] = useState(false);
     const [activeTags, setActiveTag] = useState(initialActiveTag ? [initialActiveTag] : []);
-    const maxHeight = [40, 60, 80]
+    const [isOpen, setIsOpen] = useState(true); // for animation
+    const [isVisible, setIsVisible] = useState(true); // for mounting/unmounting
+    const maxHeight = [40, 60, 80];
 
     useEffect(() => {
         setBoxPos(position);
     }, [position]);
 
-    // after the other useEffects
     useEffect(() => {
         const fit = () => setBoxPos(prev => clampToViewport(prev.x, prev.y, boxRef.current));
-        fit();                       // run once after mount
+        fit();
         window.addEventListener('resize', fit);
         return () => window.removeEventListener('resize', fit);
     }, []);
@@ -66,83 +64,47 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
         };
     }, [dragging, offset]);
 
-     useEffect(() => {
-    if (!contentRef.current || activeTags.length === 0) return;
-
-    const selector = [activeTags[activeTags.length-1]]
-      .map(t => `.highlight-category.${t}.active, .highlight-emotion.${t}.active`)
-      .join(", ");
-
-    const firstActive = contentRef.current.querySelector(selector);
-    if (firstActive) {
-      firstActive.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [activeTags, text]);
-
-    const startDrag = (e) => {
-        if (boxRef.current) {
-            const rect = boxRef.current.getBoundingClientRect();
-            setOffset({
-                x: e.clientX - rect.left,
-                y: e.clientY - rect.top,
-            });
-            setDragging(true);
+    useEffect(() => {
+        if (!contentRef.current || activeTags.length === 0) return;
+        const selector = [activeTags[activeTags.length-1]]
+          .map(t => `.highlight-category.${t}.active, .highlight-emotion.${t}.active`)
+          .join(", ");
+        const firstActive = contentRef.current.querySelector(selector);
+        if (firstActive) {
+          firstActive.scrollIntoView({ behavior: "smooth", block: "center" });
         }
-    };
+    }, [activeTags, text]);
 
-    const isValidSuggestion = (quote, activeTags) => {
-        // If no tags are active, show all quotes
-        if (activeTags.length === 0) return true;
-
-        // Check if the quote has any tags that match the active tags
-        const quoteTags = quote.tags || [];
-        return activeTags.every(tag => quoteTags.includes(tag));
-    };
-
-    // const highlightCategories = (text, activeTags) => {
-    //     return text.replace(
-    //         /<קטגוריה:\s*([^>]+)>([\s\S]*?)<\/?\s*קטגוריה(:)?\s*[^>]*>/g,
-    //         (match, cat, content) => {
-    //             const trimmedCat = cat.trim();
-    //             const className = `highlight-category ${trimmedCat}${activeTags.includes(trimmedCat) ? " active" : ""}`;
-    //             return `<span class="${className}">${content}</span>`;
-    //         }
-    //     );
-    // };
-
-    // const highlightEmotion = (text, activeTags) => {
-    //     return text.replace(
-    //         /<רגש:\s*([^>]+)>([\s\S]*?)<\/?\s*רגש(:)?\s*[^>]*>/g,
-    //         (match, emo, content) => {
-    //             const trimmedEmo = emo.trim();
-    //             const className = `highlight-emotion ${trimmedEmo}${activeTags.includes(trimmedEmo) ? " active" : ""}`;
-    //             return `<span class="${className}">${content}</span>`;
-    //         }
-    //     );
-    // };
-
-    // const highlightTags = (text, activeTags) => {
-    //     const categoryText = highlightCategories(text, activeTags);
-    //     return highlightEmotion(categoryText, activeTags);
-    // };
-    const highlightTags = (text, activeTags) => {
-        return processTaggedText(text, activeTags);
-    };
-
-    // If the text changes (i.e., a new box is opened), update the active tag
     useEffect(() => {
         if (initialActiveTag) setActiveTag([initialActiveTag]);
         else setActiveTag([]);
     }, [text, initialActiveTag]);
 
-    // Blur increases the further the box is from the top zIndex
-    const blurAmount = topZIndex===zIndex? 0 : 1; // 2px per zIndex step
+    useEffect(() => {
+      if (closingAll) setIsOpen(false);
+    }, [closingAll]);
+
+    // Animate out on close
+    const handleClose = () => {
+      setIsOpen(false);
+    };
+
+    // Unmount after animation
+    const handleAnimationEnd = (e) => {
+      if (!isOpen && e.animationName === "popout") {
+        setIsVisible(false);
+        onClose && onClose();
+      }
+    };
+
+    const blurAmount = topZIndex===zIndex? 0 : 1;
+
+    if (!isVisible) return null;
 
     return (
-
         <div
             ref={boxRef}
-            className="floating-info-box"
+            className={`floating-info-box ${isOpen ? "popup-animate-in" : "popup-animate-out"}`}
             style={{
                 top: boxPos?.y,
                 left: boxPos?.x,
@@ -152,11 +114,22 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
             }}
             onMouseDown={(e) => {
                 onFocus && onFocus();
-                startDrag(e);
-            }}
+                // Prevent drag from close button
+                if (
+                  e.target.closest(".floating-info-box-close") ||
+                  e.button !== 0 // Only left mouse button
+                ) return;
+                const rect = boxRef.current.getBoundingClientRect();
+                setOffset({
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top,
+                });
+                setDragging(true);
+}}
+            onAnimationEnd={handleAnimationEnd}
         >
             {/* Always show close button */}
-            <button className="floating-info-box-close" onClick={onClose}>
+            <button className="floating-info-box-close" onClick={handleClose}>
                 <img src="/assets/images/close.svg" alt="סגור" />
             </button>
 
@@ -172,7 +145,7 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
                 ref={contentRef} >
                     <p className="floating-info-box-content"
                         dangerouslySetInnerHTML={{
-                            __html: highlightTags(
+                            __html: processTaggedText(
                                 (text['הטקסט'] || "")
                                     .split(/\r?\n/g)
                                     .map(line => line.trim())
@@ -244,13 +217,17 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
                         style={{maxHeight:`${maxHeight[randomHeigh]}vh`}}>
 
                             {suggestions.length > 0 ? (
-                                suggestions.filter(q => isValidSuggestion(q, activeTags)).slice(0, 7).map((q, i) => (
+                                suggestions.filter(q => {
+                                    if (activeTags.length === 0) return true;
+                                    const quoteTags = q.tags || [];
+                                    return activeTags.every(tag => quoteTags.includes(tag));
+                                }).slice(0, 7).map((q, i) => (
                                     <li
                                         key={q.index}
                                         className="extra-quote-item"
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            onOpenNewBox(q, { clientX: e.clientX, clientY: e.clientY }); // Pass the quote object (should include row index/id)
+                                            onOpenNewBox(q, { clientX: e.clientX, clientY: e.clientY });
                                         }}
                                     >
                                         <div className="quote-content">
@@ -260,7 +237,8 @@ const FloatingInfoBox = ({ randomHeigh, text, position, onClose, zIndex, topZInd
                                                         .split(/\r?\n/g)
                                                         .map(line => line.trim())
                                                         .join('<br>'), [])
-                                )}} />
+                                                )
+                                            }} />
                                         </div>
                                         <div className="author">{q.author}</div>
                                     </li>

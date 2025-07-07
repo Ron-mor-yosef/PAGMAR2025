@@ -12,6 +12,7 @@ import { AnimatePresence } from "framer-motion";
 function App() {
   const location = useLocation();
   const showHeader = location.pathname !== '/';
+  
 
   return (
     <>
