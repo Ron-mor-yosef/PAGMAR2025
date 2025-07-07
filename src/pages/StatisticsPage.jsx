@@ -35,11 +35,12 @@ const StatisticsPage = () => {
     const [statsByCategory, setStatsByCategory] = useState({});
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [selectedCategoryKey, setSelectedCategoryKey] = useState('');
-
+    const [hoveredIdx, setHoveredIdx] = useState(null);
 
     const handleCategorySelect = (category) => {
         setSelectedCategoryKey(category);
         setSelectedCategory(statsByCategory[category] ?? []);
+        setHoveredIdx(null);
     };
     const getSelectedCategoryKey = ()=> selectedCategoryKey;
 
@@ -57,6 +58,15 @@ const StatisticsPage = () => {
         });
     }, []);
 
+
+    // Get explanation and source for hovered stat, or first stat if none hovered
+    const hoveredStat =
+        selectedCategory && selectedCategory.length
+            ? selectedCategory[hoveredIdx ?? 0]
+            : null;
+    const explanation = hoveredStat?.explanation || "";
+    const source = hoveredStat?.source || "";
+
     return (
         <main className="statistics-page">
             <div className="statistics-page-inner-div">
@@ -65,7 +75,18 @@ const StatisticsPage = () => {
                     onSelectStatistic={handleCategorySelect}
                     getSelectedStat={getSelectedCategoryKey}
                 />
-                <StatisticsByCategory statistics={selectedCategory} />
+                                    <div className="statistics-source" style={{minWidth: '180px', maxWidth: '300px', fontSize: '1em', background: '#f0f8ff', borderRadius: '8px', padding: '0.7em', marginRight: '1em', alignSelf: 'flex-start'}}>
+                        {source}
+                    </div>
+                <div className="statistics-main-content">
+
+                    <StatisticsByCategory
+                        statistics={selectedCategory}
+                        hoveredIdx={hoveredIdx}
+                        onHoverStat={setHoveredIdx}
+                    />
+                    
+                </div>
             </div>
         </main>
     );
