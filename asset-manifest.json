@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/PAGMAR2025/static/css/main.f4cb949e.css",
-    "main.js": "/PAGMAR2025/static/js/main.6e74f758.js",
+    "main.js": "/PAGMAR2025/static/js/main.bf48515c.js",
     "static/media/image.png": "/PAGMAR2025/static/media/image.45611bab836b7ad0c13f.png",
     "static/media/2.png": "/PAGMAR2025/static/media/2.220fb23094711069842d.png",
     "static/media/6.png": "/PAGMAR2025/static/media/6.5cef438124fd78930d11.png",
@@ -22,10 +22,10 @@
     "index.html": "/PAGMAR2025/index.html",
     "static/media/underline.svg": "/PAGMAR2025/static/media/underline.86835a68142b171ef411.svg",
     "main.f4cb949e.css.map": "/PAGMAR2025/static/css/main.f4cb949e.css.map",
-    "main.6e74f758.js.map": "/PAGMAR2025/static/js/main.6e74f758.js.map"
+    "main.bf48515c.js.map": "/PAGMAR2025/static/js/main.bf48515c.js.map"
   },
   "entrypoints": [
     "static/css/main.f4cb949e.css",
-    "static/js/main.6e74f758.js"
+    "static/js/main.bf48515c.js"
   ]
 }
