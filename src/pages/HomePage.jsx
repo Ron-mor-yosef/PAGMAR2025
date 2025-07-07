@@ -57,7 +57,6 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
         className="home-bg-video"
         src="/assets/images/open animation/comp square.mp4"
         autoPlay
-        loop
         muted
         playsInline
       />
