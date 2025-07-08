@@ -19,7 +19,8 @@
   display: flex;
   margin: 0 8rem;
   height: 4rem;
-  padding-top: 3rem;
+  padding-top: 2rem;
+  position: -webkit-sticky;
   position: sticky;
   z-index: 100;
   top: 0;

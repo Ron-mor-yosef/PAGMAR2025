@@ -15,13 +15,18 @@
         position: absolute;
         right: 0;
         bottom: 0;
-        padding: var(--grid-size);
-        font-size: calc(var(--grid-size)*3);
-        line-height: calc(var(--grid-size)*2.2);
+        /* padding: var(--grid-size); */
+        font-size: calc(var(--grid-size)*7);
+        line-height: calc(var(--grid-size)*12.1);
         font-family: 'masada';
-        font-weight: 400;
+        font-weight: 600;
     }
 }
+.hovered .single-statistic-grid {
+    /* anchor the tooltip */
+    border-color: transparent;
+}
+
 
 /* hide the tooltip until hover */
 .single-statistic-grid>.on-hover-source {
@@ -85,5 +90,11 @@ div.single-stat-explain{
     font-size: calc(var(--grid-size) * 0.9);
     line-height:  calc(var(--grid-size) * 1.1);
     font-family: 'NarkissBlock';
-    font-weight: 300;
+    font-weight: 200;
+    /* margin-right: -5px; */
+    margin-left: -8px;
+    span{
+      font-weight: 400;
+      font-size: var(--grid-size);
+    }
 }

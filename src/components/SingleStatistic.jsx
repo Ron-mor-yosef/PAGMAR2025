@@ -68,8 +68,8 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
             onMouseLeave={onLeave}
             onClick={onClick}
         >
-            <div className="single-statistic-grid">
-                { Array.from({ length: total }).map((_, percentIndx) => {
+            <div className={`single-statistic-grid ${hovered ? "hovered" : ""}`}>
+                {Array.from({ length: total }).map((_, percentIndx) => {
                     const order = displayOrder.indexOf(percentIndx);
                     const isFilled = order < filled;
                     return (
@@ -86,10 +86,10 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
                         />
                     );
                 })}
-                <span className="single-stat-percent">{statistic.percent}%</span>
+                <span className="single-stat-percent" style={{ opacity: hovered ? 1 : 0 }}>{statistic.percent}%</span>
             </div>
             {/* Always show explanation under the grid */}
-            <div className="single-stat-explain">{statistic.explanation}</div>
+            <div className="single-stat-explain"><span className="single-stat-percent">{statistic.percent}%</span> {statistic.explanation}</div>
         </section>
     );
 }

@@ -55,7 +55,7 @@ select:focus {
 
 .gallery-header {
   position: sticky;
-  top: calc(7rem);
+  top: calc(6rem);
   z-index: 10;
   background: inherit;
   padding: 2rem;
