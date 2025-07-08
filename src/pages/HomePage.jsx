@@ -65,11 +65,11 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
           <img src={process.env.PUBLIC_URL + "/assets/images/hebrew-logo.svg"} alt="Logo" className="logo" />
         </div>
         <p>
-          כיום בישראל יש כ־98,000 בני ובנות זוג של משרתי מילואים.
+          בישראל כיום יש כ־98,000 בני ובנות זוג של משרתי מילואים.
           מתוכם 97% נשים. <br /><br />
           האתר אוסף את הקולות שלהן&mdash;<br /> 
           סיפורים, תחושות ומספרים המצטברים יחד.<br /><br />
-          זהו סיפורן של הנשים העומדות בחזית העורף.
+          זה סיפורן של הנשים העומדות בחזית העורף.
         </p>
         <div className="home-nav-btns">
           <button className="home-nav-btn" onClick={() => navigate('/statistics')}>
