@@ -84,26 +84,6 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
         />
       )}
 
-      {/* Blur overlay */}
-      <div
-        ref={blurRef}
-        style={{
-          pointerEvents: 'none',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          zIndex: 100,
-          background: 'transparent',
-          maskImage: `radial-gradient(circle 150px at ${mousePos.x}px ${mousePos.y}px, transparent 0 80px, rgba(0,0,0,0.2) 100px, rgba(0,0,0,0.7) 140px, rgba(0,0,0,1) 180px)`,
-          WebkitMaskImage: `radial-gradient(circle 150px at ${mousePos.x}px ${mousePos.y}px, transparent 0 80px, rgba(0,0,0,0.2) 100px, rgba(0,0,0,0.7) 140px, rgba(0,0,0,1) 180px)`,
-          backdropFilter: 'blur(0.8px)',
-          WebkitBackdropFilter: 'blur(0.8px)',
-          transition: 'mask-image 0.1s, -webkit-mask-image 0.1s',
-        }}
-      />
-
       <div className='home-mid-box'>
         <div className='home-logo'>
           <img src={process.env.PUBLIC_URL + "/assets/images/hebrew-logo.svg"} alt="Logo" className="logo" />

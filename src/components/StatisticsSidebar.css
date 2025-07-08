@@ -5,8 +5,7 @@
 aside {
     width: fit-content;
     height: fit-content;
-    border-bottom: 1.5px solid #22222250;
-    border-left: 1.5px solid #22222250;
+
 }
 
 .statistics-sidebar ul {
@@ -37,14 +36,14 @@ li.statistics-sidebar-category:hover {
 .statistics-sidebar-category::before {
     content: "]";
     position: absolute;
-    right: 0.7rem;
+    right: 1rem;
     color: #000;
 }
 
 .statistics-sidebar-category::after {
     content: "[";
     position: absolute;
-    right: -0.5rem;
+    right: 0;
     color: #000;
 }
 
@@ -52,17 +51,23 @@ li.statistics-sidebar-category:hover {
 .sidebar-dot {
     position: absolute;
     right: 0;
-    color: var(--cat-color, #222);
+    /* color: var(--cat-color, #222); */
 }
 
 /* coloured dot when item is active or hovered */
+
 .statistics-sidebar-category.active .sidebar-dot::before,
 .statistics-sidebar-category.active:hover .sidebar-dot::before {
-    content: "●";
-    color: var(--cat-color, #222);
+    content: '';
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+    background-image: var(--cat-selection);
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .statistics-sidebar-category:hover .sidebar-dot::before {
     content: "* ";
-    color: var(--cat-color, #222);
+    /* color: var(--cat-color, #222); */
 }

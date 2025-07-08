@@ -167,7 +167,7 @@ main.home-page .home-nav-btns {
     z-index: 0;
     /* margin: 0 auto; */
     pointer-events: none;
-    /* mix-blend-mode: lighten; */
+    mix-blend-mode: lighten;
 }
 
 .home-page {

@@ -1,3 +1,23 @@
+/* Styles for the statistics source box */
+.statistics-source {
+  min-width: 180px;
+  max-width: 300px;
+  font-size: 1em;
+  border-radius: 8px;
+  padding: 0.7em;
+  margin-right: 1em;
+  align-self: flex-start;
+}
+.statistics-page-title{
+  padding: 0 var(--grid-size);
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  /* margin-bottom: 1rem; */
+  /* align-items: baseline; */
+  font-size: 1rem;
+}
+
 main.statistics-page {
   background: #FFFBF2;
   /* min-height: 100%; */
@@ -12,10 +32,17 @@ main.statistics-page {
 
 .statistics-sidebar {
   position: relative;
-  margin-top: -1.5px;
-  margin-right: -1.5px;
   background-color: #FFFBF2;
   ;
+}
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-left: 1.5px solid #22222250;
+  background-color: #FFFBF2;
+  width: 25%;
 }
 
 .statistics-page-inner-div {
