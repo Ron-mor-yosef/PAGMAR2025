@@ -1,33 +1,61 @@
-body, .home-page {
-  background:inherit; /* or another light color */
-}
-
-main.home-page p {
-    font-family: 'masada';
-    font-size: min(1.5vw, 1.5rem);
-    font-weight: 200;
-    padding: 1.5rem 0;
-    margin-top: 20px;
-    width: 100%;
-    line-height: min(2vw, 2rem);
-    text-align: center;
+body,
+.home-page {
+    background: inherit;
+    /* or another light color */
 }
 
 main.home-page {
     border-color: transparent;
 }
 
-main.home-page .home-mid-box {
-    min-width: 600px;
-    max-width: 400px;
-    margin: auto auto;
+
+.home-mid-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background: inherit;
+}
+
+.home-mid-box>* {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: #222 solid 0.5px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.home-mid-box .home-logo {
+    justify-content: center;
+    align-items: center;
+    border-bottom: #222 solid 0.5px;
+    /* padding: 1.5rem 0 1rem 0; */
+}
+
+.home-mid-box p {
+    font-size: 1.6rem;
+    max-width: max(40vw, 600px);
+    padding: 2.5rem 1rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: -1px;
+    border-bottom: #222 solid 0.5px;
+    width: 100%;
+    font-family: 'masada';
+    line-height: 2rem;
+    background: inherit;
+}
+
+
 main.home-page img.logo {
     height: 150px;
+
 }
 
 main.home-page {
@@ -37,24 +65,25 @@ main.home-page {
 }
 
 main.home-page .home-nav-btns {
-    margin-top: 3rem;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
-    margin-right: 1px;
-    width: 100%;
+    border: none;
+    margin-top: 2rem;
+    margin-top: 3rem;
 
     button {
         margin: 0;
-        padding: 20px;
-        width: 33.33%;
+        padding: 1rem;
+        width: 100%;
         border: 1px solid #222;
         margin-right: -1px;
         background: none;
         cursor: pointer;
         font: inherit;
-        font-size: 20px;
+        font-size: 1.5rem;
+        font-weight: 200;
         color: inherit;
     }
 
@@ -125,25 +154,28 @@ main.home-page .home-nav-btns {
 }
 
 .home-bg-video {
-  position: fixed;
-  top: 20px;
-  left: 0;
-  min-width: 100vw;
-  min-height: 100vh;
-  width: 100vw;
-  height: 100vh;
-  /* rotate: deg; */
-  object-fit: cover;
-  z-index: 0;
-  pointer-events: none;
-  mix-blend-mode: lighten; /* <-- this is the key change */
+    /* CONTAIN-INTRINSIC-BLOCK-SIZE: AUTO 100PX; */
+    position: fixed;
+    /* border: 1px solid #222; */
+    top: -7vh;
+    left: -1vw;
+    /* min-width: 100vw; */
+    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    /* object-fit: contain; */
+    z-index: 0;
+    /* margin: 0 auto; */
+    pointer-events: none;
+    /* mix-blend-mode: lighten; */
 }
 
 .home-page {
-  position: relative;
-  z-index: 1;
+    position: relative;
+    z-index: 1;
 }
+
 .home-mid-box {
-  position: relative;
-  z-index: 2;
+    position: relative;
+    z-index: 2;
 }

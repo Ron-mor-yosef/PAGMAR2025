@@ -1,6 +1,6 @@
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const pageVariants = {
@@ -43,6 +43,26 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
     });
   };
 
+
+  // Delay video start until after animation
+  const [showVideo, setShowVideo] = useState(false);
+  useEffect(() => {
+    // Animation duration is 0.5s (see pageTransition)
+    const timeout = setTimeout(() => setShowVideo(true), 500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // Blur effect except under cursor
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const blurRef = useRef(null);
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <motion.main
       className='home-page'
@@ -51,15 +71,39 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
       exit="out"
       variants={pageVariants}
       transition={pageTransition}
+      style={{ position: 'relative', overflow: 'hidden' }}
     >
       {/* Video background */}
-      <video
-        className="home-bg-video"
-        src={process.env.PUBLIC_URL + "/assets/images/open animation/comp square.mp4"}
-        autoPlay
-        muted
-        playsInline
+      {showVideo && (
+        <video
+          className="home-bg-video"
+          src={process.env.PUBLIC_URL + "/assets/images/open animation/comp square.mp4"}
+          autoPlay
+          muted
+          playsInline
+        />
+      )}
+
+      {/* Blur overlay */}
+      <div
+        ref={blurRef}
+        style={{
+          pointerEvents: 'none',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          zIndex: 100,
+          background: 'transparent',
+          maskImage: `radial-gradient(circle 150px at ${mousePos.x}px ${mousePos.y}px, transparent 0 80px, rgba(0,0,0,0.2) 100px, rgba(0,0,0,0.7) 140px, rgba(0,0,0,1) 180px)`,
+          WebkitMaskImage: `radial-gradient(circle 150px at ${mousePos.x}px ${mousePos.y}px, transparent 0 80px, rgba(0,0,0,0.2) 100px, rgba(0,0,0,0.7) 140px, rgba(0,0,0,1) 180px)`,
+          backdropFilter: 'blur(0.8px)',
+          WebkitBackdropFilter: 'blur(0.8px)',
+          transition: 'mask-image 0.1s, -webkit-mask-image 0.1s',
+        }}
       />
+
       <div className='home-mid-box'>
         <div className='home-logo'>
           <img src={process.env.PUBLIC_URL + "/assets/images/hebrew-logo.svg"} alt="Logo" className="logo" />
@@ -81,9 +125,10 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
           <button className="home-nav-btn" onClick={() => navigate('/intro')}>
             אודות
           </button>
-        </div>
-        {/* Burger toggle for idle settings */}
-        <div className="idle-burger-container">
+        </div>       
+      </div>
+              {/* Burger toggle for idle settings */}
+       <div className="idle-burger-container">
           <button
             className="idle-burger-btn"
             onClick={() => setShowIdleMenu(prev => !prev)}
@@ -118,7 +163,6 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
             </div>
           )}
         </div>
-      </div>
     </motion.main>
   );
 };
