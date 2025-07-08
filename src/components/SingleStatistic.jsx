@@ -5,15 +5,28 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
     const total = 12 * 12;
     const filledCount = Math.round((statistic.percent / 100) * total);
 
-    // Fill order: random or ordered
-    const [fillOrder] = useState(() => {
-        const arr = Array.from({ length: total }, (_, i) => i);
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
+    // Fill order: randomly from bottom up, but last (top) line always left-aligned
+    const fillOrder = useMemo(() => {
+        const gridSize = 12;
+        const order = [];
+        const columns = Array.from({ length: gridSize }, (_, i) => i);
+        // Fill from bottom up, randomize each row except the last (top) row
+        for (let row = gridSize - 1; row >= 1; row--) {
+            const shuffledCols = [...columns];
+            for (let i = shuffledCols.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledCols[i], shuffledCols[j]] = [shuffledCols[j], shuffledCols[i]];
+            }
+            for (let col of shuffledCols) {
+                order.push(row * gridSize + col);
+            }
         }
-        return arr;
-    });
+        // Last (top) row: always left to right
+        for (let col = 0; col < gridSize; col++) {
+            order.push(col);
+        }
+        return order;
+    }, []);
 
     // Generate random images and rotations ONCE per statistic
     const [randomImages, randomRotations] = useMemo(() => {
@@ -27,7 +40,7 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
             rotations.push([90, 180, 270][Math.floor(Math.random() * 3)]);
         }
         return [images, rotations];
-    }, [statistic.percent, statistic.color, statistic.source]);
+    }, [total]);
 
     // State: how many are currently filled (animated in)
     const [filled, setFilled] = useState(0);
@@ -39,16 +52,14 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
             if (i <= filledCount) {
                 setFilled(i);
                 i++;
-                setTimeout(animate, 30);
+                setTimeout(animate, 8); // Faster animation
             }
         }
         animate();
-    }, [statistic.percent, statistic.color, statistic.source, hovered]);
+    }, [statistic.percent, statistic.color, statistic.source, hovered, filledCount]);
 
-    // Use ordered fill on hover, random otherwise
-    const displayOrder = hovered
-        ? Array.from({ length: total }, (_, i) => i)
-        : fillOrder;
+    // Always use ordered fill
+    const displayOrder = fillOrder;
 
     return (
         <section
@@ -58,10 +69,9 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
             onClick={onClick}
         >
             <div className="single-statistic-grid">
-                {Array.from({ length: total }).map((_, percentIndx) => {
+                { Array.from({ length: total }).map((_, percentIndx) => {
                     const order = displayOrder.indexOf(percentIndx);
                     const isFilled = order < filled;
-                    // Start with all transparent, then fill in
                     return (
                         <img
                             className={`single-percent${isFilled ? " animated-in" : ""}`}
@@ -70,7 +80,7 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
                             style={{
                                 rotate: `${randomRotations[percentIndx]}deg`,
                                 borderColor: "transparent",
-                                opacity: isFilled ? 1 : 0,
+                                opacity: isFilled && !hovered ? 1 : 0,
                             }}
                             alt=""
                         />

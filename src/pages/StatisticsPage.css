@@ -1,28 +1,40 @@
-/* Styles for the statistics source box */
 .statistics-source {
   min-width: 180px;
   max-width: 300px;
-  font-size: 1em;
+  font-size: 1rem;
   border-radius: 8px;
-  padding: 0.7em;
-  margin-right: 1em;
+  padding: 0.5rem;
+  margin: 2rem;
+  line-height: 1.3rem;
   align-self: flex-start;
+  font-family: 'masada', sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statistics-source:not(:empty)::before {
+  content: '';
+  display: inline-block;
+  width: var(--grid-size);
+  height: 100%;
+  background-image: url('../../public/assets/images/star.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
 }
 .statistics-page-title{
   padding: 0 var(--grid-size);
   display: flex;
   flex-direction: row;
   justify-content:space-between;
-  /* margin-bottom: 1rem; */
-  /* align-items: baseline; */
   font-size: 1rem;
 }
 
 main.statistics-page {
   background: #FFFBF2;
-  /* min-height: 100%; */
   height: fit-content;
-  /* overflow-y: auto; */
   padding: var(--grid-size);
   font-family: 'NarkissBlock', 'Masada', Arial, sans-serif;
   direction: rtl;
@@ -46,7 +58,6 @@ main.statistics-page {
 }
 
 .statistics-page-inner-div {
-  /* margin: var(--grid-size); */
   border: 1.5px solid #22222250;
   display: flex;
   flex-wrap: nowrap;

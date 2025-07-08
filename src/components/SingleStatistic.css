@@ -53,7 +53,7 @@
 }
 
 .single-percent.animated-in {
-    animation: sketch-in 0.33s cubic-bezier(.4,0,.2,1);
+    animation: sketch-in 0.13s cubic-bezier(.4,0,.2,1);
 }
 
 @keyframes sketch-in {

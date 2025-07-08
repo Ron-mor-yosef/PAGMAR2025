@@ -16,9 +16,11 @@ aside {
 li.statistics-sidebar-category {
     list-style: none;
     margin-bottom: var(--grid-size);
-    line-height: var(--grid-size);
+    line-height: calc(var(--grid-size) * 1.5);
     position: relative;
+    font-weight: 200;
     padding-inline-start: 2em;
+    font-size: var(--grid-size);
 }
 
 li.statistics-sidebar-category:hover {
@@ -43,7 +45,7 @@ li.statistics-sidebar-category:hover {
 .statistics-sidebar-category::after {
     content: "[";
     position: absolute;
-    right: 0;
+    right: -1px;
     color: #000;
 }
 
@@ -60,14 +62,16 @@ li.statistics-sidebar-category:hover {
 .statistics-sidebar-category.active:hover .sidebar-dot::before {
     content: '';
     display: inline-block;
-    width: 1.2em;
-    height: 1.2em;
+    width: var(--grid-size);
+    height: var(--grid-size);
     background-image: var(--cat-selection);
     background-size: contain;
     background-repeat: no-repeat;
+    position: relative;
+    top: 6px;
 }
 
-.statistics-sidebar-category:hover .sidebar-dot::before {
-    content: "* ";
-    /* color: var(--cat-color, #222); */
+.statistics-sidebar-category:hover  {
+font-weight: 300;
+font-size: calc(var(--grid-size) * 0.98);
 }
