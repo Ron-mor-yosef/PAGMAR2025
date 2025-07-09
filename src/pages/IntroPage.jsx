@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './IntroPage.css';
+import { motion } from 'framer-motion';
+import { pageVariants, pageTransition } from './PageMotion';
 
 const IntroPage = () => {
   const [introParagraphs, setIntroParagraphs] = useState([]);
@@ -18,22 +20,31 @@ const IntroPage = () => {
   }, []);
 
   return (
-    <main className="intro-page">
+    <motion.main
+      className="intro-page"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
+      <div className="intro-page-general-content">
       <div className="intro-page-title">על הפרויקט</div>
-      <div className="intro-page-content">
-        <div className="intro-page-paragraphs">
-          {introParagraphs}
-        </div>
+        <div className="intro-page-content">
+          <div className="intro-page-paragraphs">
+            {introParagraphs}
+          </div>
+        
         <div className="intro-page-credits">
-          יוצרת האתר <span className="intro-page-credits-name">רון מור יוסף</span> , סטודנטית שנה אחרונה במחלקה לתקשורת חזותית בבצלאל. האתר נבנה במסגרת פרויקט גמר בהנחיית <span className="intro-page-credits-name">חובב אופנהיים</span> ו<span className="intro-page-credits-name">פרופ׳ רותו מודן</span> .
+          יוצרת האתר <span className="intro-page-credits-name">רון מור יוסף</span>, סטודנטית שנה אחרונה במחלקה לתקשורת חזותית בבצלאל. האתר נבנה במסגרת פרויקט גמר בהנחיית <span className="intro-page-credits-name">חובב אופנהיים</span> ו<span className="intro-page-credits-name">פרופ׳ רותו מודן</span>.
           <br />פיתוח: <span className="intro-page-credits-name">יובל כהן</span>.
         </div>
+      </div>
       </div>
       <div className="intro-page-footer">
         <img src={process.env.PUBLIC_URL + "/assets/images/logo-bezalel.png"} alt="Bezalel logo" />
       </div>
-
-    </main>
+    </motion.main>
   );
 };
 

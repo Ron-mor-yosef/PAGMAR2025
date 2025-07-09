@@ -14,7 +14,7 @@
   gap: 0.5rem;
 }
 
-.statistics-source:not(:empty)::before {
+.statistics-source::before {
   content: '';
   display: inline-block;
   width: var(--grid-size);
@@ -23,13 +23,14 @@
   background-size: contain;
   background-repeat: no-repeat;
   flex-shrink: 0;
+  color: var(--border-color);
 }
 .statistics-page-title{
   padding: 0 calc(var(--grid-size) *0.2);
   display: flex;
   flex-direction: row;
   justify-content:space-between;
-  font-size: 1.3rem;
+  font-size: 18px;
   line-height: 1.5rem;
   margin-bottom: 0.5rem;
 }

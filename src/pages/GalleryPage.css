@@ -65,7 +65,7 @@ select:focus {
 .gallery-filters {
   display: grid;
   grid-template-columns:
-    minmax(max-content, 3fr) minmax(max-content, 2fr);
+    minmax(max-content, 2fr) minmax(max-content, 3fr);
   width: 100%;
   border-collapse: collapse;
 }
@@ -105,6 +105,7 @@ ul.gallery-active-tags {
 
 .single-filter {
   /* flex: 1 0 0; */
+  /* opacity: 0.6; */
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -116,13 +117,14 @@ ul.gallery-active-tags {
 }
 
 .single-filter.emotions-filter {
-  border-left: none;
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px 0 0 8px;
+
 
 }
 
 .single-filter.category-filter {
-  border-radius: 8px 0 0 8px;
+  border-radius: 0 8px 8px 0;
+  border-left: none;
 }
 
 .filter-options {
@@ -149,17 +151,15 @@ ul.gallery-active-tags {
   background-origin: padding-box;
   background-repeat: no-repeat;
   background-position: center 8px;
-  /* adjust as needed */
   background-size: 32px 32px;
-  /* adjust as needed */
   position: relative;
-  font-size: 1rem;
+  font-size: 18px;
 
 }
 
 .filter-options button:hover {
   font-weight: 500;
-  font-size: 15.5px;
+  font-size: 17.5px;
 }
 
 .filter-options button.active::after {
@@ -213,7 +213,7 @@ ul.gallery-active-tags {
 .single-filter label {
   font-weight: 300;
   margin: 0 0.5rem;
-  font-size: 1rem;
+  font-size: 18px;
 }
 
 .single-filter:not(:last-child)::after {

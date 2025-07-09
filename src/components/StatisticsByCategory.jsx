@@ -22,6 +22,7 @@ const StatisticsByCategory = ({ statistics, onHoverStat, hoveredIdx, onClickStat
           onHover={() => onHoverStat(idx)}
           onLeave={() => onHoverStat(null)}
           onClick={() => onClickStat && onClickStat(idx)}
+          className={hoveredIdx !== null && hoveredIdx !== idx ? 'blurred' : ''}
         />
       ))}
     </section>

@@ -4,6 +4,15 @@ main.intro-page {
     font-weight: 300;
     padding-right: 2rem;
 
+    .intro-page-general-content {
+        display: flex;
+        flex-direction: column;
+        height:fit-content;
+        width: fit-content;
+        padding: 0 2rem;
+        margin: auto;
+    }
+
     .intro-page-title {
         background: none;
         border: none;
@@ -11,6 +20,7 @@ main.intro-page {
         font: inherit;
         padding: 0 0.6rem;
         margin: 0;
+        /* margin-right: 2rem; */
         transition: color 0.18s;
         position: relative;
         font-family: 'NarkissBlock', sans-serif;
@@ -41,8 +51,8 @@ main.intro-page {
         display: flex;
         flex-direction: row;
         padding-top: 0;
-        justify-content: space-evenly;
-        height: calc(100vh - 12.5rem - 1px);
+        justify-content: center;
+        /* height: calc(100vh - 12.5rem - 1px); */
         align-items: flex-start;
         height: 57vh;
 
@@ -61,7 +71,7 @@ main.intro-page {
 
         .intro-page-paragraphs,
         .intro-page-credits {
-            max-width: 50%;
+            max-width: 600px;
             width: 35vw;
             margin-left: 4rem;
             padding-bottom: 1rem;
@@ -95,7 +105,7 @@ main.intro-page {
         height: fit-content;
 
         img {
-            height: 80px;
+            height: 60px;
             /* Increase to zoom in and hide borders */
             width: auto;
             margin: 2rem;

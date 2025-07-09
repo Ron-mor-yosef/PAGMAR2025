@@ -16,11 +16,11 @@ aside {
 li.statistics-sidebar-category {
     list-style: none;
     margin-bottom: var(--grid-size);
-    line-height: calc(var(--grid-size) * 1.5);
+    line-height: calc(var(--grid-size) );
     position: relative;
-    font-weight: 200;
-    padding-inline-start: 2em;
-    font-size: var(--grid-size);
+    font-weight: 300;
+    padding-inline-start: 3rem;
+    font-size: 18px;
 }
 
 li.statistics-sidebar-category:hover {
@@ -38,14 +38,14 @@ li.statistics-sidebar-category:hover {
 .statistics-sidebar-category::before {
     content: "]";
     position: absolute;
-    right: 1rem;
+    right: calc(1rem + var(--grid-size) * 0.5);
     color: #000;
 }
 
 .statistics-sidebar-category::after {
     content: "[";
     position: absolute;
-    right: -1px;
+    right: calc(-1px - var(--grid-size) * 0.5);
     color: #000;
 }
 
@@ -68,10 +68,9 @@ li.statistics-sidebar-category:hover {
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
-    top: 6px;
 }
 
 .statistics-sidebar-category:hover  {
-font-weight: 300;
-font-size: calc(var(--grid-size) * 0.98);
+font-weight: 500;
+font-size: calc(var(--grid-size) * 0.9);
 }

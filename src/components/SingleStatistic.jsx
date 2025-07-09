@@ -1,29 +1,18 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./SingleStatistic.css";
 
-function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
+function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick, className = '' }) {
     const total = 12 * 12;
     const filledCount = Math.round((statistic.percent / 100) * total);
 
-    // Fill order: randomly from bottom up, but last (top) line always left-aligned
+    // Fill order: bottom right to top left
     const fillOrder = useMemo(() => {
         const gridSize = 12;
         const order = [];
-        const columns = Array.from({ length: gridSize }, (_, i) => i);
-        // Fill from bottom up, randomize each row except the last (top) row
-        for (let row = gridSize - 1; row >= 1; row--) {
-            const shuffledCols = [...columns];
-            for (let i = shuffledCols.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffledCols[i], shuffledCols[j]] = [shuffledCols[j], shuffledCols[i]];
-            }
-            for (let col of shuffledCols) {
+        for (let row = gridSize - 1; row >= 0; row--) {
+            for (let col = gridSize - 1; col >= 0; col--) {
                 order.push(row * gridSize + col);
             }
-        }
-        // Last (top) row: always left to right
-        for (let col = 0; col < gridSize; col++) {
-            order.push(col);
         }
         return order;
     }, []);
@@ -37,7 +26,7 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
                 process.env.PUBLIC_URL +
                 `/assets/images/squares/${Math.ceil(Math.random() * 6)}.png`
             );
-            rotations.push([90, 180, 270][Math.floor(Math.random() * 3)]);
+            rotations.push([0,90, 180, 270][Math.floor(Math.random() * 4)] + (Math.random() - 0.5) * 10);
         }
         return [images, rotations];
     }, [total]);
@@ -45,30 +34,31 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
     // State: how many are currently filled (animated in)
     const [filled, setFilled] = useState(0);
 
+    // Animate only when a new category/statistic is loaded, not on hover changes
     useEffect(() => {
-        setFilled(0); // reset on statistic change
+        setFilled(0);
         let i = 0;
         function animate() {
             if (i <= filledCount) {
                 setFilled(i);
                 i++;
-                setTimeout(animate, 8); // Faster animation
+                setTimeout(animate, 8);
             }
         }
         animate();
-    }, [statistic.percent, statistic.color, statistic.source, hovered, filledCount]);
+    }, [statistic.percent, statistic.color, statistic.source, filledCount]);
 
     // Always use ordered fill
     const displayOrder = fillOrder;
 
     return (
         <section
-            className={`single-statistic${hovered ? " hovered" : ""}`}
+            className={`single-statistic${className ? ` ${className}` : ''}`}
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
             onClick={onClick}
         >
-            <div className={`single-statistic-grid ${hovered ? "hovered" : ""}`}>
+            <div className={`single-statistic-grid `}>
                 {Array.from({ length: total }).map((_, percentIndx) => {
                     const order = displayOrder.indexOf(percentIndx);
                     const isFilled = order < filled;
@@ -80,13 +70,13 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick }) {
                             style={{
                                 rotate: `${randomRotations[percentIndx]}deg`,
                                 borderColor: "transparent",
-                                opacity: isFilled && !hovered ? 1 : 0,
+                                opacity: isFilled  ? 1 : 0,
                             }}
                             alt=""
                         />
                     );
                 })}
-                <span className="single-stat-percent" style={{ opacity: hovered ? 1 : 0 }}>{statistic.percent}%</span>
+                {/* <span className="single-stat-percent" style={{ opacity: hovered ? 1 : 0 }}>{statistic.percent}%</span> */}
             </div>
             {/* Always show explanation under the grid */}
             <div className="single-stat-explain"><span className="single-stat-percent">{statistic.percent}%</span> {statistic.explanation}</div>

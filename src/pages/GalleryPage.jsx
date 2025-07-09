@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const pageVariants = {
   initial: {
     opacity: 0,
-    y: 30
+    y: -20
   },
   in: {
     opacity: 1,
@@ -216,37 +216,7 @@ const GalleryPage = () => {
 
       <div className="gallery-header">
         <div className="gallery-filters">
-          <div className="single-filter emotions-filter">
-            <label>רגשות</label>
-            <div className="filter-options">
-              {emotions.map((e, idx) => (
-                <>
-                  {idx > 0 ? <label>/</label> : null}
-                  <button
-                    key={e}
-                    type="button"
-                    className={selectedEmotions.includes(e) ? "active" : ""}
-                    data-svg-type="emotion"
-                    style={
-                      selectedEmotions.includes(e)
-                        ? {
-                          "--svg-url-emotion": `url('${process.env.PUBLIC_URL}/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`,
-                          "--circle-rotate": filterOptionRotation[e] || "0deg",
-                          // If the red-circle icon 5 is selected, add an extra translateY offset:
-                          "--after-bottom": emotionIcons[e] === 5 ? "-10%" : "10%",
-                        }
-                        : {}
-                    }
-                    onClick={() => toggleEmotion(e)}
-                  >
-                    {e}
-                  </button>
-                </>
-              ))}
-            </div>
-          </div>
-
-          <div className="single-filter category-filter">
+                    <div className="single-filter category-filter">
             <label>נושאים</label>
             <div className="filter-options">
             
@@ -277,12 +247,43 @@ const GalleryPage = () => {
               ))}
             </div>
           </div>
+          <div className="single-filter emotions-filter">
+            <label>רגשות</label>
+            <div className="filter-options">
+              {emotions.map((e, idx) => (
+                <>
+                  {idx > 0 ? <label>/</label> : null}
+                  <button
+                    key={e}
+                    type="button"
+                    className={selectedEmotions.includes(e) ? "active" : ""}
+                    data-svg-type="emotion"
+                    style={
+                      selectedEmotions.includes(e)
+                        ? {
+                          "--svg-url-emotion": `url('${process.env.PUBLIC_URL}/assets/images/red_circles/${emotionIcons[e] || 1}.svg')`,
+                          "--circle-rotate": filterOptionRotation[e] || "0deg",
+                          // If the red-circle icon 5 is selected, add an extra translateY offset:
+                          "--after-bottom": emotionIcons[e] === 5 ? "-10%" : "10%",
+                        }
+                        : {}
+                    }
+                    onClick={() => toggleEmotion(e)}
+                  >
+                    {e}
+                  </button>
+                </>
+              ))}
+            </div>
+          </div>
+
+
 
         </div>
         <div className="gallery-buttom-header">
           <label className="count-filter">[ {filtered.length} ] </label>
             <ul className="gallery-active-tags">
-              {[...selectedEmotions, ...selectedCategories].map(t =>
+              {[ ...selectedCategories,...selectedEmotions].map(t =>
                 <li> {t.trim()} </li>
               )}
             </ul>

@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+import { pageVariants, pageTransition } from './PageMotion';
 import React, { useEffect, useState } from "react";
 import StatisticsSidebar from "../components/StatisticsSidebar";
 import StatisticsByCategory from "../components/StatisticsByCategory";
@@ -67,7 +69,14 @@ const StatisticsPage = () => {
     const source = hoveredStat?.source || "";
 
     return (
-        <main className="statistics-page">
+        <motion.main
+            className="statistics-page"
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+        >
             <div className="statistics-page-title">
                 <div className="statistics-page-title-changing">
                     {selectedCategoryKey}
@@ -97,7 +106,7 @@ const StatisticsPage = () => {
 
                 </div>
             </div>
-        </main>
+        </motion.main>
     );
 };
 
