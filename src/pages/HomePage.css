@@ -148,7 +148,7 @@ main.home-page .home-nav-btns {
 
 .home-bg-video {
     position: fixed;
-    top: 0;
+    top: -1rem;
     left: 0;
     width: 100vw;
     height: 100vh;

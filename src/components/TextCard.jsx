@@ -30,7 +30,7 @@ const TextCard = ({
 
   function cleanTextForClamp(text) {
     // Remove trailing commas or periods before ellipsis, but allow '?'
-    const withoutTags = text.replace(/([,,-]+)</g, '<').replace(/\s+</g, ' <').replace(/<[/]?span[^\>]*>/g,'');
+    const withoutTags = text.split('<br>').slice(0, 2).map(line => line.replace(/([,.]+)/g, '').replace(/\s+</g, ' <').replace(/<[^>]*>/g,'')).join('<br/>').trim().concat("...");
     console.log("cleanTextForClamp", withoutTags);
     return withoutTags;
   }
@@ -43,10 +43,10 @@ const TextCard = ({
     >
       <div className="text-card-content">
 
-        {<p dangerouslySetInnerHTML={{
+        {<p className="hover:text-card-content-hover" dangerouslySetInnerHTML={{
           __html: cleanTextForClamp(processTaggedText(
             (text['הטקסט'] || "")
-              .split(/\r?\n/g)
+              .split(/\r?\n/g) // Limit to 2 lines
               .map(line => line.trim())
               .join('<br>'), []))
         }} />}

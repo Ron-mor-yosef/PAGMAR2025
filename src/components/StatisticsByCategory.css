@@ -10,16 +10,14 @@ section.stat-category-section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: calc(var(--grid-size)* 17 * 3);
+    max-width: calc(var(--grid-size)* 48);
     width: fit-content;
     height: 100%;
     justify-content: flex-start;
     align-items: stretch;
     align-content: stretch;
-    /* gap: calc(var(--grid-size)*2) calc(var(--grid-size)*4); */
     margin: 0;
     padding: 0;
-
 }
 
 .single-statistic {
