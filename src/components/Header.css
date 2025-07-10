@@ -24,7 +24,7 @@
   position: sticky;
   z-index: 100;
   top: 0;
-  background: #FFFBF2;
+  background: var(--main-bg);
 
   /* width: 100%; */
   /* height: 100%; */
