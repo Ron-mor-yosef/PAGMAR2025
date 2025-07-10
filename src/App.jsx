@@ -10,7 +10,7 @@ import { AnimatePresence } from "framer-motion";
 
 function App() {
   const location = useLocation();
-  const showHeader = location.pathname !== '/';
+  const showHeader = location.pathname !== '/PAGMAR2025';
   
 
   return (
@@ -20,11 +20,11 @@ function App() {
       {showHeader && <Header />}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/intro" element={<IntroPage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/statistics" element={<StatisticsPage />} />
-          <Route path="/PAGMAR2025" element={<Navigate to="/" replace />} />
+          <Route path="/PAGMAR2025" element={<HomePage />} />
+          <Route path="/PAGMAR2025/intro" element={<IntroPage />} />
+          <Route path="/PAGMAR2025/gallery" element={<GalleryPage />} />
+          <Route path="/PAGMAR2025/statistics" element={<StatisticsPage />} />
+          {/* <Route path="/PAGMAR2025" element={<Navigate to="/" replace />} /> */}
         </Routes>
       </AnimatePresence>
     </>
