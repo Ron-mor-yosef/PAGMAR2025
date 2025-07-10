@@ -1,17 +1,17 @@
 .intro-page {
   /* background-color: #FFF0FF; */
-    background: #FFFBF2;
+    background: var(--main-bg);
 
 }
 
 .gallery-page {
-  background: #FFFBF2;
+  background: var(--main-bg);
   /* background-color: #F0F8FF; */
 }
 
 .statistics-page {
   /* background-color: #EFFFE8; */
-    background: #FFFBF2;
+    background: var(--main-bg);
 
 }
 
@@ -67,7 +67,7 @@ nav a {
   margin-right: -1px;
   text-decoration: none;
   text-align: center;
-  line-height: 54px;
+  /* line-height: 54px; */
   /* transition: background 0.2s, color 0.2s; */
   transition: padding-bottom 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 

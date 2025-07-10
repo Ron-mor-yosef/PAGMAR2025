@@ -13,8 +13,8 @@
 .text-card:hover, .text-card-content:hover {
   filter: none;
   background-color: #F0F8FF;
-  color: #0022AB;
-  border-color: #0022AB;
+  color: var(--main-blue);
+  border-color: var(--main-blue);
   }
 
 .text-card p {
@@ -111,10 +111,17 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: "...";
+  text-overflow: ellipsis "...";
   max-height: 4rem;
   line-height: 1.5em;
   font-size: 28px;
   font-weight: 700;
   color: inherit;
+}
+
+/* Ensure ellipsis is colored on hover */
+.text-card-content:hover {
+  color: var(--main-blue);
+  text-overflow: ellipsis "...";
+  text-decoration-color: var(--main-blue);
 }

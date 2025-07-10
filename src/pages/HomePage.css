@@ -1,13 +1,6 @@
-body,
-.home-page {
-    background: inherit;
-    /* or another light color */
-}
-
 main.home-page {
     border-color: transparent;
 }
-
 
 .home-mid-box {
     width: 100%;
@@ -140,7 +133,7 @@ main.home-page .home-nav-btns {
 }
 
 .idle-burger-btn:hover {
-    background: #F0F8FF;
+    /* background: #F0F8FF; */
 }
 
 .idle-toggle-popup {
@@ -154,20 +147,15 @@ main.home-page .home-nav-btns {
 }
 
 .home-bg-video {
-    /* CONTAIN-INTRINSIC-BLOCK-SIZE: AUTO 100PX; */
     position: fixed;
-    /* border: 1px solid #222; */
-    top: -7vh;
-    left: -1vw;
-    /* min-width: 100vw; */
-    min-height: 100vh;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    /* object-fit: contain; */
+    object-fit: cover; /* or 'contain' if you want the whole video visible with possible letterboxing */
     z-index: 0;
-    /* margin: 0 auto; */
     pointer-events: none;
-    mix-blend-mode: lighten;
+    background: transparent;
 }
 
 .home-page {
@@ -177,5 +165,5 @@ main.home-page .home-nav-btns {
 
 .home-mid-box {
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }

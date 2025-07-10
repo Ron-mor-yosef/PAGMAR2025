@@ -79,7 +79,7 @@ select:focus {
 .gallery-buttom-header {
   display: flex;
   height: fit-content;
-  border-bottom: #222 1px solid;
+  border-bottom: #222 0.5px solid;
   font-weight: 200;
 }
 
@@ -110,7 +110,7 @@ ul.gallery-active-tags {
   flex-direction: column-reverse;
   align-items: center;
   gap: 0.5rem;
-  border: 0.6px solid #222;
+  border: 0.5px solid #222;
   padding: 1rem 1.5rem;
   margin: 0;
   min-width: max-content;

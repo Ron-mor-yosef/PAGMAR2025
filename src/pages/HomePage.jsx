@@ -77,7 +77,7 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
       {showVideo && (
         <video
           className="home-bg-video"
-          src={process.env.PUBLIC_URL + "/assets/images/open animation/comp square.mp4"}
+          src={process.env.PUBLIC_URL + "/assets/images/open animation/opening.webm"}
           autoPlay
           muted
           playsInline
