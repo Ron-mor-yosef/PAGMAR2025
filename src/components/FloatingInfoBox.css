@@ -46,7 +46,7 @@ li {
 .floating-info-box-close {
   border: none;
   background: transparent;
-  font-size: 18px;
+  font-size: 1.125rem;
   cursor: pointer;
   margin-right: -5px;
   position: absolute;
@@ -101,7 +101,7 @@ li {
   margin-bottom: 8px;
   letter-spacing: 0.001rem;
   margin-top: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5;
   font-weight: 300;
   direction: rtl;
@@ -122,14 +122,11 @@ li {
   align-items: center;
   .tags {
     margin: 1rem;
-
-
     label {
       border-left: var(--border-color) solid 0.6px;
       padding-left: 6px;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 200;
-
     }
   }
 
@@ -155,11 +152,11 @@ li {
   max-width: 60%;
   padding: 0;
   margin: 0;
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 
 .floating-info-box-filters ul {
-  font-size: 13px;
+  font-size: 0.8125rem;
   padding: 0;
   margin: 0;
 }
@@ -181,7 +178,7 @@ li {
   margin: 0;
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-family: 'NarkissBlock', sans-serif;
   font-weight: 200;
   align-items: center;
@@ -193,7 +190,7 @@ li {
 .floating-info-box-filters .tags li:hover,
 li.highlight-category.active {
   font-weight: 300;
-  font-size: calc(13px - 0.035em);
+  font-size: calc(0.78rem);
   /* Slightly smaller to compensate for boldness */
 
 }

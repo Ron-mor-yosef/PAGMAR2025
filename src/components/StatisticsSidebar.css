@@ -20,7 +20,7 @@ li.statistics-sidebar-category {
     position: relative;
     font-weight: 300;
     padding-inline-start: 3rem;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 li.statistics-sidebar-category:hover {

@@ -83,13 +83,13 @@ section.single-statistic {
 
 div.single-stat-explain{
     padding: calc(var(--grid-size) * 0.3 ) 0;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height:  21px;
     font-family: 'NarkissBlock';
     font-weight: 200;
     margin-left: -10px;
     span{
       font-weight: 500;
-      font-size: 28px;
+      font-size: 1.75rem;
     }
 }

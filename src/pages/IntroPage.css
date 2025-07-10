@@ -1,6 +1,6 @@
 main.intro-page {
     font-family: 'masada';
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 300;
     padding-right: 2rem;
 
@@ -25,7 +25,7 @@ main.intro-page {
         position: relative;
         font-family: 'NarkissBlock', sans-serif;
         font-weight: 300;
-        font-size: 20px;
+        font-size: 1.25rem;
         padding: 2rem 0;
     }
 
@@ -92,7 +92,7 @@ main.intro-page {
                 border: 0.2em solid transparent;
                 color: #F0F8FF;
                 font-weight: 400;
-                font-size: 17px;
+                font-size: 1.0625rem;
             }
 
         }

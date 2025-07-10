@@ -88,7 +88,7 @@ select:focus {
   line-height: 100%;
   padding-left: 0;
   width:3rem;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 200;
 
   /* font-weight: 300; */
@@ -153,13 +153,13 @@ ul.gallery-active-tags {
   background-position: center 8px;
   background-size: 32px 32px;
   position: relative;
-  font-size: 18px;
+  font-size: 1.125rem;
 
 }
 
 .filter-options button:hover {
   font-weight: 500;
-  font-size: 17.5px;
+  font-size: 1.09375rem;
 }
 
 .filter-options button.active::after {
@@ -213,7 +213,7 @@ ul.gallery-active-tags {
 .single-filter label {
   font-weight: 300;
   margin: 0 0.5rem;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .single-filter:not(:last-child)::after {
@@ -260,7 +260,7 @@ ul.gallery-active-tags {
   color: #222;
   border-color: transparent;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-family: 'NarkissBlock';
   cursor: pointer;
   transition: background 0.2s, color 0.2s;

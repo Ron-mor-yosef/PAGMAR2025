@@ -5,11 +5,11 @@ function SingleStatistic({ statistic, hovered, onHover, onLeave, onClick, classN
     const total = 12 * 12;
     const filledCount = Math.round((statistic.percent / 100) * total);
 
-    // Fill order: bottom right to top left
+    // Fill order: top right to bottom left
     const fillOrder = useMemo(() => {
         const gridSize = 12;
         const order = [];
-        for (let row = gridSize - 1; row >= 0; row--) {
+        for (let row = 0; row < gridSize; row++) {
             for (let col = gridSize - 1; col >= 0; col--) {
                 order.push(row * gridSize + col);
             }
