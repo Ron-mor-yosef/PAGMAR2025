@@ -96,13 +96,13 @@ const HomePage = ({ idleTimeout, setIdleTimeout, idleEnabled, setIdleEnabled }) 
           זה סיפורן של הנשים העומדות בחזית העורף.
         </p>
         <div className="home-nav-btns">
-          <button className="home-nav-btn" onClick={() => navigate('/PAGMAR2025/statistics')}>
+          <button className="home-nav-btn" onClick={() => navigate('/statistics')}>
             מספרים
           </button>
-          <button className="home-nav-btn" onClick={() => navigate('/PAGMAR2025/gallery')}>
+          <button className="home-nav-btn" onClick={() => navigate('/gallery')}>
             טקסטים
           </button>
-          <button className="home-nav-btn" onClick={() => navigate('/PAGMAR2025/intro')}>
+          <button className="home-nav-btn" onClick={() => navigate('/intro')}>
             אודות
           </button>
         </div>       

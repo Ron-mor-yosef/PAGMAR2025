@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className="header">
       <header className="toolbar top-bar">
-        <Link to="/PAGMAR2025"><img src={process.env.PUBLIC_URL + "/assets/images/hebrew-logo.svg"} alt="Logo" className="logo" /></Link>
+        <Link to="/"><img src={process.env.PUBLIC_URL + "/assets/images/hebrew-logo.svg"} alt="Logo" className="logo" /></Link>
       </header>
       <nav>
         <Link to="/statistics" className={location.pathname === "/statistics" ? "active statistics-page" : "statistics-page"}>מספרים</Link>
