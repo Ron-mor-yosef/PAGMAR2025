@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/PAGMAR2025/static/css/main.945514fb.css",
-    "main.js": "/PAGMAR2025/static/js/main.ec2a5dc9.js",
+    "main.css": "/PAGMAR2025/static/css/main.4270e94d.css",
+    "main.js": "/PAGMAR2025/static/js/main.8f613fe1.js",
     "static/media/image.png": "/PAGMAR2025/static/media/image.45611bab836b7ad0c13f.png",
     "static/media/2.png": "/PAGMAR2025/static/media/2.220fb23094711069842d.png",
     "static/media/6.png": "/PAGMAR2025/static/media/6.5cef438124fd78930d11.png",
@@ -21,11 +21,11 @@
     "static/media/1.svg": "/PAGMAR2025/static/media/1.74626d65c4798280dfdc.svg",
     "index.html": "/PAGMAR2025/index.html",
     "static/media/underline.svg": "/PAGMAR2025/static/media/underline.86835a68142b171ef411.svg",
-    "main.945514fb.css.map": "/PAGMAR2025/static/css/main.945514fb.css.map",
-    "main.ec2a5dc9.js.map": "/PAGMAR2025/static/js/main.ec2a5dc9.js.map"
+    "main.4270e94d.css.map": "/PAGMAR2025/static/css/main.4270e94d.css.map",
+    "main.8f613fe1.js.map": "/PAGMAR2025/static/js/main.8f613fe1.js.map"
   },
   "entrypoints": [
-    "static/css/main.945514fb.css",
-    "static/js/main.ec2a5dc9.js"
+    "static/css/main.4270e94d.css",
+    "static/js/main.8f613fe1.js"
   ]
 }
