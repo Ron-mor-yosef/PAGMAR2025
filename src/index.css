@@ -4,7 +4,7 @@
   --main-blue: #0022AB;
 }
 
-html, body, #root {
+body {
   scroll-behavior: smooth;
   height: 100%;
 }
@@ -126,6 +126,7 @@ main {
   border: 0.5px solid #222;
   border-top: none;
   background-color: inherit; /* Set default background color */
+  margin-top: 6rem;
 }
 
 p {

@@ -30,7 +30,7 @@ const TextCard = ({
 
   function cleanTextForClamp(text) {
     // Remove trailing commas or periods before ellipsis, but allow '?'
-    const withoutTags = text.split('<br>').slice(0, 2).map(line => line.replace(/([,.]+)/g, '').replace(/\s+</g, ' <').replace(/<[^>]*>/g,'')).join('<br/>').trim().concat("...");
+    const withoutTags = text.split('<br>').slice(0, 2).map(line => line.replace(/([,.]+)/g, '').replace(/\s+</g, ' <').replace(/<[^>]*>/g,'')).join('<br>').concat("...");
     console.log("cleanTextForClamp", withoutTags);
     return withoutTags;
   }
