@@ -43,7 +43,6 @@ a.statistics-page {
 main.statistics-page {
   /* background: var(--main-bg); */
   min-height: calc(var(--grid-size) * 36);
-  height: 100%;
   padding: var(--grid-size);
   font-family: 'NarkissBlock', 'Masada', Arial, sans-serif;
   direction: rtl;

@@ -4,8 +4,9 @@
   --main-blue: #0022AB;
 }
 
-html {
+html, body, #root {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 @font-face {

@@ -56,7 +56,6 @@ main.intro-page {
         justify-content: center;
         /* height: calc(100vh - 12.5rem - 1px); */
         align-items: flex-start;
-        height: 57vh;
 
         .intro-page-credits-name {
             background-repeat: repeat-x;
@@ -102,7 +101,6 @@ main.intro-page {
     }
 
     .intro-page-footer {
-        height: 8vh;
         direction: ltr;
         height: fit-content;
 
