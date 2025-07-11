@@ -1,27 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const IDLE_TIMEOUT = 2 * 60 * 1000; // 2 minutes
-
-export default function IdleDetector() {
+export default function IdleDetector({ timeout = 120, enabled = true }) {
   const navigate = useNavigate();
   const location = useLocation();
   const timeoutRef = useRef();
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
+    if (!enabled) {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      setFading(false);
+      return;
+    }
     const resetTimer = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       setFading(false);
       timeoutRef.current = setTimeout(() => {
-        setFading(true);
-        setTimeout(() => {
-          if (location.pathname !== "/") navigate("/", { replace: true });
-        }, 800); // match fade duration
-      }, IDLE_TIMEOUT);
+        if (location.pathname !== "/") {
+          setFading(true);
+          setTimeout(() => {
+            navigate("/", { replace: true });
+          }, 800); // match fade duration
+        }
+      }, timeout * 1000); // timeout in seconds
     };
 
-    // Listen to user activity
     window.addEventListener("mousemove", resetTimer);
     window.addEventListener("keydown", resetTimer);
     window.addEventListener("mousedown", resetTimer);
@@ -37,7 +41,7 @@ export default function IdleDetector() {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
     // eslint-disable-next-line
-  }, [location.pathname, navigate]);
+  }, [location.pathname, navigate, timeout, enabled]);
 
   return fading ? <div className="fade-overlay" /> : null;
 }

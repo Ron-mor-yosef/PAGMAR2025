@@ -10,9 +10,9 @@ const Header = () => {
         <Link to="/PAGMAR2025"><img src={process.env.PUBLIC_URL + "/assets/images/hebrew-logo.svg"} alt="Logo" className="logo" /></Link>
       </header>
       <nav>
-        <Link to="/PAGMAR2025/statistics" className={location.pathname === "/PAGMAR2025/statistics" ? "active statistics-page" : "statistics-page"}>מספרים</Link>
-        <Link to="/PAGMAR2025/gallery" className={location.pathname === "/PAGMAR2025/gallery" ? "active gallery-page" : "gallery-page"}>טקסטים</Link>
-        <Link to="/PAGMAR2025/intro" className={location.pathname === "/PAGMAR2025/intro" ? "active intro-page" : "intro-page"}>אודות</Link>
+        <Link to="/statistics" className={location.pathname === "/statistics" ? "active statistics-page" : "statistics-page"}>מספרים</Link>
+        <Link to="/gallery" className={location.pathname === "/gallery" ? "active gallery-page" : "gallery-page"}>טקסטים</Link>
+        <Link to="/intro" className={location.pathname === "/intro" ? "active intro-page" : "intro-page"}>אודות</Link>
       </nav>
     </div>
   );
