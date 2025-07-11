@@ -17,7 +17,12 @@ section.stat-category-section {
     align-items: stretch;
     align-content: stretch;
     margin: 0;
+    /* margin-left only if odd-margin class is present */
     padding: 0;
+}
+
+section.stat-category-section.odd-margin {
+    margin-left: calc(var(--grid-size)*0.5);
 }
 
 .single-statistic {

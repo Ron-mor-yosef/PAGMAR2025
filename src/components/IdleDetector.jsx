@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
+// timeout is in seconds from the UI
 export default function IdleDetector({ timeout = 120, enabled = true }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,7 +24,7 @@ export default function IdleDetector({ timeout = 120, enabled = true }) {
             navigate("/", { replace: true });
           }, 800); // match fade duration
         }
-      }, timeout * 1000); // timeout in seconds
+      }, Number(timeout) * 1000); // timeout is in seconds from UI
     };
 
     window.addEventListener("mousemove", resetTimer);

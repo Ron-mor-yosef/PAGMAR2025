@@ -35,6 +35,8 @@ function App() {
           <Route path="/intro" element={<IntroPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/statistics" element={<StatisticsPage />} />
+          {/* Redirect any unknown route to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
     </>
