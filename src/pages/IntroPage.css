@@ -1,10 +1,12 @@
 main.intro-page {
+    display: flex;
+    flex-direction: column;
     font-family: 'masada';
     font-size: 1.125rem;
     font-weight: 300;
     padding: var(--grid-size);
     padding-right: 2rem;
-    padding-top: calc(var(--grid-size) + 2rem);
+    /* padding-top: calc(var(--grid-size) + 2rem); */
 
     .intro-page-general-content {
         display: flex;
@@ -75,7 +77,7 @@ main.intro-page {
             max-width: 600px;
             width: 35vw;
             margin-left: 4rem;
-            padding-bottom: 1rem;
+            padding-bottom: 3rem;
             line-height: 170%;
 
             p {
@@ -103,12 +105,14 @@ main.intro-page {
     .intro-page-footer {
         direction: ltr;
         height: fit-content;
+        padding-top: 2rem;
 
         img {
             height: 60px;
             /* Increase to zoom in and hide borders */
             width: auto;
             margin: 2rem;
+
             margin-bottom: calc(2rem - var(--grid-size) );
 
         }
