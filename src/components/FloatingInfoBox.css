@@ -115,15 +115,17 @@ li {
   letter-spacing: 0.02rem;
   align-content: flex-start;
   align-items: center;
-  .tags {
-    margin: 1rem;
-    label {
-      border-left: var(--main-blue) solid 0.6px;
-      padding-left: 6px;
-      font-size: 0.875rem;
-      font-weight: 200;
-    }
-  }
+}
+
+.floating-info-box-filters .tags {
+  margin: 1rem;
+}
+
+.floating-info-box-filters .tags label {
+  border-left: var(--main-blue) solid 0.6px;
+  padding-left: 6px;
+  font-size: 0.875rem;
+  font-weight: 200;
 }
 
 .floating-info-box-filters label {
@@ -202,29 +204,30 @@ li.highlight-category.active {
 
 .floating-info-box-filters,
 .floating-info-box-extra {
-
   transition: transform 0.5s;
+}
 
-  span.toggle-extra {
-    display: flex;
-    margin-top: 5px;
-    cursor: pointer;
-    justify-content: center;
-    flex-wrap: nowrap;
-    font-size: 20px;
-    line-height: 28px;
-    align-content: baseline;
-    img {
-      margin: auto 0;
-    }
-  }
+.floating-info-box-filters span.toggle-extra,
+.floating-info-box-extra span.toggle-extra {
+  display: flex;
+  margin-top: 5px;
+  cursor: pointer;
+  justify-content: center;
+  flex-wrap: nowrap;
+  font-size: 20px;
+  line-height: 28px;
+  align-content: baseline;
+}
 
-  span.toggle-extra:hover {
-    font-weight: 500;
-    font-size: 19.5px;
+.floating-info-box-filters span.toggle-extra img,
+.floating-info-box-extra span.toggle-extra img {
+  margin: auto 0;
+}
 
-  }
-
+.floating-info-box-filters span.toggle-extra:hover,
+.floating-info-box-extra span.toggle-extra:hover {
+  font-weight: 500;
+  font-size: 19.5px;
 }
 
 .floating-info-box-filters.collapsed,
@@ -276,10 +279,10 @@ li.highlight-category.active {
   border-top: 1px solid var(--main-blue);
   max-height: 100%;
   overflow-y: hidden;
+}
 
-  p.content {
-    color: var(--main-blue);
-  }
+.extra-quotes-list p.content {
+  color: var(--main-blue);
 }
 
 .extra-quote-item {
